@@ -32,5 +32,6 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
+          token: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           branch: gh-pages  # 배포될 브랜치
           folder: dist      # 배포할 폴더
