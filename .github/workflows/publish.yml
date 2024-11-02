@@ -28,6 +28,9 @@ jobs:
       - name: Build Angular project
         run: npm run build -- --output-path=dist
 
+      - name: Create .nojekyll file
+        run: echo > dist/NetflixClone/.nojekyll
+
       # 5. 배포 (GitHub Pages 사용)
       - name: Deploy to gh pages
         run: |
