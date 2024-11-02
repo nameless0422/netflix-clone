@@ -1,0 +1,36 @@
+name: Deploy Angular Project
+
+on:
+  push:
+    branches:
+      - main  # main 브랜치에 푸시될 때 워크플로우 실행
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 리포지토리 클론
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Node.js 설정
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16  # 프로젝트에 맞는 Node.js 버전으로 설정
+
+      # 3. 의존성 설치
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Angular 빌드
+      - name: Build Angular project
+        run: npm run build -- --output-path=dist
+
+      # 5. 배포 (GitHub Pages 사용)
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages  # 배포될 브랜치
+          folder: dist      # 배포할 폴더
