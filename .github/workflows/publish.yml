@@ -20,16 +20,11 @@ jobs:
         with:
           node-version: 18  # 프로젝트에 맞는 Node.js 버전으로 설정
 
-      # 3. 의존성 설치
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm install
-
-      # 4. Angular 빌드
-      - name: Build Angular project
-        run: npm run build -- --output-path=dist
-
-      - name: Create .nojekyll file
-        run: echo > dist/NetflixClone/.nojekyll
+    
+      - name: Build Angular App
+        run: npm run build
 
       # 5. 배포 (GitHub Pages 사용)
       - name: Deploy to gh pages
