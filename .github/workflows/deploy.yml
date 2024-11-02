@@ -35,9 +35,4 @@ jobs:
           token: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           branch: gh-pages  # 배포될 브랜치
           folder: dist      # 배포할 폴더
-      
-      # 6. 배포 URL 출력
-      - name: Print deployed URL
-        run: echo "Deployed URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
-설명
-      
+    
