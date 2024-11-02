@@ -30,9 +30,9 @@ jobs:
 
       # 5. 배포 (GitHub Pages 사용)
       - name: Deploy to gh pages
-      run: |
-        npx angular-cli-ghpages --dir=dist/your-angular-app
-      env:
-        CI: true
-        GH_TOKEN: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        run: |
+          npx angular-cli-ghpages --dir=dist/your-angular-app
+        env:
+          CI: true
+          GH_TOKEN: ${{ secrets.ACTIONS_DEPLOY_KEY }}
     
