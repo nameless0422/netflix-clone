@@ -36,5 +36,3 @@ jobs:
           branch: gh-pages  # 배포될 브랜치
           folder: dist      # 배포할 폴더
       
-      - name: Print deployed URL
-        run: echo "Deployed URL: ${{ steps.deployment.outputs.page_url }}"
