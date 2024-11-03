@@ -3,7 +3,7 @@ name: Deploy Angular to GitHub Pages
 on:
   push:
     branches:
-      - main  # main 브랜치에 push될 때 동작
+      - master # master 브랜치에 push될 때 동작
 
 jobs:
   build-and-deploy:
