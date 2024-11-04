@@ -27,4 +27,4 @@ jobs:
         ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BASE_BRANCH: master
         BRANCH: deploy
-        FOLDER: dist
+        FOLDER: dist/browser
