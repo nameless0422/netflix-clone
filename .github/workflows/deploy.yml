@@ -23,7 +23,9 @@ jobs:
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@releases/v2
-      with:
-        token: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        branch: deploy
-        folder: dist/browser
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        BASE_BRANCH: master # The branch the action should deploy from.
+        BRANCH: deploy # The branch the action should deploy to.
+        FOLDER: dist/browser # The folder the action should deploy.
+     
