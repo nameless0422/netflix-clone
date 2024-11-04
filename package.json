@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:deploy": "ng build --configuration=production --base-href=/netflix-clone/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:NetflixClone": "node dist/netflix-clone/server/server.mjs"
