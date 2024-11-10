@@ -18,10 +18,10 @@
   }
   
   .logo-icon {
-    width: 24px;
-    height: 24px;
-    fill: #e50914; /* 로고 아이콘을 빨간색으로 설정 */
-    margin-right: 10px; /* 텍스트와 간격 */
+    width: 30px; /* 아이콘 크기를 30px로 조정 */
+    height: 30px; /* 높이도 동일하게 30px로 설정 */
+    fill: #e50914;
+    margin-right: 10px;
   }
   
   .nav-menu {
