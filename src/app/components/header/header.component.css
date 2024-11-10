@@ -1,0 +1,44 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #2b2b2b;
+    color: #ffffff;
+    transition: background-color 0.3s ease; /* 배경색 전환 애니메이션 */
+  }
+  
+  .header:hover {
+    background-color: #141414; /* 마우스 오버 시 배경색 */
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo img {
+    width: 24px;
+    margin-right: 10px;
+  }
+  
+  .nav-menu {
+    display: flex;
+    gap: 2rem;
+  }
+  
+  .nav-menu a {
+    color: #ffffff;
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+  
+  .nav-menu a:hover {
+    color: #b3b3b3;
+  }
+  
+  .user-icon {
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+  
