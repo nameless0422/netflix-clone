@@ -6,9 +6,12 @@
   background-color: #141414;
   color: #ffffff;
   padding: 1rem 2rem;
-  text-align: center;
+  text-align: center; /* 텍스트 가운데 정렬 */
   box-shadow: 0px -2px 8px rgba(0, 0, 0, 0.2); /* 상단 그림자 */
-  z-index: 1000; /* 다른 요소 위에 위치하도록 설정 */
+  z-index: 1000;
+  display: flex;
+  justify-content: center; /* 가로축 가운데 정렬 */
+  align-items: center; /* 세로축 가운데 정렬 */
 }
 
   .footer-content {
