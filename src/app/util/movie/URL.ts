@@ -32,4 +32,4 @@ const fetchMovies = async (url: string): Promise<any> => {
 }
 
 
-export { fetchFeaturedMovie, getURL4PopularMovies, getURL4ReleaseMovies, getURL4GenreMovies };
+export { fetchFeaturedMovie, getURL4PopularMovies, getURL4ReleaseMovies, getURL4GenreMovies, fetchMovies };

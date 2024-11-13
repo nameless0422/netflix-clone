@@ -19,7 +19,11 @@ jobs:
         node-version: '18'
 
     - name: Build Angular app to deploy
-      run: npm install && npm run build:deploy
+      env:
+        TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+      run: |
+        echo "TMDB_API_KEY=$TMDB_API_KEY" > .env
+        npm install && npm run build:deploy
 
     - name: Install jq
       run: sudo apt-get install -y jq
