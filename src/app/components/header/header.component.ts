@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onProfileClick(): void {
+    console.log('Profile button clicked');
     if (this.isLoggedIn) {
       this.logout();
     } else {
