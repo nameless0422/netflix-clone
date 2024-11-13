@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { getURL4PopularMovies, getURL4ReleaseMovies, getURL4GenreMovies, fetchMovies } from './URL';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MovieService {
-  private apiKey = 'YOUR_TMDB_API_KEY';  // 발급받은 API 키로 변경
+  private apiKey = environment.tmdbApiKey;  // 발급받은 API 키로 변경
 
   async getPopularMovies(page: number = 1): Promise<any> {
     const url = getURL4PopularMovies(this.apiKey, page);
