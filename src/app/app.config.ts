@@ -1,12 +1,15 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter, withHashLocation } from '@angular/router';
+import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
+import { importProvidersFrom } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes, withHashLocation()), // HashLocationStrategy 적용
-    provideClientHydration()
+    provideRouter(routes),
+    provideClientHydration(),
+    importProvidersFrom(FormsModule)  // FormsModule 추가로 ngModel 사용 가능
   ]
 };
