@@ -18,19 +18,24 @@ jobs:
       with:
         node-version: '18'
 
-    - name: Build Angular app to deploy
-      env:
-        TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+    - name: Replace API Key in environment.prod.ts
       run: |
-        echo "TMDB_API_KEY=$TMDB_API_KEY" > .env
-        npm install && npm run build:deploy
+        # Replace the placeholder for TMDB_API_KEY in environment.prod.ts
+        sed -i "s/apiKey: ''/apiKey: '${{ secrets.TMDB_API_KEY }}'/" src/environments/environment.prod.ts
+
+    - name: Install dependencies and build Angular app
+      run: |
+        npm install
+        npm run build --configuration=production --base-href=/netflix-clone/  # base-href 추가
 
     - name: Install jq
       run: sudo apt-get install -y jq
+
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
       with:
-        token: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        token: ${{ secrets.GITHUB_TOKEN }}  # ACTIONS_DEPLOY_KEY 대신 GITHUB_TOKEN 사용
         branch: deploy
-        folder: dist/browser  
+        folder: dist/browser  # 빌드된 Angular 앱 폴더
+
         
