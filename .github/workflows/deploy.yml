@@ -18,8 +18,10 @@ jobs:
       with:
         node-version: '18'
 
-    - name: Replace API Key in environment.prod.ts
+    - name: Replace API Key in environment.ts/environment.prod.ts
       run: |
+        # Replace the placeholder for TMDB_API_KEY in environment.ts
+        sed -i "s/apiKey: ''/apiKey: '${{ secrets.TMDB_API_KEY }}'/" src/environments/environment.ts
         # Replace the placeholder for TMDB_API_KEY in environment.prod.ts
         sed -i "s/apiKey: ''/apiKey: '${{ secrets.TMDB_API_KEY }}'/" src/environments/environment.prod.ts
 
@@ -34,7 +36,7 @@ jobs:
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}  # ACTIONS_DEPLOY_KEY 대신 GITHUB_TOKEN 사용
+        token: ${{ secrets.ACTIONS_DEPLOY_KEY  }}
         branch: deploy
         folder: dist/browser  # 빌드된 Angular 앱 폴더
 
