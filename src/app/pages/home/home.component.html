@@ -1,29 +1,41 @@
 <div class="movie-section">
   <h2>Popular Movies</h2>
-  <div class="movie-row">
-    <div *ngFor="let movie of popularMovies" class="movie-card">
-      <img [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" alt="{{ movie.title }}" />
-      <p>{{ movie.title }}</p>
+  <div class="movie-row-container">
+    <button class="scroll-button left" (click)="scrollLeft('popularRow')">&#8249;</button>
+    <div class="movie-row" #popularRow>
+      <div *ngFor="let movie of popularMovies" class="movie-card">
+        <img [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" alt="{{ movie.title }}" />
+        <p>{{ movie.title }}</p>
+      </div>
     </div>
+    <button class="scroll-button right" (click)="scrollRight('popularRow')">&#8250;</button>
   </div>
 </div>
 
 <div class="movie-section">
   <h2>Latest Movies</h2>
-  <div class="movie-row">
-    <div *ngFor="let movie of releaseMovies" class="movie-card">
-      <img [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" alt="{{ movie.title }}" />
-      <p>{{ movie.title }}</p>
+  <div class="movie-row-container">
+    <button class="scroll-button left" (click)="scrollLeft('releaseRow')">&#8249;</button>
+    <div class="movie-row" #releaseRow>
+      <div *ngFor="let movie of releaseMovies" class="movie-card">
+        <img [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" alt="{{ movie.title }}" />
+        <p>{{ movie.title }}</p>
+      </div>
     </div>
+    <button class="scroll-button right" (click)="scrollRight('releaseRow')">&#8250;</button>
   </div>
 </div>
 
 <div class="movie-section">
   <h2>Action Movies</h2>
-  <div class="movie-row">
-    <div *ngFor="let movie of actionMovies" class="movie-card">
-      <img [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" alt="{{ movie.title }}" />
-      <p>{{ movie.title }}</p>
+  <div class="movie-row-container">
+    <button class="scroll-button left" (click)="scrollLeft('actionRow')">&#8249;</button>
+    <div class="movie-row" #actionRow>
+      <div *ngFor="let movie of actionMovies" class="movie-card">
+        <img [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" alt="{{ movie.title }}" />
+        <p>{{ movie.title }}</p>
+      </div>
     </div>
+    <button class="scroll-button right" (click)="scrollRight('actionRow')">&#8250;</button>
   </div>
 </div>
