@@ -7,9 +7,9 @@ import { FormsModule } from '@angular/forms';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    importProvidersFrom(FormsModule),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideClientHydration(),
-    importProvidersFrom(FormsModule)  // FormsModule 추가로 ngModel 사용 가능
+    provideClientHydration()
   ]
 };
