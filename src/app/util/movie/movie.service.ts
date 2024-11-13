@@ -6,7 +6,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class MovieService {
-  private apiKey = environment.tmdbApiKey;  // 발급받은 API 키로 변경
+  private apiKey = environment.apiKey;  // 발급받은 API 키로 변경
 
   async getPopularMovies(page: number = 1): Promise<any> {
     const url = getURL4PopularMovies(this.apiKey, page);
