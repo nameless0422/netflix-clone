@@ -26,6 +26,8 @@ jobs:
         sed -i "s/apiKey: ''/apiKey: '${{ secrets.TMDB_API_KEY }}'/" src/environments/environment.prod.ts
 
     - name: Install dependencies and build Angular app
+      env:
+        TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
       run: |
         npm install
         npm run build --configuration=production --base-href=/netflix-clone/  # base-href 추가
