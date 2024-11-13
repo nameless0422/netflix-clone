@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   standalone: true,
+  imports: [CommonModule, FormsModule, RouterOutlet, RouterLink, RouterLinkActive],
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
