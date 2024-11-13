@@ -20,7 +20,7 @@
 }
 
 .logo-icon {
-  width: 30px; /* 아이콘 크기를 30px로 조정 */
+  width: 30px;
   height: 30px;
   fill: #e50914;
   margin-right: 10px;
@@ -29,6 +29,7 @@
 .nav-menu {
   display: flex;
   gap: 2rem;
+  margin: 0 auto; /* 중앙 정렬을 유지 */
 }
 
 .nav-menu a {
@@ -42,7 +43,7 @@
 }
 
 .auth-button {
-  margin-left: auto; /* 오른쪽 끝으로 배치 */
+  /* 오른쪽 끝에 위치하게 설정 */
 }
 
 .auth-button button {
