@@ -11,9 +11,7 @@
     <a routerLink="/explore" routerLinkActive="active">찾아보기</a>
     <a routerLink="/wishlist" routerLinkActive="active">내가 찜한 리스트</a>
   </nav>
-  <div class="auth-button">
-    <button (click)="onProfileClick()">
-      {{ isLoggedIn ? '로그아웃' : '로그인' }}
-    </button>
+  <div class="auth-button" (click)="onProfileClick()">
+    <span>{{ isLoggedIn ? '로그아웃' : '로그인' }}</span>
   </div>
 </header>

@@ -43,11 +43,6 @@
 }
 
 .auth-button {
-  margin-left: auto; /* 오른쪽 끝으로 배치 */
-  padding-left: 1rem; /* 좌측 여백 추가 */
-}
-
-.auth-button button {
   background-color: #e50914;
   color: #ffffff;
   border: none;
@@ -59,8 +54,7 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-/* 호버 시 버튼 효과 */
-.auth-button button:hover {
-  background-color: #f40612; /* 버튼 배경색이 조금 더 밝아짐 */
-  transform: scale(1.05); /* 살짝 확대 효과 */
+.auth-button:hover {
+  background-color: #f40612;
+  transform: scale(1.05);
 }
