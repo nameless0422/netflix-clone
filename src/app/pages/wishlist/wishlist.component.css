@@ -1,0 +1,52 @@
+.wishlist {
+    padding: 20px;
+    color: #fff;
+    background-color: #141414;
+  }
+  
+  .wishlist h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #e5e5e5;
+    font-weight: bold;
+  }
+  
+  .movie-row {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px 0;
+  }
+  
+  .movie-card {
+    flex: 0 0 auto;
+    position: relative;
+    width: 200px;
+    margin-right: 10px;
+    transition: transform 0.3s;
+    cursor: pointer;
+  }
+  
+  .movie-card:hover {
+    transform: scale(1.1);
+    z-index: 1;
+  }
+  
+  .movie-card img {
+    width: 100%;
+    border-radius: 4px;
+  }
+  
+  .movie-card p {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    margin: 0;
+    padding: 10px;
+    font-size: 14px;
+    color: #e5e5e5;
+    text-align: center;
+    border-radius: 0 0 4px 4px;
+  }
+  

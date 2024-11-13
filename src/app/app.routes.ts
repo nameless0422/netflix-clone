@@ -2,9 +2,11 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { WishlistComponent } from './pages/wishlist/wishlist.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent }  // /signup 경로에 회원가입 컴포넌트 연결
+  { path: 'signup', component: SignupComponent },
+  { path: 'wishlist', component: WishlistComponent }
 ];
