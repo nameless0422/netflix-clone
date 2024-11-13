@@ -11,7 +11,9 @@
     <a routerLink="/explore" routerLinkActive="active">찾아보기</a>
     <a routerLink="/wishlist" routerLinkActive="active">내가 찜한 리스트</a>
   </nav>
-  <div class="user-icon" (click)="onProfileClick()">
-    <span role="img" aria-label="Profile">{{ isLoggedIn ? '로그아웃' : '👤' }}</span>
+  <div class="auth-button">
+    <button (click)="onProfileClick()">
+      {{ isLoggedIn ? '로그아웃' : '로그인' }}
+    </button>
   </div>
 </header>
