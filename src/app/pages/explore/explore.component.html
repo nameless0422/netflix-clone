@@ -1,0 +1,20 @@
+<div class="explore-container">
+    <h1>찾아보기</h1>
+    <div class="search-bar">
+      <input [(ngModel)]="searchQuery" placeholder="영화 또는 TV 시리즈 검색..." />
+      <button (click)="onSearch()">검색</button>
+    </div>
+  
+    <div class="results">
+      <div *ngIf="searchResults.length > 0">
+        <div *ngFor="let movie of searchResults" class="movie-card">
+          <img [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" alt="{{ movie.title }}" />
+          <p>{{ movie.title }}</p>
+        </div>
+      </div>
+      <div *ngIf="searchResults.length === 0">
+        <p>검색 결과가 없습니다.</p>
+      </div>
+    </div>
+  </div>
+  

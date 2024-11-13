@@ -31,5 +31,9 @@ const fetchMovies = async (url: string): Promise<any> => {
     }
 }
 
+const getURL4SearchMovies = (apiKey: string, query: string): string => {
+    return `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=ko-KR&query=${query}&page=1`;
+  };
 
-export { fetchFeaturedMovie, getURL4PopularMovies, getURL4ReleaseMovies, getURL4GenreMovies, fetchMovies };
+
+export { fetchFeaturedMovie, getURL4PopularMovies, getURL4ReleaseMovies, getURL4GenreMovies, getURL4SearchMovies, fetchMovies };

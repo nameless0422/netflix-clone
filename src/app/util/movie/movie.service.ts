@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { getURL4PopularMovies, getURL4ReleaseMovies, getURL4GenreMovies, fetchMovies } from './URL';
+import { getURL4PopularMovies, getURL4ReleaseMovies, getURL4GenreMovies, getURL4SearchMovies, fetchMovies } from './URL';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -23,4 +23,10 @@ export class MovieService {
     const url = getURL4GenreMovies(this.apiKey, actionGenreId, page);
     return await fetchMovies(url);
   }
+
+  async searchMovies(query: string): Promise<any> {
+    const url = getURL4SearchMovies(this.apiKey, query);
+    return await fetchMovies(url); // 검색 영화 요청을 URL.ts에서 처리
+  }
+  
 }
