@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   documentaryMovieResult: any[] = [];
   sciencefictionMovieResult: any[] = [];
   thrillerMovieResult: any[] = [];
+bannerResult: any;
 
   constructor(private movieService: MovieService) {}
 
