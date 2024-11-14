@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
 
   async loadBannerMovie() {
     try {
-      const randomMovie = await this.movieService.getPopularMovies(1);
+      const randomMovie = await this.movieService.getRandomMovies();
       const movieData = randomMovie.results[0];
       this.movieTitle = movieData.original_title;
       this.movieDescription = movieData.overview;

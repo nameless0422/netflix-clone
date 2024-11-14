@@ -38,10 +38,17 @@ export class MovieService {
   // 배너 영화 데이터 가져오기
   async getRandomMovies(): Promise<any> {
     try {
-      const response = await this.getPopularMovies(1);
-      return response.data.results[0];  
+      const popularMovies = await this.getPopularMovies(1);  // 첫 페이지의 인기 영화 가져오기
+      const movies = popularMovies.results;
+      
+      if (movies.length > 0) {
+        const randomIndex = Math.floor(Math.random() * movies.length);  // 무작위 인덱스 선택
+        return movies[randomIndex];  // 무작위 영화 반환
+      } else {
+        throw new Error('No movies found');
+      }
     } catch (error) {
-      console.error('Error fetching banner movies:', error);
+      console.error('Error fetching random movie:', error);
     }
   }
 
