@@ -53,9 +53,6 @@ html, body {
   display: flex;
   overflow-x: auto;
   gap: 10px;
-  scroll-behavior: smooth;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
 }
 
 .movie-row::-webkit-scrollbar {
