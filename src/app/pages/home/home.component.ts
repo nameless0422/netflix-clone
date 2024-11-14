@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MovieService } from '../../util/movie/movie.service';  // MovieService 가져오기
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -27,6 +27,10 @@ export class HomeComponent implements OnInit {
   movieBackdrop: string = ''; 
   movieVideos: any[] = []; 
 
+  @ViewChild('popularRow') popularRow!: ElementRef;
+  @ViewChild('releaseRow') releaseRow!: ElementRef;
+  @ViewChild('actionRow') actionRow!: ElementRef;
+  
   constructor(private movieService: MovieService) {}
 
   ngOnInit(): void {
