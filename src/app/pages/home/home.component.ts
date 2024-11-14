@@ -102,6 +102,7 @@ export class HomeComponent implements OnInit {
 
   onMovieClick(movie: any) {
     this.selectedMovie = movie;
+    console.log('Selected movie:', movie);
   }
   closeMovieDetail() {
     this.selectedMovie = null;  // 모달 닫기
