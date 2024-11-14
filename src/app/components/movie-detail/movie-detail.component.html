@@ -1,6 +1,6 @@
-<div class="modal-backdrop" *ngIf="movie" (click)="closeModal()"></div>
-<div class="modal-content" *ngIf="movie">
-  <button (click)="closeModal()">Close</button>
-  <h2>{{ movie.title }}</h2>
-  <p>{{ movie.overview }}</p>
+<div class="modal-backdrop" (click)="closeModal()"></div>
+<div class="modal-content">
+  <button class="close-btn" (click)="closeModal()">X</button>
+  <h2>{{ movie?.title || 'No Title' }}</h2>
+  <p>{{ movie?.overview || 'No Description' }}</p>
 </div>
