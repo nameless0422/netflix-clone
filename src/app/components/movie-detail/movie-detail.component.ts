@@ -22,10 +22,15 @@ export class MovieDetailComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.movie) {
-      this.movieImage = `https://image.tmdb.org/t/p/original${this.movie.backdrop_path}`;
+      // backdrop_path가 존재하지 않을 경우 poster_path 사용
+      const imagePath = this.movie.backdrop_path || this.movie.poster_path;
+      if (imagePath) {
+        this.movieImage = `https://image.tmdb.org/t/p/original${imagePath}`;
+      }
       this.loadMovieVideos(this.movie.id);
     }
   }
+  
 
   async loadMovieVideos(movieId: number): Promise<void> {
     try {
