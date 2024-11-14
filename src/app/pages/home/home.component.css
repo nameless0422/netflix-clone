@@ -1,51 +1,59 @@
-.home-container {
-  padding: 20px; /* 전체 홈 컨테이너에 패딩 추가 */
+.scroll-button {
+  background-image: url('/path/to/your/image.png'); /* 화살표 이미지 경로 추가 */
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s;
+}
+
+.scroll-button.left {
+  transform: rotate(180deg); /* 왼쪽 버튼은 180도 회전 */
+}
+
+.scroll-button.active {
+  background-color: rgba(255, 255, 255, 0.6); /* 활성화된 버튼에 반투명 배경 */
+}
+
+.scroll-button:hover {
+  transform: scale(1.1);
+}
+
+.scroll-button:focus {
+  outline: none;
+}
+
+.movie-row {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  flex-grow: 1;
+}
+
+.movie-card {
+  min-width: 150px;
+  flex: 0 0 auto;
   text-align: center;
+  background-color: #333;
+  border-radius: 8px;
+  overflow: hidden;
   color: #ffffff;
+  scroll-snap-align: start;
 }
 
-h2 {
-  margin-bottom: 10px;
-  padding: 10px; /* 제목에 패딩 추가 */
+.movie-card img {
+  width: 100%;
+  height: auto;
+  border-bottom: 2px solid #e50914;
 }
 
-.movie-section {
-    padding: 20px 0;
-  }
-  
-  .movie-section h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    color: #ffffff;
-  }
-  
-  .movie-row {
-    display: flex;
-    overflow-x: auto;
-    gap: 10px;
-    scroll-snap-type: x mandatory; /* 스크롤이 한 번에 하나의 항목을 맞추게 설정 */
-    -webkit-overflow-scrolling: touch; /* 터치스크린에서 부드러운 스크롤 */
-  }
-  
-  .movie-card {
-    min-width: 150px;
-    flex: 0 0 auto;
-    text-align: center;
-    background-color: #333;
-    border-radius: 8px;
-    overflow: hidden;
-    color: #ffffff;
-    scroll-snap-align: start; /* 각 카드가 스크롤 끝에 맞춰지도록 설정 */
-  }
-  
-  .movie-card img {
-    width: 100%;
-    height: auto;
-    border-bottom: 2px solid #e50914;
-  }
-  
-  .movie-card p {
-    font-size: 0.9rem;
-    padding: 5px 0;
-  }
-  
+.movie-card p {
+  font-size: 0.9rem;
+  padding: 5px 0;
+}
