@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MovieService } from '../../util/movie/movie.service';  // MovieService 가져오기
+import { MovieService } from '../../util/movie/movie.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
@@ -12,112 +12,96 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  // 영화 데이터 배열 정의
-  popularMovies: any[] = [];
-  trendingMovieResult: any[] = [];
-  actionMovieResult: any[] = [];
-  adventureMovieResult: any[] = [];
-  animationMovieResult: any[] = [];
-  comedyMovieResult: any[] = [];
-  documentaryMovieResult: any[] = [];
-  sciencefictionMovieResult: any[] = [];
-  thrillerMovieResult: any[] = [];
-  movieTitle: string = ''; 
-  movieDescription: string = ''; 
-  movieBackdrop: string = ''; 
-  movieVideos: any[] = []; 
-  movieCategories : any[] = [];
+  movieCategories: any[] = [];
+  movieTitle: string = '';
+  movieDescription: string = '';
+  movieBackdrop: string = '';
+  movieVideos: any[] = [];
 
   @ViewChild('popularRow') popularRow!: ElementRef;
   @ViewChild('releaseRow') releaseRow!: ElementRef;
   @ViewChild('actionRow') actionRow!: ElementRef;
-  
+
   constructor(private movieService: MovieService) {}
- 
+
   ngOnInit(): void {
     this.loadBannerMovie();
-    this.loadData();  // 데이터 로드
+    this.loadData();
   }
 
   async loadBannerMovie() {
-    const randomMovie = await this.movieService.getPopularMovies(1);  
-    const movieId = randomMovie.results[0].id;  
+    try {
+      const randomMovie = await this.movieService.getPopularMovies(1);
+      const movieId = randomMovie.results[0].id;
 
-    this.movieTitle = randomMovie.results[0].original_title;
-    this.movieDescription = randomMovie.results[0].overview;
-    this.movieBackdrop = randomMovie.results[0].backdrop_path;
+      this.movieTitle = randomMovie.results[0].original_title;
+      this.movieDescription = randomMovie.results[0].overview;
+      this.movieBackdrop = randomMovie.results[0].backdrop_path;
 
-    const movieVideos = await this.movieService.getMovieVideos(movieId);
-    this.movieVideos = movieVideos;  
+      const movieVideos = await this.movieService.getMovieVideos(movieId);
+      this.movieVideos = movieVideos;
+    } catch (error) {
+      console.error('Error loading banner movie:', error);
+    }
   }
 
-  loadData() {
-    this.movieService.getPopularMovies(1).then(result => {
-      this.popularMovies = result.results;
-      console.log('Popular Movies:', this.popularMovies); // 콘솔 로그 추가
-    });
-  
-    this.movieService.getReleaseMovies(1).then(result => {
-      this.trendingMovieResult = result.results;
-      console.log('Trending Movies:', this.trendingMovieResult); // 콘솔 로그 추가
-    });
-  
-    this.movieService.getMoviesByGenre('28',1).then(result => {
-      this.actionMovieResult = result.results;
-      console.log('Action Movies:', this.actionMovieResult); // 콘솔 로그 추가
-    });
-  
-    // 각 카테고리에 대해 데이터 로드 로그 추가
-    this.movieService.getMoviesByGenre('12', 1).then(result => {
-      this.adventureMovieResult = result.results;
-      console.log('Adventure Movies:', this.adventureMovieResult);
-    });
-    this.movieService.getMoviesByGenre('16', 1).then(result => {
-      this.animationMovieResult = result.results;
-      console.log('Animation Movies:', this.animationMovieResult);
-    });
-    this.movieService.getMoviesByGenre('35', 1).then(result => {
-      this.comedyMovieResult = result.results;
-      console.log('Comedy Movies:', this.comedyMovieResult);
-    });
-    this.movieService.getMoviesByGenre('99', 1).then(result => {
-      this.documentaryMovieResult = result.results;
-      console.log('Documentary Movies:', this.documentaryMovieResult);
-    });
-    this.movieService.getMoviesByGenre('878', 1).then(result => {
-      this.sciencefictionMovieResult = result.results;
-      console.log('Science Fiction Movies:', this.sciencefictionMovieResult);
-    });
-    this.movieService.getMoviesByGenre('53', 1).then(result => {
-      this.thrillerMovieResult = result.results;
-      console.log('Thriller Movies:', this.thrillerMovieResult);
-    });
-  
-    // movieCategories 업데이트
-    this.movieCategories = [
-      { title: 'Trending', result: this.trendingMovieResult },
-      { title: 'Action', result: this.actionMovieResult },
-      { title: 'Adventure', result: this.adventureMovieResult },
-      { title: 'Animation', result: this.animationMovieResult },
-      { title: 'Comedy', result: this.comedyMovieResult },
-      { title: 'Documentary', result: this.documentaryMovieResult },
-      { title: 'Science-Fiction', result: this.sciencefictionMovieResult },
-      { title: 'Thriller', result: this.thrillerMovieResult }
-    ];
+  async loadData() {
+    try {
+      // 모든 영화 데이터를 병렬로 불러옴
+      const [trending, action, adventure, animation, comedy, documentary, scifi, thriller] = await Promise.all([
+        this.movieService.getReleaseMovies(1),
+        this.movieService.getMoviesByGenre('28', 1),
+        this.movieService.getMoviesByGenre('12', 1),
+        this.movieService.getMoviesByGenre('16', 1),
+        this.movieService.getMoviesByGenre('35', 1),
+        this.movieService.getMoviesByGenre('99', 1),
+        this.movieService.getMoviesByGenre('878', 1),
+        this.movieService.getMoviesByGenre('53', 1)
+      ]);
+
+      // 데이터가 모두 로드된 후에 카테고리 배열 업데이트
+      this.movieCategories = [
+        { title: 'Trending', result: trending.results },
+        { title: 'Action', result: action.results },
+        { title: 'Adventure', result: adventure.results },
+        { title: 'Animation', result: animation.results },
+        { title: 'Comedy', result: comedy.results },
+        { title: 'Documentary', result: documentary.results },
+        { title: 'Science-Fiction', result: scifi.results },
+        { title: 'Thriller', result: thriller.results }
+      ];
+
+      // 데이터 로드 확인을 위한 로그
+      console.log('Movie Categories loaded:', this.movieCategories);
+    } catch (error) {
+      console.error('Error loading movie data:', error);
+    }
   }
-  
 
   scrollLeft(category: string) {
-    const element = document.querySelector(`.${category} .movie-row`);
+    const element = document.querySelector(`[data-category="${category}"]`);
     if (element) {
-      element.scrollBy({ left: -200, behavior: 'smooth' });
+      element.scrollBy({
+        left: -200,
+        behavior: 'smooth'
+      });
     }
   }
 
   scrollRight(category: string) {
-    const element = document.querySelector(`.${category} .movie-row`);
+    const element = document.querySelector(`[data-category="${category}"]`);
     if (element) {
-      element.scrollBy({ left: 200, behavior: 'smooth' });
+      element.scrollBy({
+        left: 200,
+        behavior: 'smooth'
+      });
     }
+  }
+
+  // 옵셔널: 영화 카드 클릭 핸들러
+  onMovieClick(movie: any) {
+    console.log('Movie clicked:', movie);
+    // 여기에 영화 클릭 시 실행할 로직 추가
+    // 예: 상세 페이지로 이동 또는 모달 표시
   }
 }

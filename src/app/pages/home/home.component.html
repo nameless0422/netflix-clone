@@ -3,21 +3,30 @@
     <h1>{{ movieTitle }}</h1>
     <p>{{ movieDescription }}</p>
   </div>
-  <img [src]="'https://image.tmdb.org/t/p/original' + movieBackdrop" alt="Banner" class="banner-image">
 </div>
 
-<div class="contain mt-3 mb-5 p-4">
-  <div *ngFor="let category of movieCategories" class="movie-section">
-    <h5 class="text-white">{{ category.title }}</h5>
-    <div class="movie-row-container">
-      <button class="scroll-button left" (click)="scrollLeft(category.title)">&#8249;</button>
-      <div class="movie-row" [ngClass]="category.title">
-        <div *ngFor="let movie of category.result" class="movie-card">
-          <img *ngIf="movie.poster_path" [src]="'https://image.tmdb.org/t/p/original/' + movie.poster_path" class="movie-img" alt="{{ movie.title }}">
-          <p>{{ movie.title }}</p>
+<div class="container mt-3 mb-5 p-4">
+  <ng-container *ngFor="let category of movieCategories">
+    <div class="movie-section">
+      <h5 class="text-white">{{ category.title }}</h5>
+      
+      <div class="movie-row-container">
+        <button class="scroll-button prev-btn" (click)="scrollLeft(category.title)">‹</button>
+        
+        <div class="movie-row" [attr.data-category]="category.title">
+          <ng-container *ngIf="category.result && category.result.length > 0">
+            <div *ngFor="let movie of category.result" class="movie-card">
+              <img *ngIf="movie.poster_path" 
+                   [src]="'https://image.tmdb.org/t/p/original/' + movie.poster_path" 
+                   class="movie-img" 
+                   [alt]="movie.title">
+              <p>{{ movie.title }}</p>
+            </div>
+          </ng-container>
         </div>
+        
+        <button class="scroll-button next-btn" (click)="scrollRight(category.title)">›</button>
       </div>
-      <button class="scroll-button right" (click)="scrollRight(category.title)">&#8250;</button>
     </div>
-  </div>
+  </ng-container>
 </div>
