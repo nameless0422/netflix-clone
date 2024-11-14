@@ -1,12 +1,13 @@
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between;  /* 로고와 메뉴를 양 끝으로 정렬 */
   align-items: center;
   padding: 1rem 2rem;
   background-color: #2b2b2b;
   color: #ffffff;
   transition: background-color 0.3s ease;
   position: fixed;
+  width: 100%; /* 헤더가 화면 전체 너비를 차지하도록 설정 */
   z-index: 10;
 }
 
@@ -17,6 +18,7 @@
 .logo {
   display: flex;
   align-items: center;
+  justify-content: flex-start; /* 로고는 왼쪽 정렬 */
 }
 
 .logo-icon {
@@ -29,7 +31,8 @@
 .nav-menu {
   display: flex;
   gap: 2rem;
-  margin: 0 auto; /* 중앙 정렬을 유지 */
+  justify-content: center;  /* 메뉴 항목을 수평으로 중앙 정렬 */
+  flex-grow: 1; /* 남는 공간을 차지하도록 */
 }
 
 .nav-menu a {
