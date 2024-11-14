@@ -32,14 +32,10 @@ export class HomeComponent implements OnInit {
   async loadBannerMovie() {
     try {
       const randomMovie = await this.movieService.getPopularMovies(1);
-      const movieId = randomMovie.results[0].id;
-
-      this.movieTitle = randomMovie.results[0].original_title;
-      this.movieDescription = randomMovie.results[0].overview;
-      this.movieBackdrop = randomMovie.results[0].backdrop_path;
-
-      const movieVideos = await this.movieService.getMovieVideos(movieId);
-      this.movieVideos = movieVideos;
+      const movieData = randomMovie.results[0];
+      this.movieTitle = movieData.original_title;
+      this.movieDescription = movieData.overview;
+      this.movieBackdrop = `https://image.tmdb.org/t/p/original/${movieData.backdrop_path}`;
     } catch (error) {
       console.error('Error loading banner movie:', error);
     }
