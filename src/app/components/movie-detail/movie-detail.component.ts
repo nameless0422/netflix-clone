@@ -1,5 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MovieService } from '../../util/movie/movie.service'; // 경로는 상황에 맞게 수정하세요
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { MovieService } from '../../util/movie/movie.service';
+
+interface Video {
+  key: string;
+  site: string;
+}
 
 @Component({
   selector: 'app-movie-detail',
@@ -9,14 +14,15 @@ import { MovieService } from '../../util/movie/movie.service'; // 경로는 상�
 })
 export class MovieDetailComponent implements OnInit {
   @Input() movie: any;
-  movieImage: string = '';  // movieImage 속성 추가
-  movieVideos: any[] = [];  // movieVideos 속성 추가
+  @Output() close = new EventEmitter<void>();  // 모달 닫기 이벤트 추가
+  movieImage: string = '';
+  movieVideos: any[] = [];
 
   constructor(private movieService: MovieService) {}
 
   ngOnInit(): void {
     if (this.movie) {
-      this.movieImage = `https://image.tmdb.org/t/p/original/${this.movie.backdrop_path}`;
+      this.movieImage = `https://image.tmdb.org/t/p/original${this.movie.backdrop_path}`;
       this.loadMovieVideos(this.movie.id);
     }
   }
@@ -24,14 +30,14 @@ export class MovieDetailComponent implements OnInit {
   async loadMovieVideos(movieId: number): Promise<void> {
     try {
       const videos = await this.movieService.getMovieVideos(movieId);
-      this.movieVideos = videos.filter((video: { site: string; }) => video.site === 'YouTube'); // YouTube 비디오만 필터링
+      this.movieVideos = videos.filter((video:Video) => video.site === 'YouTube');
     } catch (error) {
       console.error('Error loading movie videos:', error);
     }
   }
 
   closeModal() {
-    this.movie = null;
+    this.close.emit();  // 부모 컴포넌트로 닫기 이벤트 전달
   }
 }
 

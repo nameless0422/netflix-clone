@@ -105,6 +105,6 @@ export class HomeComponent implements OnInit {
     console.log('Selected movie:', movie);
   }
   closeMovieDetail() {
-    this.selectedMovie = null;  // 모달 닫기
+    this.selectedMovie = null;
   }
 }
