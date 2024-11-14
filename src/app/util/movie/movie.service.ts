@@ -6,6 +6,9 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class MovieService {
+  getTrendingMovies(arg0: number) {
+    throw new Error('Method not implemented.');
+  }
   private apiKey = environment.apiKey;  // 발급받은 API 키로 변경
 
   // 인기 영화 가져오기
