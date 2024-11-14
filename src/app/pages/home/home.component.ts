@@ -26,13 +26,14 @@ export class HomeComponent implements OnInit {
   movieDescription: string = ''; 
   movieBackdrop: string = ''; 
   movieVideos: any[] = []; 
+  movieCategories : any[] = [];
 
   @ViewChild('popularRow') popularRow!: ElementRef;
   @ViewChild('releaseRow') releaseRow!: ElementRef;
   @ViewChild('actionRow') actionRow!: ElementRef;
   
   constructor(private movieService: MovieService) {}
-
+ 
   ngOnInit(): void {
     this.loadBannerMovie();
     this.loadData();  // 데이터 로드
@@ -53,16 +54,44 @@ export class HomeComponent implements OnInit {
   loadData() {
     this.movieService.getPopularMovies(1).then(result => {
       this.popularMovies = result.results;
+      console.log('Popular Movies:', this.popularMovies); // 콘솔 로그 추가
     });
   
-    this.movieService.getReleaseMovies(1).then(result => this.trendingMovieResult = result.results);
-    this.movieService.getMoviesByGenre('28',1).then(result => this.actionMovieResult = result.results);
-    this.movieService.getMoviesByGenre('12', 1).then(result => this.adventureMovieResult = result.results);
-    this.movieService.getMoviesByGenre('16', 1).then(result => this.animationMovieResult = result.results);
-    this.movieService.getMoviesByGenre('35', 1).then(result => this.comedyMovieResult = result.results);
-    this.movieService.getMoviesByGenre('99', 1).then(result => this.documentaryMovieResult = result.results);
-    this.movieService.getMoviesByGenre('878', 1).then(result => this.sciencefictionMovieResult = result.results);
-    this.movieService.getMoviesByGenre('53', 1).then(result => this.thrillerMovieResult = result.results);
+    this.movieService.getReleaseMovies(1).then(result => {
+      this.trendingMovieResult = result.results;
+      console.log('Trending Movies:', this.trendingMovieResult); // 콘솔 로그 추가
+    });
+  
+    this.movieService.getMoviesByGenre('28',1).then(result => {
+      this.actionMovieResult = result.results;
+      console.log('Action Movies:', this.actionMovieResult); // 콘솔 로그 추가
+    });
+  
+    // 각 카테고리에 대해 데이터 로드 로그 추가
+    this.movieService.getMoviesByGenre('12', 1).then(result => {
+      this.adventureMovieResult = result.results;
+      console.log('Adventure Movies:', this.adventureMovieResult);
+    });
+    this.movieService.getMoviesByGenre('16', 1).then(result => {
+      this.animationMovieResult = result.results;
+      console.log('Animation Movies:', this.animationMovieResult);
+    });
+    this.movieService.getMoviesByGenre('35', 1).then(result => {
+      this.comedyMovieResult = result.results;
+      console.log('Comedy Movies:', this.comedyMovieResult);
+    });
+    this.movieService.getMoviesByGenre('99', 1).then(result => {
+      this.documentaryMovieResult = result.results;
+      console.log('Documentary Movies:', this.documentaryMovieResult);
+    });
+    this.movieService.getMoviesByGenre('878', 1).then(result => {
+      this.sciencefictionMovieResult = result.results;
+      console.log('Science Fiction Movies:', this.sciencefictionMovieResult);
+    });
+    this.movieService.getMoviesByGenre('53', 1).then(result => {
+      this.thrillerMovieResult = result.results;
+      console.log('Thriller Movies:', this.thrillerMovieResult);
+    });
   
     // movieCategories 업데이트
     this.movieCategories = [
@@ -76,17 +105,7 @@ export class HomeComponent implements OnInit {
       { title: 'Thriller', result: this.thrillerMovieResult }
     ];
   }
-
-  movieCategories = [
-    { title: 'Trending', result: this.trendingMovieResult },
-    { title: 'Action', result: this.actionMovieResult },
-    { title: 'Adventure', result: this.adventureMovieResult },
-    { title: 'Animation', result: this.animationMovieResult },
-    { title: 'Comedy', result: this.comedyMovieResult },
-    { title: 'Documentary', result: this.documentaryMovieResult },
-    { title: 'Science-Fiction', result: this.sciencefictionMovieResult },
-    { title: 'Thriller', result: this.thrillerMovieResult }
-  ];
+  
 
   scrollLeft(category: string) {
     const element = document.querySelector(`.${category} .movie-row`);
