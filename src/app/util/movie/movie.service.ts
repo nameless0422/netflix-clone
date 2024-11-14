@@ -39,9 +39,11 @@ export class MovieService {
   async getRandomMovies(): Promise<any> {
     try {
       const popularMovies = await this.getPopularMovies(1);  // 첫 페이지의 인기 영화 가져오기
-      const movies = popularMovies.results;
+  
+      // popularMovies나 results 배열이 유효한지 확인
+      const movies = popularMovies?.results;
       
-      if (movies.length > 0) {
+      if (movies && movies.length > 0) {
         const randomIndex = Math.floor(Math.random() * movies.length);  // 무작위 인덱스 선택
         return movies[randomIndex];  // 무작위 영화 반환
       } else {
@@ -49,6 +51,7 @@ export class MovieService {
       }
     } catch (error) {
       console.error('Error fetching random movie:', error);
+      return null;  // 에러 발생 시 null 반환
     }
   }
 
