@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit {
     { title: 'Science-Fiction', result: this.sciencefictionMovieResult },
     { title: 'Thriller', result: this.thrillerMovieResult }
   ];
+  getRowElement: any;
 
   constructor(private movieService: MovieService) {}
 
@@ -41,6 +42,21 @@ export class HomeComponent implements OnInit {
     this.loadData();  // 초기 데이터 로드
   }
 
+   // 좌측 버튼 클릭 시 스크롤
+   scrollLeft(section: 'popularRow' | 'releaseRow' | 'actionRow') {
+    const rowElement = this.getRowElement(section)?.nativeElement;
+    if (rowElement) {
+      rowElement.scrollBy({ left: -200, behavior: 'smooth' });
+    }
+  }
+
+  // 우측 버튼 클릭 시 스크롤
+  scrollRight(section: 'popularRow' | 'releaseRow' | 'actionRow') {
+    const rowElement = this.getRowElement(section)?.nativeElement;
+    if (rowElement) {
+      rowElement.scrollBy({ left: 200, behavior: 'smooth' });
+    }
+  }
   // 데이터 로드 함수
   loadData() {
     // 배너 데이터
