@@ -22,6 +22,13 @@
   border-radius: 8px;
 }
 
+.movie-image {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
 .close-btn {
   position: absolute;
   top: 10px;

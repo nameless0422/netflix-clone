@@ -1,6 +1,25 @@
 <div class="modal-backdrop" (click)="closeModal()"></div>
 <div class="modal-content">
   <button class="close-btn" (click)="closeModal()">X</button>
+
+  <!-- 영화 이미지 -->
+  <img [src]="movieImage" alt="{{ movie?.title }}" class="movie-image" *ngIf="movieImage">
+
+  <!-- 영화 정보 -->
   <h2>{{ movie?.title || 'No Title' }}</h2>
   <p>{{ movie?.overview || 'No Description' }}</p>
+
+  <!-- 동영상 -->
+  <div *ngIf="movieVideos.length > 0">
+    <h3>Trailer</h3>
+    <iframe
+      *ngFor="let video of movieVideos"
+      [src]="'https://www.youtube.com/embed/' + video.key"
+      width="100%"
+      height="315"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
 </div>
