@@ -15,7 +15,7 @@
         
         <div class="movie-row" [attr.data-category]="category.title">
           <ng-container *ngIf="category.result && category.result.length > 0">
-            <div *ngFor="let movie of category.result" class="movie-card" (click)="onMovieClick(movie)">
+            <div *ngFor="let movie of category.result" class="movie-card" (click)="openMovieDetail(movie)">
               <img *ngIf="movie.poster_path" 
                    [src]="'https://image.tmdb.org/t/p/original/' + movie.poster_path" 
                    class="movie-img" 
@@ -31,5 +31,6 @@
   </ng-container>
 
   <!-- 선택된 영화가 있을 때만 모달 컴포넌트 렌더링 -->
-  <app-movie-detail *ngIf="selectedMovie" [movie]="selectedMovie" (close)="closeMovieDetail()"></app-movie-detail>
+  <app-movie-detail *ngIf="selectedMovieId" [movieId]="selectedMovieId" (close)="closeMovieDetail()"></app-movie-detail>
+
 </div>

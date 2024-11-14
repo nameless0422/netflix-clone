@@ -4,27 +4,20 @@
   <div class="movie-header" [style.background-image]="'url(' + movieImage + ')'">
     <button class="close-btn" (click)="closeModal()">X</button>
     <div class="movie-title-overlay">
-      <h1>{{ movie?.title || 'No Title' }}</h1>
+      <h1>{{ movieDetails?.title || 'No Title' }}</h1>
     </div>
   </div>
 
   <!-- 하단 정보 및 개요 -->
   <div class="movie-info">
-    <p>{{ movie?.overview || 'No Description' }}</p>
-    <p><strong>출시일:</strong> {{ movie?.release_date || 'Unknown' }}</p>
-    <p><strong>평점:</strong> {{ movie?.vote_average || 'No Rating' }}</p>
+    <p>{{ movieDetails?.overview || 'No Description' }}</p>
+    <p><strong>출시일:</strong> {{ movieDetails?.release_date || 'Unknown' }}</p>
+    <p><strong>평점:</strong> {{ movieDetails?.vote_average || 'No Rating' }}</p>
 
     <!-- 장르 정보 -->
-    <p *ngIf="movie?.genres"><strong>장르:</strong> 
-      <span *ngFor="let genre of movie.genres; let i = index">
-        {{ genre.name }}<span *ngIf="i < movie.genres.length - 1">, </span>
-      </span>
-    </p>
-
-    <!-- 출연자 정보 -->
-    <p *ngIf="movie?.cast"><strong>출연:</strong> 
-      <span *ngFor="let actor of movie.cast; let i = index">
-        {{ actor.name }}<span *ngIf="i < movie.cast.length - 1">, </span>
+    <p *ngIf="movieGenres.length > 0"><strong>장르:</strong> 
+      <span *ngFor="let genre of movieGenres; let i = index">
+        {{ genre.name }}<span *ngIf="i < movieGenres.length - 1">, </span>
       </span>
     </p>
   </div>

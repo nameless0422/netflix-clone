@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { getURL4PopularMovies, getURL4ReleaseMovies, getURL4GenreMovies, getURL4SearchMovies, getURL4MovieVideos, getMovieVideos, fetchMovies } from './URL';
+import { getURL4PopularMovies, getURL4ReleaseMovies, getURL4GenreMovies, getURL4SearchMovies, getURL4MovieVideos, getMovieVideos, getURL4DetailsMovies, fetchMovies } from './URL';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -66,6 +66,14 @@ export class MovieService {
       return [];  // 에러 발생 시 빈 배열 리턴
     }
   }
-  
+  async getMovieDetail(movieId: number){
+    try {
+      const url = getURL4DetailsMovies(this.apiKey, movieId);
+      return await fetchMovies(url);
+    } catch (error) {
+      console.error('Error fetching movie details:', error);
+      return null;
+    }
+  }
 }
 

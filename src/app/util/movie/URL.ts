@@ -44,5 +44,9 @@ const getMovieVideos = (url: string)  => {
     return axios.get(url);
 };
 
+const getURL4DetailsMovies = (apiKey: string, movieId: number): string => {
+    return `https://api.themoviedb.org/3/movie/${movieId}?language=ko-KR&api_key=${apiKey}`;
+};
 
-export { fetchFeaturedMovie, getURL4PopularMovies, getURL4ReleaseMovies, getURL4GenreMovies, getURL4SearchMovies, getURL4MovieVideos, getMovieVideos, fetchMovies };
+
+export { fetchFeaturedMovie, getURL4PopularMovies, getURL4ReleaseMovies, getURL4GenreMovies, getURL4SearchMovies, getURL4MovieVideos, getMovieVideos, getURL4DetailsMovies,fetchMovies };

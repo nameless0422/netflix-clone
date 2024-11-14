@@ -6,6 +6,11 @@ interface Video {
   site: string;
 }
 
+interface Genre {
+  id: number;
+  name: string;
+}
+
 @Component({
   selector: 'app-movie-detail',
   templateUrl: './movie-detail.component.html',
@@ -14,9 +19,12 @@ interface Video {
 })
 export class MovieDetailComponent implements OnInit {
   @Input() movie: any;
+  @Input() movieId!: number;
   @Output() close = new EventEmitter<void>();  // 모달 닫기 이벤트 추가
   movieImage: string = '';
+  movieDetails: any;
   movieVideos: any[] = [];
+  movieGenres: Genre[] = [];
 
   constructor(private movieService: MovieService) {}
 
@@ -28,10 +36,19 @@ export class MovieDetailComponent implements OnInit {
         this.movieImage = `https://image.tmdb.org/t/p/original${imagePath}`;
       }
       this.loadMovieVideos(this.movie.id);
-      console.log(this.movie)
+      this.loadMovieDetails(this.movie.id);
     }
   }
   
+  async loadMovieDetails(movieId: number): Promise<void> {
+    try {
+      this.movieDetails = await this.movieService.getMovieDetail(movieId);
+      this.movieImage = `https://image.tmdb.org/t/p/original${this.movieDetails.backdrop_path}`;
+      this.movieGenres = this.movieDetails.genres; // 장르 데이터 저장
+    } catch (error) {
+      console.error('Error loading movie details:', error);
+    }
+  }
 
   async loadMovieVideos(movieId: number): Promise<void> {
     try {

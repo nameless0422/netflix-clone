@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   movieDescription: string = '';
   movieBackdrop: string = '';
   movieVideos: any[] = [];
-  selectedMovie: any = null;
+  selectedMovieId: any = null;
 
   @ViewChild('popularRow') popularRow!: ElementRef;
   @ViewChild('releaseRow') releaseRow!: ElementRef;
@@ -97,10 +97,11 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  onMovieClick(movie: any) {
-    this.selectedMovie = movie;
+  openMovieDetail(movieId: number) {
+    this.selectedMovieId = movieId;
   }
+  
   closeMovieDetail() {
-    this.selectedMovie = null;
+    this.selectedMovieId = null;
   }
 }
