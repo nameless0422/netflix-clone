@@ -34,5 +34,15 @@ export class MovieService {
     const url = getURL4GenreMovies(this.apiKey, genreId, page);
     return await fetchMovies(url);
   }
+
+  // 배너 영화 데이터 가져오기
+  async getBannerMovies(): Promise<any> {
+    try {
+      const response = await this.getPopularMovies(1);
+      return response.data.results.slice(0, 5);  // 첫 5개 영화만 배너로 사용
+    } catch (error) {
+      console.error('Error fetching banner movies:', error);
+    }
+  }
 }
 
