@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { getURL4PopularMovies, getURL4ReleaseMovies, getURL4GenreMovies, getURL4SearchMovies, fetchMovies } from './URL';
+import { getURL4PopularMovies, getURL4ReleaseMovies, getURL4GenreMovies, getURL4SearchMovies, getURL4MovieVideos, getMovieVideos, fetchMovies } from './URL';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -44,5 +44,18 @@ export class MovieService {
       console.error('Error fetching banner movies:', error);
     }
   }
+
+  // 영화의 동영상 정보 가져오기
+  async getMovieVideos(movieId: number): Promise<any> {
+    try {
+      // URL을 생성하여 동영상 정보를 가져옴
+      const response = getMovieVideos(getURL4MovieVideos(this.apiKey, movieId))
+      return (await response).data.results;  // 동영상 정보 배열 리턴
+    } catch (error) {
+      console.error('Error fetching movie videos:', error);
+      return [];  // 에러 발생 시 빈 배열 리턴
+    }
+  }
+  
 }
 

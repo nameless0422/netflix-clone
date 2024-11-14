@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
   movieTitle: string = ''; 
   movieDescription: string = ''; 
   movieBackdrop: string = ''; 
+  movieVideos: any[] = []; 
 
   constructor(private movieService: MovieService) {}
 
@@ -32,13 +33,18 @@ export class HomeComponent implements OnInit {
     this.loadBannerMovie();
     this.loadData();  // 데이터 로드
   }
-
-  // 배너 영화 데이터 로드 함수
   async loadBannerMovie() {
-    const randomMovie = await this.movieService.getRandomMovies();  // 랜덤 영화 데이터
-    this.movieTitle = randomMovie.original_title;
-    this.movieDescription = randomMovie.overview;
-    this.movieBackdrop = randomMovie.backdrop_path;
+    // 인기 영화 중 하나를 가져옵니다.
+    const randomMovie = await this.movieService.getPopularMovies(1);  
+    const movieId = randomMovie.results[0].id;  // 영화 ID 가져오기
+
+    this.movieTitle = randomMovie.results[0].original_title;
+    this.movieDescription = randomMovie.results[0].overview;
+    this.movieBackdrop = randomMovie.results[0].backdrop_path;
+
+    // 해당 영화의 예고편 동영상 정보를 가져옵니다.
+    const movieVideos = await this.movieService.getMovieVideos(movieId);
+    this.movieVideos = movieVideos;  // 동영상 정보 저장
   }
   // 데이터 로드 함수
   loadData() {

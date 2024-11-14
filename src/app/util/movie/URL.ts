@@ -33,7 +33,16 @@ const fetchMovies = async (url: string): Promise<any> => {
 
 const getURL4SearchMovies = (apiKey: string, query: string): string => {
     return `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=ko-KR&query=${query}&page=1`;
-  };
+};
+
+// 영화 동영상 URL 생성 (예고편 등)
+const getURL4MovieVideos = (apiKey: string, movieId: number) => {
+    return `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}&language=ko-KR`;
+};
+
+const getMovieVideos = (url: string)  => {
+    return axios.get(url);
+};
 
 
-export { fetchFeaturedMovie, getURL4PopularMovies, getURL4ReleaseMovies, getURL4GenreMovies, getURL4SearchMovies, fetchMovies };
+export { fetchFeaturedMovie, getURL4PopularMovies, getURL4ReleaseMovies, getURL4GenreMovies, getURL4SearchMovies, getURL4MovieVideos, getMovieVideos, fetchMovies };
