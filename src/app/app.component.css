@@ -125,4 +125,9 @@
     border-radius: 5px;
     margin-bottom: 0.5rem;
   }
+
+  /* 헤더 높이만큼 여백 추가 */
+  main {
+    margin-top: 70px; /* 헤더 높이와 일치하는 값 */
+  }
   
