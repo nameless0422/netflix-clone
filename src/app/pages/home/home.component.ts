@@ -72,9 +72,6 @@ export class HomeComponent implements OnInit {
         { title: 'Science-Fiction', result: scifi.results },
         { title: 'Thriller', result: thriller.results }
       ];
-
-      // 데이터 로드 확인을 위한 로그
-      console.log('Movie Categories loaded:', this.movieCategories);
     } catch (error) {
       console.error('Error loading movie data:', error);
     }
@@ -102,7 +99,6 @@ export class HomeComponent implements OnInit {
 
   onMovieClick(movie: any) {
     this.selectedMovie = movie;
-    console.log('Selected movie:', movie);
   }
   closeMovieDetail() {
     this.selectedMovie = null;

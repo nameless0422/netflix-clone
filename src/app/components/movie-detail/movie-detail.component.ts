@@ -28,6 +28,7 @@ export class MovieDetailComponent implements OnInit {
         this.movieImage = `https://image.tmdb.org/t/p/original${imagePath}`;
       }
       this.loadMovieVideos(this.movie.id);
+      console.log(this.movieImage)
     }
   }
   
