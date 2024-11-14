@@ -1,0 +1,9 @@
+<div class="modal-backdrop" *ngIf="movie" (click)="closeModal()"></div>
+<div class="modal-content" *ngIf="movie">
+  <button class="close-btn" (click)="closeModal()">X</button>
+  <h2>{{ movie.title }}</h2>
+  <img [src]="'https://image.tmdb.org/t/p/original/' + movie.backdrop_path" alt="{{ movie.title }}" class="movie-backdrop">
+  <p>{{ movie.overview }}</p>
+  <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
+  <p><strong>Rating:</strong> {{ movie.vote_average }}</p>
+</div>

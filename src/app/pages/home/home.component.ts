@@ -3,12 +3,13 @@ import { MovieService } from '../../util/movie/movie.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { MovieDetailComponent } from '../../components/movie-detail/movie-detail.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [CommonModule, FormsModule, RouterOutlet, RouterLink, RouterLinkActive, MovieDetailComponent],
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
@@ -17,6 +18,7 @@ export class HomeComponent implements OnInit {
   movieDescription: string = '';
   movieBackdrop: string = '';
   movieVideos: any[] = [];
+  selectedMovie: any = null;
 
   @ViewChild('popularRow') popularRow!: ElementRef;
   @ViewChild('releaseRow') releaseRow!: ElementRef;
@@ -98,10 +100,10 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  // 옵셔널: 영화 카드 클릭 핸들러
   onMovieClick(movie: any) {
-    console.log('Movie clicked:', movie);
-    // 여기에 영화 클릭 시 실행할 로직 추가
-    // 예: 상세 페이지로 이동 또는 모달 표시
+    this.selectedMovie = movie;
+  }
+  closeMovieDetail() {
+    this.selectedMovie = null;  // 모달 닫기
   }
 }
