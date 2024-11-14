@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit {
     this.movieService.getPopularMovies(1).then(result => {
       this.popularMovies = result.results;
     });
-
+  
     this.movieService.getReleaseMovies(1).then(result => this.trendingMovieResult = result.results);
     this.movieService.getMoviesByGenre('28',1).then(result => this.actionMovieResult = result.results);
     this.movieService.getMoviesByGenre('12', 1).then(result => this.adventureMovieResult = result.results);
@@ -63,6 +63,18 @@ export class HomeComponent implements OnInit {
     this.movieService.getMoviesByGenre('99', 1).then(result => this.documentaryMovieResult = result.results);
     this.movieService.getMoviesByGenre('878', 1).then(result => this.sciencefictionMovieResult = result.results);
     this.movieService.getMoviesByGenre('53', 1).then(result => this.thrillerMovieResult = result.results);
+  
+    // movieCategories 업데이트
+    this.movieCategories = [
+      { title: 'Trending', result: this.trendingMovieResult },
+      { title: 'Action', result: this.actionMovieResult },
+      { title: 'Adventure', result: this.adventureMovieResult },
+      { title: 'Animation', result: this.animationMovieResult },
+      { title: 'Comedy', result: this.comedyMovieResult },
+      { title: 'Documentary', result: this.documentaryMovieResult },
+      { title: 'Science-Fiction', result: this.sciencefictionMovieResult },
+      { title: 'Thriller', result: this.thrillerMovieResult }
+    ];
   }
 
   movieCategories = [

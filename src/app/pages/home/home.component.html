@@ -7,16 +7,12 @@
   <img [src]="'https://image.tmdb.org/t/p/original/' + movieBackdrop" alt="{{ movieTitle }}" class="banner-image" />
 </div>
 
-<!-- 영화 카테고리 섹션 -->
 <div class="contain mt-3 mb-5 p-4">
-  <!-- 카테고리 반복 -->
-  <div *ngFor="let category of movieCategories">
+  <div *ngFor="let category of movieCategories" class="movie-section">
     <h5 class="text-white">{{ category.title }}</h5>
-    
-    <!-- 스크롤 버튼과 영화 목록 -->
-    <div class="rowposter mt-3 p-2">
+    <div class="movie-row-container">
       <button class="scroll-button left" (click)="scrollLeft(category.title)">&#8249;</button>
-      <div class="movie-row" #getRowElement>
+      <div class="movie-row" [ngClass]="category.title">
         <ng-container *ngFor="let movie of category.result">
           <div class="movie-card">
             <img [src]="'https://image.tmdb.org/t/p/original/' + movie.poster_path" class="movie-img" alt="{{ movie.title }}" [routerLink]="['/movie', movie.id]">
