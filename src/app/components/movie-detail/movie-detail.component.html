@@ -1,16 +1,22 @@
 <div class="modal-backdrop" (click)="closeModal()"></div>
 <div class="modal-content">
-  <button class="close-btn" (click)="closeModal()">X</button>
+  <!-- 상단 이미지 배경 -->
+  <div class="movie-header" [style.background-image]="'url(' + movieImage + ')'">
+    <button class="close-btn" (click)="closeModal()">X</button>
+    <div class="movie-title-overlay">
+      <h1>{{ movie?.title || 'No Title' }}</h1>
+    </div>
+  </div>
 
-  <!-- 영화 이미지 -->
-  <img [src]="movieImage" alt="{{ movie?.title }}" class="movie-image" *ngIf="movieImage">
+  <!-- 하단 정보 및 개요 -->
+  <div class="movie-info">
+    <p><strong>개요:</strong> {{ movie?.overview || 'No Description' }}</p>
+    <p><strong>출시일:</strong> {{ movie?.release_date || 'Unknown' }}</p>
+    <p><strong>평점:</strong> {{ movie?.vote_average || 'No Rating' }}</p>
+  </div>
 
-  <!-- 영화 정보 -->
-  <h2>{{ movie?.title || 'No Title' }}</h2>
-  <p>{{ movie?.overview || 'No Description' }}</p>
-
-  <!-- 동영상 -->
-  <div *ngIf="movieVideos.length > 0">
+  <!-- 동영상 트레일러 -->
+  <div *ngIf="movieVideos.length > 0" class="movie-trailer">
     <h3>Trailer</h3>
     <iframe
       *ngFor="let video of movieVideos"
