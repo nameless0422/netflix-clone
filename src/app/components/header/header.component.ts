@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -18,7 +18,12 @@ export class HeaderComponent implements OnInit {
   constructor(private cookieService: CookieService, private router: Router) {}
 
   ngOnInit(): void {
-    this.isLoggedIn = this.cookieService.get('isLoggedIn') === 'true';
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // 페이지 이동이 완료되면 로그인 상태 확인
+        this.isLoggedIn = this.cookieService.get('isLoggedIn') === 'true';
+      }
+    });
   }
 
   onProfileClick(): void {
