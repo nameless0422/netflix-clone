@@ -32,10 +32,14 @@ export class HomeComponent implements OnInit {
   async loadBannerMovie() {
     try {
       const randomMovie = await this.movieService.getRandomMovies();
-      const movieData = randomMovie.results[0];
-      this.movieTitle = movieData.original_title;
-      this.movieDescription = movieData.overview;
-      this.movieBackdrop = `https://image.tmdb.org/t/p/original/${movieData.backdrop_path}`;
+  
+      if (randomMovie) {
+        this.movieTitle = randomMovie.original_title || '제목 없음';
+        this.movieDescription = randomMovie.overview || '설명 없음';
+        this.movieBackdrop = `https://image.tmdb.org/t/p/original/${randomMovie.backdrop_path}`;
+      } else {
+        console.error('No movie data found');
+      }
     } catch (error) {
       console.error('Error loading banner movie:', error);
     }
