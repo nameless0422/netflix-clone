@@ -1,86 +1,91 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MovieService } from '../../util/movie/movie.service';  // MovieService 가져오기
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { MovieService } from '../../util/movie/movie.service';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule, RouterOutlet, RouterLink, RouterLinkActive],
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
-  popularMovies: any[] = [];
-  releaseMovies: any[] = [];
-  actionMovies: any[] = [];
+export class HomeComponent implements OnInit {
+  // 영화 카테고리 데이터
+  bannerResult: any = [];
+  trendingMovieResult: any = [];
+  actionMovieResult: any = [];
+  adventureMovieResult: any = [];
+  animationMovieResult: any = [];
+  comedyMovieResult: any = [];
+  documentaryMovieResult: any = [];
+  sciencefictionMovieResult: any = [];
+  thrillerMovieResult: any = [];
 
-  // 각 구역에 대한 ViewChild 참조를 미리 정의
-  @ViewChild('popularRow', { static: false }) popularRow!: ElementRef;
-  @ViewChild('releaseRow', { static: false }) releaseRow!: ElementRef;
-  @ViewChild('actionRow', { static: false }) actionRow!: ElementRef;
-
-  // 좌측/우측 버튼의 활성화 상태
-  isActiveLeft: boolean = false;
-  isActiveRight: boolean = true;
+  // 동적 영화 카테고리 배열
+  movieCategories = [
+    { title: 'Trending', result: this.trendingMovieResult },
+    { title: 'Action', result: this.actionMovieResult },
+    { title: 'Adventure', result: this.adventureMovieResult },
+    { title: 'Animation', result: this.animationMovieResult },
+    { title: 'Comedy', result: this.comedyMovieResult },
+    { title: 'Documentary', result: this.documentaryMovieResult },
+    { title: 'Science-Fiction', result: this.sciencefictionMovieResult },
+    { title: 'Thriller', result: this.thrillerMovieResult }
+  ];
 
   constructor(private movieService: MovieService) {}
 
-  async ngOnInit(): Promise<void> {
-    try {
-      const popularData = await this.movieService.getPopularMovies();
-      this.popularMovies = popularData.results;
-
-      const releaseData = await this.movieService.getReleaseMovies();
-      this.releaseMovies = releaseData.results;
-
-      const actionData = await this.movieService.getActionMovies();
-      this.actionMovies = actionData.results;
-    } catch (error) {
-      console.error('Error loading movies:', error);
-    }
+  ngOnInit(): void {
+    this.loadData();  // 초기 데이터 로드
   }
 
-  // 이전 버튼 (왼쪽) 클릭
-  handlePrev(section: 'popularRow' | 'releaseRow' | 'actionRow') {
-    const rowElement = this.getRowElement(section)?.nativeElement;
-    if (rowElement) {
-      rowElement.scrollBy({ left: -200, behavior: 'smooth' });
-      this.updateButtonState();
-    }
-  }
+  // 데이터 로드 함수
+  loadData() {
+    // 배너 데이터
+    this.movieService.getPopularMovies(1).then(result => {
+      this.bannerResult = result.results;
+    });
 
-  // 다음 버튼 (오른쪽) 클릭
-  handleNext(section: 'popularRow' | 'releaseRow' | 'actionRow') {
-    const rowElement = this.getRowElement(section)?.nativeElement;
-    if (rowElement) {
-      rowElement.scrollBy({ left: 200, behavior: 'smooth' });
-      this.updateButtonState();
-    }
-  }
+    // 트렌딩 영화 데이터
+    this.movieService.getReleaseMovies(1).then(result => {
+      this.trendingMovieResult = result.results;
+    });
 
-  // 섹션에 대한 rowElement를 동적으로 가져오는 메서드
-  private getRowElement(section: 'popularRow' | 'releaseRow' | 'actionRow'): ElementRef | undefined {
-    switch (section) {
-      case 'popularRow':
-        return this.popularRow;
-      case 'releaseRow':
-        return this.releaseRow;
-      case 'actionRow':
-        return this.actionRow;
-      default:
-        return undefined;
-    }
-  }
+    // 액션 영화 데이터
+    this.movieService.getMoviesByGenre('28',1).then(result => {
+      this.actionMovieResult = result.results;
+    });
 
-  // 버튼 상태 업데이트
-  private updateButtonState() {
-    // popularRow의 스크롤 상태 확인
-    const rowElement = this.popularRow.nativeElement;
+    // 어드벤처 영화 데이터
+    this.movieService.getMoviesByGenre('12', 1).then(result => {  // 장르 ID '12'는 어드벤처
+      this.adventureMovieResult = result.results;
+    });
 
-    // 좌측 버튼 활성화 조건: 스크롤이 0보다 크면 활성화
-    this.isActiveLeft = rowElement.scrollLeft > 0;
+    // 애니메이션 영화 데이터
+    this.movieService.getMoviesByGenre('16', 1).then(result => {  // 장르 ID '16'은 애니메이션
+      this.animationMovieResult = result.results;
+    });
 
-    // 우측 버튼 활성화 조건: 스크롤이 끝에 도달했으면 비활성화
-    this.isActiveRight = rowElement.scrollLeft < rowElement.scrollWidth - rowElement.clientWidth;
+    // 코미디 영화 데이터
+    this.movieService.getMoviesByGenre('35', 1).then(result => {  // 장르 ID '35'는 코미디
+      this.comedyMovieResult = result.results;
+    });
+
+    // 다큐멘터리 영화 데이터
+    this.movieService.getMoviesByGenre('99', 1).then(result => {  // 장르 ID '99'는 다큐멘터리
+      this.documentaryMovieResult = result.results;
+    });
+
+    // 사이언스 픽션 영화 데이터
+    this.movieService.getMoviesByGenre('878', 1).then(result => {  // 장르 ID '878'은 사이언스 픽션
+      this.sciencefictionMovieResult = result.results;
+    });
+
+    // 스릴러 영화 데이터
+    this.movieService.getMoviesByGenre('53', 1).then(result => {  // 장르 ID '53'은 스릴러
+      this.thrillerMovieResult = result.results;
+    });
   }
 }
