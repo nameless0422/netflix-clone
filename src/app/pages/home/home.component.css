@@ -134,3 +134,24 @@
   margin-top: 80px;  /* 헤더 높이만큼 여백 추가 */
   padding: 20px;
 }
+
+/* 영화 카테고리 이미지 */
+.rowimg {
+  width: 100%;  /* 이미지 너비 고정 */
+  height: 250px; /* 이미지 높이 고정 */
+  object-fit: cover;  /* 비율을 유지하면서 이미지를 자름 */
+  border-radius: 8px; /* 둥근 모서리 */
+}
+
+/* 영화 카테고리 섹션 */
+.rowposter {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 10px; /* 카드 아래 여백 */
+}
+
+.rowposter .rowimg {
+  flex: 0 0 auto;  /* 수평으로 배치되도록 설정 */
+  max-width: 200px;  /* 카드 최대 너비 */
+}
