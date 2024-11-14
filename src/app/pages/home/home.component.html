@@ -12,12 +12,10 @@
     <div class="movie-row-container">
       <button class="scroll-button left" (click)="scrollLeft(category.title)">&#8249;</button>
       <div class="movie-row" [ngClass]="category.title">
-        <ng-container *ngFor="let movie of category.result">
-          <div class="movie-card">
-            <img *ngIf="movie.poster_path" [src]="'https://image.tmdb.org/t/p/original/' + movie.poster_path" class="movie-img" alt="{{ movie.title }}">
-            <p>{{ movie.title }}</p>
-          </div>
-        </ng-container>
+        <div *ngFor="let movie of category.result" class="movie-card">
+          <img *ngIf="movie.poster_path" [src]="'https://image.tmdb.org/t/p/original/' + movie.poster_path" class="movie-img" alt="{{ movie.title }}">
+          <p>{{ movie.title }}</p>
+        </div>
       </div>
       <button class="scroll-button right" (click)="scrollRight(category.title)">&#8250;</button>
     </div>
