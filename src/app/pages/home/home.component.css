@@ -1,24 +1,76 @@
-/* 영화 카드 스타일 */
+/* 배너 섹션 스타일링 */
+.contain-fluid {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.carousel-inner {
+  position: relative;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* 이미지를 배경으로 잘라서 전체 화면을 채움 */
+}
+
+.carousel-caption {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: white;
+  z-index: 2;
+}
+
+.carousel-caption h2 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.carousel-caption p {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 슬라이드 내 버튼 스타일링 */
+.carousel-control-prev,
+.carousel-control-next {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border-radius: 50%;
+  padding: 1rem;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1);  /* 아이콘 색상 반전 */
+}
+
+/* 영화 카드 스타일링 */
 .movie-card {
-  min-width: 150px; /* 최소 너비 설정 */
+  min-width: 150px;  /* 카드 최소 너비 */
   flex: 0 0 auto;
   text-align: center;
   background-color: #333;
   border-radius: 8px;
   overflow: hidden;
   color: #ffffff;
-  position: relative; /* 이미지와 텍스트를 겹치지 않도록 하기 위한 설정 */
+  position: relative;
 }
 
-/* 영화 이미지 스타일 */
 .movie-card img {
-  width: 100%;  /* 이미지가 카드의 너비를 채우도록 설정 */
-  height: 200px; /* 고정된 높이 설정 */
-  object-fit: cover; /* 이미지 비율을 유지하면서 잘리도록 설정 */
-  border-bottom: 2px solid #e50914;
+  width: 100%;
+  height: auto;
 }
 
-/* 영화 제목 스타일 */
 .movie-card p {
   font-size: 0.9rem;
   padding: 5px 0;
@@ -27,10 +79,10 @@
 /* 영화 목록의 수평 정렬 */
 .movie-row {
   display: flex;
-  overflow-x: auto;  /* 수평 스크롤 활성화 */
+  overflow-x: auto;
   gap: 10px;
-  scroll-snap-type: x mandatory;  /* 스크롤이 섹션에 맞춰 스냅되도록 설정 */
-  -webkit-overflow-scrolling: touch;  /* 터치스크린에서 부드러운 스크롤링 */
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* 영화 카테고리 섹션 스타일 */
@@ -61,7 +113,7 @@
 
 .scroll-button.left {
   left: 10px;
-  transform: rotate(180deg); /* 좌측 버튼 회전 */
+  transform: rotate(180deg);
 }
 
 .scroll-button.right {
@@ -76,34 +128,8 @@
   outline: none;
 }
 
-/* 배너 섹션 */
-.contain-fluid {
-  margin-bottom: 20px;
-}
-
-/* 기본적으로 각 섹션에 일정한 마진 및 패딩 */
+/* 페이지 내용에 마진 추가하여 헤더와 겹치지 않도록 설정 */
 .contain {
+  margin-top: 80px;  /* 헤더 높이만큼 여백 추가 */
   padding: 20px;
-}
-
-.rowposter {
-  display: flex;
-  gap: 10px;
-  overflow-x: auto;
-}
-
-.rowimg {
-  width: 100%;
-  height: 200px; /* 이미지 높이 고정 */
-  object-fit: cover;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-/* 각 카테고리 제목 스타일 */
-h5 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 15px;
-  color: #ffffff;
 }
