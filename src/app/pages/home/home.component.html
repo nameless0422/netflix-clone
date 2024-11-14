@@ -1,29 +1,11 @@
 <!-- 배너 섹션 -->
-<div class="contain-fluid">
-  <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <!-- 배너 슬라이드 -->
-      <div class="carousel-item active" *ngFor="let b of bannerResult; let i=index" [ngClass]="{active: i === 0}">
-        <img [src]="'https://image.tmdb.org/t/p/original/' + b.backdrop_path" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h2>{{ b.original_title }}</h2>
-          <p>{{ b.overview }}</p>
-        </div>
-      </div>
-    </div>
-    <!-- 이전 버튼 -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <!-- 다음 버튼 -->
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+<div class="banner">
+  <div class="banner-content">
+    <h1>{{ movieTitle }}</h1>
+    <p>{{ movieDescription }}</p>
   </div>
+  <img [src]="'https://image.tmdb.org/t/p/original/' + movieBackdrop" alt="{{ movieTitle }}" class="banner-image" />
 </div>
-
 
 <!-- 영화 카테고리 섹션 -->
 <div class="contain mt-3 mb-5 p-4">

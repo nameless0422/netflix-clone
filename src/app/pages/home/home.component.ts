@@ -22,18 +22,23 @@ export class HomeComponent implements OnInit {
   documentaryMovieResult: any[] = [];
   sciencefictionMovieResult: any[] = [];
   thrillerMovieResult: any[] = [];
-  bannerResult: any[] = [];
+  movieTitle: string = ''; 
+  movieDescription: string = ''; 
+  movieBackdrop: string = ''; 
 
   constructor(private movieService: MovieService) {}
 
   ngOnInit(): void {
-    this.loadBannerMovies();
+    this.loadBannerMovie();
     this.loadData();  // 데이터 로드
   }
 
   // 배너 영화 데이터 로드 함수
-  loadBannerMovies() {
-    this.movieService.getBannerMovies().then(result => this.bannerResult = result.results);  // 배너 데이터 가져오기
+  async loadBannerMovie() {
+    const randomMovie = await this.movieService.getRandomMovies();  // 랜덤 영화 데이터
+    this.movieTitle = randomMovie.original_title;
+    this.movieDescription = randomMovie.overview;
+    this.movieBackdrop = randomMovie.backdrop_path;
   }
   // 데이터 로드 함수
   loadData() {

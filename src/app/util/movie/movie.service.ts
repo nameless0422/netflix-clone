@@ -36,10 +36,10 @@ export class MovieService {
   }
 
   // 배너 영화 데이터 가져오기
-  async getBannerMovies(): Promise<any> {
+  async getRandomMovies(): Promise<any> {
     try {
       const response = await this.getPopularMovies(1);
-      return response.data.results.slice(0, 5);  // 첫 5개 영화만 배너로 사용
+      return response.data.results[0];  
     } catch (error) {
       console.error('Error fetching banner movies:', error);
     }
