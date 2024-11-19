@@ -135,4 +135,10 @@ export class HomeComponent implements OnInit {
     console.log('Toggling favorite for:', movie.id); // 디버깅
     this.wishlistManager.toggleWishlist(movie);
   }
+
+  onFavoriteClick(event: MouseEvent, movie: { id: number; title: string; poster_path: string }): void {
+    event.stopPropagation(); // 이벤트 전파 방지
+    this.toggleFavorite(movie);
+  }
+
 }

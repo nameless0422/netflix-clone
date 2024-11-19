@@ -48,5 +48,9 @@ const getURL4DetailsMovies = (apiKey: string, movieId: number): string => {
     return `https://api.themoviedb.org/3/movie/${movieId}?language=ko-KR&api_key=${apiKey}`;
 };
 
+const getURL4MovieCasts = ( apiKey: string, movieId: number ): string => {
+    return `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}&language=ko-KR`;
+}
 
-export { fetchFeaturedMovie, getURL4PopularMovies, getURL4ReleaseMovies, getURL4GenreMovies, getURL4SearchMovies, getURL4MovieVideos, getMovieVideos, getURL4DetailsMovies,fetchMovies };
+
+export { fetchFeaturedMovie, getURL4PopularMovies, getURL4ReleaseMovies, getURL4GenreMovies, getURL4SearchMovies, getURL4MovieVideos, getMovieVideos, getURL4DetailsMovies, getURL4MovieCasts, fetchMovies };

@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { MovieService } from '../../util/movie/movie.service';
+import { CommonModule } from '@angular/common'; // CommonModule 추가
 
 interface Genre {
   id: number;
@@ -10,6 +11,7 @@ interface Genre {
   selector: 'app-movie-detail',
   templateUrl: './movie-detail.component.html',
   styleUrls: ['./movie-detail.component.css'],
+  imports: [CommonModule],
   standalone: true
 })
 export class MovieDetailComponent implements OnInit, OnChanges {
@@ -19,12 +21,14 @@ export class MovieDetailComponent implements OnInit, OnChanges {
   movieImage: string = '';
   movieGenres: Genre[] = [];
   movieVideos: any[] = [];
+  movieCast: any[] = [];
 
   constructor(private movieService: MovieService) {}
 
   ngOnInit(): void {
     if (this.movieId) {
       this.loadMovieDetails(this.movieId);
+      this.loadMovieCast(this.movieId);
     }
   }
 
@@ -48,6 +52,15 @@ export class MovieDetailComponent implements OnInit, OnChanges {
     } catch (error) {
       console.error('Error loading movie details:', error);
       this.movieDetails = null; // 오류 발생 시 초기화
+    }
+  }
+
+  async loadMovieCast(movieId: number): Promise<void> {
+    try {
+      const castData = await this.movieService.getMovieCast(movieId);
+      this.movieCast = castData.cast.slice(0, 6); // 주요 출연진 6명만 표시
+    } catch (error) {
+      console.error('Error loading movie cast:', error);
     }
   }
 

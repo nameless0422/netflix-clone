@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { getURL4PopularMovies, getURL4ReleaseMovies, getURL4GenreMovies, getURL4SearchMovies, getURL4MovieVideos, getMovieVideos, getURL4DetailsMovies, fetchMovies } from './URL';
+import { getURL4PopularMovies, getURL4ReleaseMovies, getURL4GenreMovies, getURL4SearchMovies, getURL4MovieVideos, getMovieVideos, getURL4DetailsMovies, getURL4MovieCasts, fetchMovies } from './URL';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -75,5 +75,17 @@ export class MovieService {
       return null;
     }
   }
+  async getMovieCast(movieId: number): Promise<any> {
+    try {
+      const url = getURL4MovieCasts(this.apiKey, movieId)
+      const response = await fetch(url);
+      const data = await response.json();
+      return data; // 출연진 데이터를 반환
+    } catch (error) {
+      console.error('Error fetching movie cast:', error);
+      return { cast: [] }; // 에러 발생 시 빈 출연진 데이터 반환
+    }
+  }
+
 }
 
