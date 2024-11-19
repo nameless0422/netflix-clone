@@ -97,8 +97,12 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  openMovieDetail(movieId: number) {
-    this.selectedMovieId = movieId;
+  openMovieDetail(movie: any) {
+    if (typeof movie.id === 'number') {
+      this.selectedMovieId = movie.id; // movie.id를 올바르게 전달
+    } else {
+      console.error('Invalid movieId:', movie.id);
+    }
   }
   
   closeMovieDetail() {

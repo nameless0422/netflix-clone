@@ -66,10 +66,10 @@ export class MovieService {
       return [];  // 에러 발생 시 빈 배열 리턴
     }
   }
-  async getMovieDetail(movieId: number){
+  async getMovieDetail(movieId: number): Promise<any> {
     try {
       const url = getURL4DetailsMovies(this.apiKey, movieId);
-      return await fetchMovies(url);
+      return await fetchMovies(url); // 여기서 fetchMovies는 올바른 URL을 받음
     } catch (error) {
       console.error('Error fetching movie details:', error);
       return null;
