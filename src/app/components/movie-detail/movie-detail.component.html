@@ -21,6 +21,7 @@
       <p><strong>개요:</strong> {{ movieDetails?.overview || '설명이 없습니다.' }}</p>
       <p><strong>상태:</strong> {{ movieDetails?.status || '알 수 없음' }}</p>
       <p><strong>언어:</strong> {{ movieDetails?.original_language || '알 수 없음' }}</p>
+      <p><strong>제작비:</strong> {{ movieDetails?.budget | currency:'USD':'symbol':'1.0-0' }}</p>
       <p><strong>수익:</strong> {{ movieDetails?.revenue | currency:'USD':'symbol':'1.0-0' }}</p>
     </div>
   </div>
