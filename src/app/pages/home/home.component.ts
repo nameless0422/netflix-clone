@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MovieService } from '../../util/movie/movie.service';
+import WishlistManager from '../../util/movie/useWishlist';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
@@ -19,12 +20,17 @@ export class HomeComponent implements OnInit {
   movieBackdrop: string = '';
   movieVideos: any[] = [];
   selectedMovieId: any = null;
+  hoveredMovieId: number | null = null;
+  wishlistManager: WishlistManager;
 
   @ViewChild('popularRow') popularRow!: ElementRef;
   @ViewChild('releaseRow') releaseRow!: ElementRef;
   @ViewChild('actionRow') actionRow!: ElementRef;
 
-  constructor(private movieService: MovieService) {}
+  constructor(private movieService: MovieService) {
+    this.wishlistManager = new WishlistManager();
+    this.wishlistManager.loadWishlist(); // 로컬 스토리지에서 찜 목록 로드
+  }
 
   ngOnInit(): void {
     this.loadBannerMovie();
@@ -107,5 +113,24 @@ export class HomeComponent implements OnInit {
   
   closeMovieDetail() {
     this.selectedMovieId = null;
+  }
+
+  // 마우스 호버 이벤트 처리
+  onMouseEnter(movieId: number): void {
+    this.hoveredMovieId = movieId;
+  }
+
+  onMouseLeave(): void {
+    this.hoveredMovieId = null;
+  }
+
+  // 찜 여부 확인
+  isFavorite(movieId: number): boolean {
+    return this.wishlistManager.isInWishlist(movieId);
+  }
+
+  // 찜 토글
+  toggleFavorite(movie: { id: number; title: string; poster_path: string }): void {
+    this.wishlistManager.toggleWishlist(movie);
   }
 }

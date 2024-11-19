@@ -16,10 +16,22 @@
         <div class="movie-row" [attr.data-category]="category.title">
           <ng-container *ngIf="category.result && category.result.length > 0">
             <div *ngFor="let movie of category.result" class="movie-card" (click)="openMovieDetail(movie)">
+              
+              <!-- 영화 포스터 -->
               <img *ngIf="movie.poster_path" 
                    [src]="'https://image.tmdb.org/t/p/original/' + movie.poster_path" 
                    class="movie-img" 
                    [alt]="movie.title">
+
+              <!-- 찜하기 버튼 -->
+              <button *ngIf="hoveredMovieId === movie.id" 
+                class="favorite-btn" 
+                [class.favorited]="isFavorite(movie.id)"
+                (click)="toggleFavorite(movie)">
+                <i class="fa" [ngClass]="isFavorite(movie.id) ? 'fa-heart' : 'fa-heart-o'"></i>
+              </button>
+              
+              <!-- 타이틀 -->
               <p>{{ movie.title }}</p>
             </div>
           </ng-container>
