@@ -37,11 +37,17 @@ export class MovieDetailComponent implements OnInit, OnChanges {
   async loadMovieDetails(movieId: number): Promise<void> {
     try {
       this.movieDetails = await this.movieService.getMovieDetail(movieId);
-      this.movieImage = `https://image.tmdb.org/t/p/original${this.movieDetails.backdrop_path || this.movieDetails.poster_path}`;
+      console.log('Movie details:', this.movieDetails); // API 응답 데이터 확인
+      if (this.movieDetails && (this.movieDetails.backdrop_path || this.movieDetails.poster_path)) {
+        this.movieImage = `https://image.tmdb.org/t/p/original${this.movieDetails.backdrop_path || this.movieDetails.poster_path}`;
+      } else {
+        console.warn('No image available for this movie');
+      }
       this.movieGenres = this.movieDetails.genres || []; // 장르 데이터 저장
       this.loadMovieVideos(movieId);
     } catch (error) {
       console.error('Error loading movie details:', error);
+      this.movieDetails = null; // 오류 발생 시 초기화
     }
   }
 
