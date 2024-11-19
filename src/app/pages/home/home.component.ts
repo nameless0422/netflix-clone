@@ -115,12 +115,13 @@ export class HomeComponent implements OnInit {
     this.selectedMovieId = null;
   }
 
-  // 마우스 호버 이벤트 처리
   onMouseEnter(movieId: number): void {
+    console.log('Mouse entered:', movieId); // 디버깅
     this.hoveredMovieId = movieId;
   }
-
+  
   onMouseLeave(): void {
+    console.log('Mouse left'); // 디버깅
     this.hoveredMovieId = null;
   }
 
@@ -131,6 +132,7 @@ export class HomeComponent implements OnInit {
 
   // 찜 토글
   toggleFavorite(movie: { id: number; title: string; poster_path: string }): void {
+    console.log('Toggling favorite for:', movie.id); // 디버깅
     this.wishlistManager.toggleWishlist(movie);
   }
 }
