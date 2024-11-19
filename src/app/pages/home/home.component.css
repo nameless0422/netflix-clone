@@ -79,6 +79,11 @@ html, body {
   object-fit: cover;
 }
 
+/* 포스터 어두운 효과 */
+.movie-card:hover .movie-img {
+  filter: brightness(0.5); /* 밝기 조정 */
+}
+
 .movie-card p {
   color: white;
   padding: 10px;
