@@ -73,17 +73,21 @@ html, body {
   cursor: pointer;
 }
 
+/* 포스터 이미지 */
 .movie-img {
   width: 100%;
-  height: 300px;
+  height: 100%;
   object-fit: cover;
+  border-radius: 8px;
+  transition: filter 0.3s ease;
 }
 
 /* 포스터 어두운 효과 */
 .movie-card:hover .movie-img {
-  filter: brightness(0.5); /* 밝기 조정 */
+  filter: brightness(0.5); /* 마우스 호버 시 어두워짐 */
 }
 
+/* 영화 제목 */
 .movie-card p {
   color: white;
   padding: 10px;
@@ -98,7 +102,6 @@ html, body {
   top: 10px;
   right: 10px;
   background-color: rgba(0, 0, 0, 0.6);
-  color: white;
   border: none;
   border-radius: 50%;
   width: 36px;
@@ -119,13 +122,14 @@ html, body {
   background-color: rgba(255, 0, 0, 0.8);
 }
 
-.favorite-btn i {
-  font-size: 16px;
+/* SVG 하트 아이콘 색상 */
+.favorite-btn svg {
+  fill: white; /* 기본 색상 */
+  transition: fill 0.3s;
 }
 
-/* 찜 상태 표시 */
-.favorite-btn.favorited {
-  background-color: rgba(255, 0, 0, 1);
+.favorite-btn.favorited svg {
+  fill: red; /* 찜 상태일 때 색상 */
 }
 
 /* 스크롤 버튼 스타일 */
@@ -169,27 +173,27 @@ html, body {
   .container {
     padding: 0 20px;
   }
-  
+
   .movie-card {
     min-width: 140px;
   }
-  
+
   .movie-img {
     height: 210px;
   }
-  
+
   .scroll-button {
     display: none;
   }
-  
+
   .banner-content {
     padding: 30px;
   }
-  
+
   .banner h1 {
     font-size: 2rem;
   }
-  
+
   .banner p {
     font-size: 1rem;
   }
