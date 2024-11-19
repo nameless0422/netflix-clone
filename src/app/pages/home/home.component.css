@@ -59,7 +59,8 @@ html, body {
 }
 
 .movie-card {
-  min-width: 200px;
+  min-width: 180px; /* 카드 너비 조정 */
+  height: 270px; /* 카드 높이 추가 */
   flex: 0 0 auto;
   background-color: #2f2f2f;
   border-radius: 4px;
@@ -175,11 +176,12 @@ html, body {
   }
 
   .movie-card {
-    min-width: 140px;
+    min-width: 140px; /* 작은 화면에서 카드 너비 축소 */
+    height: 210px; /* 작은 화면에서 카드 높이 축소 */
   }
 
   .movie-img {
-    height: 210px;
+    height: 100%;
   }
 
   .scroll-button {
