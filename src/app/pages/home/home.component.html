@@ -15,7 +15,10 @@
         
         <div class="movie-row" [attr.data-category]="category.title">
           <ng-container *ngIf="category.result && category.result.length > 0">
-            <div *ngFor="let movie of category.result" class="movie-card" (click)="openMovieDetail(movie)">
+            <div *ngFor="let movie of category.result" class="movie-card" 
+            (click)="openMovieDetail(movie)"
+            (mouseenter)="onMouseEnter(movie.id)"
+            (mouseleave)="onMouseLeave()">
               
               <!-- 영화 포스터 -->
               <img *ngIf="movie.poster_path" 
