@@ -3,7 +3,7 @@
   text-align: center;
   color: white;
   background-color: #141414;
-  margin-top: 20px;
+  margin-top: 50px;
 }
 
 /* 타이틀 스타일 */
@@ -13,7 +13,7 @@ h1 {
   color: #ffffff; /* 흰색 */
   text-transform: uppercase; /* 대문자 변환 */
   position: absolute; /* 절대 위치 설정 */
-  top: 20px; /* 화면 상단으로부터 간격 */
+  top: 70px; /* 화면 상단으로부터 간격 */
   left: 20px; /* 화면 왼쪽으로부터 간격 */
   margin: 0; /* 여백 제거 */
   letter-spacing: 2px; /* 문자 간격 */
