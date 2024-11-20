@@ -1,10 +1,12 @@
 import { Component, OnInit ,ChangeDetectorRef  } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import WishlistManager from '../../util/movie/useWishlist';
 
 @Component({
   selector: 'app-wishlist',
   templateUrl: './wishlist.component.html',
   standalone: true,
+  imports: [CommonModule],
   styleUrls: ['./wishlist.component.css'],
 })
 export class WishlistComponent implements OnInit {
