@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { MovieService } from '../../util/movie/movie.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -13,19 +13,22 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class ExploreComponent implements OnInit {
   searchResults: any[] = [];
-  genres: any[] = [];  // 장르 목록
-  ratings: number[] = [5, 6, 7, 8, 9, 10];  // 평점
-  languages: any[] = [];  // 언어 목록
-
+  genres: any[] = [];
+  ratings: number[] = [5, 6, 7, 8, 9, 10];
+  languages: any[] = [];
+  
   selectedGenre: string = '';
   selectedRating: string = '';
   selectedLanguage: string = '';
+  currentPage: number = 1; // 현재 페이지
+  isLoading: boolean = false; // 로딩 상태 확인
 
   constructor(private movieService: MovieService) {}
 
   ngOnInit(): void {
     this.loadGenres();
     this.loadLanguages();
+    this.applyFilters();
   }
 
   loadGenres(): void {
@@ -40,14 +43,30 @@ export class ExploreComponent implements OnInit {
     });
   }
 
-  applyFilters(): void {
-    const genre = this.selectedGenre;
-    const rating = this.selectedRating;
-    const language = this.selectedLanguage;
-  
-    this.movieService.getMoviesByFilters(genre, rating, language).then((movies) => {
-      this.searchResults = movies;
-    });
+  async applyFilters(): Promise<void> {
+    this.currentPage = 1;
+    this.searchResults = []; // 기존 결과 초기화
+    this.loadMoreMovies(); // 첫 페이지 데이터 로드
+  }
+
+  async loadMoreMovies(): Promise<void> {
+    if (this.isLoading) return;
+
+    this.isLoading = true;
+    try {
+      const newMovies = await this.movieService.getMoviesByFilters(
+        this.selectedGenre,
+        this.selectedRating,
+        this.selectedLanguage,
+        this.currentPage
+      );
+      this.searchResults = [...this.searchResults, ...newMovies];
+      this.currentPage++;
+    } catch (error) {
+      console.error('Error loading more movies:', error);
+    } finally {
+      this.isLoading = false;
+    }
   }
 
   resetFilters(): void {
@@ -55,5 +74,16 @@ export class ExploreComponent implements OnInit {
     this.selectedRating = '';
     this.selectedLanguage = '';
     this.applyFilters();
+  }
+
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+    const threshold = 300; // 스크롤 바닥과의 거리 (px)
+    const position = window.innerHeight + window.scrollY;
+    const height = document.body.scrollHeight;
+
+    if (position >= height - threshold) {
+      this.loadMoreMovies(); // 추가 데이터 로드
+    }
   }
 }

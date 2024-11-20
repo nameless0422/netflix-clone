@@ -122,11 +122,11 @@ export class MovieService {
     }
   }
   // 필터로 가져오기
-  async getMoviesByFilters(genre: string, rating: string, language: string): Promise<any[]> {
+  async getMoviesByFilters(genre: string, rating: string, language: string, page: number = 1): Promise<any[]> {
     try {
-      const url = getURL4MoviesWithFilters(this.apiKey, genre, rating, language);
+      const url = getURL4MoviesWithFilters(this.apiKey, genre, rating, language, page);
       const response = await fetchMovies(url);
-      return response.results || []; // 영화 목록 반환
+      return response.results || [];
     } catch (error) {
       console.error('Error fetching movies by filters:', error);
       return [];

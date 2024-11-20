@@ -60,8 +60,8 @@ const getURL4Languages = (apiKey: string): string => {
     return `https://api.themoviedb.org/3/configuration/languages?api_key=${apiKey}`;
 };
 
-const getURL4MoviesWithFilters = (apiKey: string, genre: string, rating: string, language: string): string => {
-    let url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=ko-KR`;
+const getURL4MoviesWithFilters = (apiKey: string, genre: string, rating: string, language: string, page: number): string => {
+    let url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=ko-KR&page=${page}`;
   
     if (genre) {
       url += `&with_genres=${genre}`;
