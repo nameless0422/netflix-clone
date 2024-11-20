@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { MovieService } from '../../util/movie/movie.service';
+import WishlistManager from '../../util/movie/useWishlist';
 import { CommonModule } from '@angular/common'; // CommonModule 추가
 
 interface Genre {
@@ -22,8 +23,12 @@ export class MovieDetailComponent implements OnInit, OnChanges {
   movieGenres: Genre[] = [];
   movieVideos: any[] = [];
   movieCast: any[] = [];
+  wishlistManager: WishlistManager;
 
-  constructor(private movieService: MovieService) {}
+  constructor(private movieService: MovieService) {
+    this.wishlistManager = new WishlistManager();
+    this.wishlistManager.loadWishlist();
+  }
 
   ngOnInit(): void {
     if (this.movieId) {
@@ -58,9 +63,10 @@ export class MovieDetailComponent implements OnInit, OnChanges {
   async loadMovieCast(movieId: number): Promise<void> {
     try {
       const castData = await this.movieService.getMovieCast(movieId);
-      this.movieCast = castData.cast.slice(0, 6); // 주요 출연진 6명만 표시
+      this.movieCast = (castData?.cast || []).slice(0, 6); // 주요 출연진 6명만 표시
     } catch (error) {
       console.error('Error loading movie cast:', error);
+      this.movieCast = [];
     }
   }
 
@@ -76,4 +82,20 @@ export class MovieDetailComponent implements OnInit, OnChanges {
   closeModal() {
     this.close.emit();  // 부모 컴포넌트로 닫기 이벤트 전달
   }
+
+  toggleWishlist(movie: any): void {
+    if (movie) {
+      this.wishlistManager.toggleWishlist(movie);
+    }
+  }
+  
+  isInWishlist(movieId: number): boolean {
+    return this.wishlistManager.isInWishlist(movieId);
+  }
+
+  getScoreDashArray(score: number): string {
+    const percentage = (score / 100) * 100;
+    return `${percentage}, 100`;
+  }
+
 }
