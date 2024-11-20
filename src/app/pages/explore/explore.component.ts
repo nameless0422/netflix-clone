@@ -26,9 +26,9 @@ export class ExploreComponent implements OnInit {
   constructor(private movieService: MovieService) {}
 
   ngOnInit(): void {
+    this.resetFilters(); // 페이지 로드 시 필터와 검색 결과 초기화
     this.loadGenres();
     this.loadLanguages();
-    this.applyFilters();
   }
 
   loadGenres(): void {
@@ -46,7 +46,11 @@ export class ExploreComponent implements OnInit {
   async applyFilters(): Promise<void> {
     this.currentPage = 1;
     this.searchResults = []; // 기존 결과 초기화
-    this.loadMoreMovies(); // 첫 페이지 데이터 로드
+  
+    // 최초에 60개 데이터 로드
+    for (let i = 1; i <= 3; i++) {
+      await this.loadMoreMovies(); // 3페이지 데이터 로드
+    }
   }
 
   async loadMoreMovies(): Promise<void> {
