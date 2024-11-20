@@ -18,7 +18,7 @@ export class ExploreComponent implements OnInit {
   ratings: number[] = [5, 6, 7, 8, 9, 10];
   languages: any[] = [];
   
-  wishlistManager = new WishlistManager();
+  wishlistManager: WishlistManager;
   hoveredMovieId: number | null = null; // 마우스 호버 상태 관리
   selectedGenre: string = '';
   selectedRating: string = '';
@@ -26,7 +26,10 @@ export class ExploreComponent implements OnInit {
   currentPage: number = 1; // 현재 페이지
   isLoading: boolean = false; // 로딩 상태 확인
 
-  constructor(private movieService: MovieService,) {}
+  constructor(private movieService: MovieService) {
+    this.wishlistManager = new WishlistManager();
+    this.wishlistManager.loadWishlist();
+  }
 
   ngOnInit(): void {
     this.resetFilters(); // 페이지 로드 시 필터와 검색 결과 초기화
