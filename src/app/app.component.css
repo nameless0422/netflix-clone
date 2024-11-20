@@ -128,6 +128,20 @@
 
   /* 헤더 높이만큼 여백 추가 */
   main {
-    margin-top: 50px; /* 헤더 높이와 일치하는 값 */
+    margin-top: 50px;
+    min-height: 80vh; /* 화면 높이의 80%를 최소 높이로 설정 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 자식 콘텐츠를 중앙에 배치 */
+    align-items: center; /* 자식 콘텐츠를 수평 중앙 정렬 */
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #141414; /* 필요 시 배경색 설정 */
+    color: white; /* 기본 텍스트 색상 */
+  }
+  
+  router-outlet {
+    width: 100%;
+    max-width: 1200px; /* 최대 페이지 너비 설정 */
   }
   
