@@ -5,9 +5,18 @@
   background-color: #141414;
 }
 
+/* 타이틀 스타일 */
 h1 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #ffffff; /* 흰색 */
+  text-transform: uppercase; /* 대문자 변환 */
+  position: absolute; /* 절대 위치 설정 */
+  top: 20px; /* 화면 상단으로부터 간격 */
+  left: 20px; /* 화면 왼쪽으로부터 간격 */
+  margin: 0; /* 여백 제거 */
+  letter-spacing: 2px; /* 문자 간격 */
+  z-index: 10; /* 다른 요소 위에 표시 */
 }
 
 .empty-wishlist {
@@ -29,7 +38,10 @@ h1 {
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s;
+  width: 200px; /* 명시적으로 카드 크기 지정 */
+  height: 300px; /* 명시적으로 카드 크기 지정 */
 }
+
 
 .wishlist-card:hover {
   transform: scale(1.05);

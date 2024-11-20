@@ -17,13 +17,14 @@ export class WishlistComponent implements OnInit {
   loadWishlist(): void {
     this.wishlistManager.loadWishlist();
     this.wishlist = this.wishlistManager.getWishlist();
+    console.log('Loaded Wishlist:', this.wishlist); // 디버깅용
   }
 
   removeFromWishlist(movieId: number): void {
     const movie = this.wishlist.find((item) => item.id === movieId);
     if (movie) {
-      this.wishlistManager.toggleWishlist(movie); // 위시리스트에서 제거
-      this.loadWishlist(); // 위시리스트 갱신
+      this.wishlistManager.toggleWishlist(movie);
+      this.loadWishlist();
     }
   }
 }
