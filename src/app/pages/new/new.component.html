@@ -1,1 +1,24 @@
-<p>new works!</p>
+<div class="new-page-container">
+    <!-- 뷰 전환 버튼 -->
+    <div class="view-toggle">
+      <button (click)="toggleView()">
+        {{ isGridView ? '리스트 보기' : '그리드 보기' }}
+      </button>
+    </div>
+  
+    <!-- 영화 카드 컨테이너 -->
+    <div [class.grid-view]="isGridView" [class.list-view]="!isGridView">
+      <div class="movie-card" *ngFor="let movie of movies">
+        <img
+          [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+          [alt]="movie.original_title"
+          class="movie-img"
+        />
+        <div class="movie-info">
+          <h3>{{ movie.original_title }}</h3>
+          <p>평점: {{ movie.vote_average }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
