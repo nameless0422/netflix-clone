@@ -12,7 +12,6 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
   styleUrls: ['./explore.component.css']
 })
 export class ExploreComponent implements OnInit {
-  searchQuery: string = '';
   searchResults: any[] = [];
   genres: any[] = [];  // 장르 목록
   ratings: number[] = [5, 6, 7, 8, 9, 10];  // 평점
@@ -29,23 +28,14 @@ export class ExploreComponent implements OnInit {
     this.loadLanguages();
   }
 
-  onSearch(): void {
-    if (this.searchQuery.trim()) {
-      this.movieService.searchMovies(this.searchQuery).then(results => {
-        this.searchResults = results;
-        this.applyFilters(); // 필터 적용
-      });
-    }
-  }
-
   loadGenres(): void {
-    this.movieService.getGenres().then(genres => {
+    this.movieService.getGenres().then((genres) => {
       this.genres = genres;
     });
   }
 
   loadLanguages(): void {
-    this.movieService.getLanguages().then(languages => {
+    this.movieService.getLanguages().then((languages) => {
       this.languages = languages;
     });
   }
@@ -53,13 +43,13 @@ export class ExploreComponent implements OnInit {
   applyFilters(): void {
     let filteredResults = [...this.searchResults];
     if (this.selectedGenre) {
-      filteredResults = filteredResults.filter(movie => movie.genre_ids.includes(Number(this.selectedGenre)));
+      filteredResults = filteredResults.filter((movie) => movie.genre_ids.includes(Number(this.selectedGenre)));
     }
     if (this.selectedRating) {
-      filteredResults = filteredResults.filter(movie => Math.floor(movie.vote_average) >= Number(this.selectedRating));
+      filteredResults = filteredResults.filter((movie) => Math.floor(movie.vote_average) >= Number(this.selectedRating));
     }
     if (this.selectedLanguage) {
-      filteredResults = filteredResults.filter(movie => movie.original_language === this.selectedLanguage);
+      filteredResults = filteredResults.filter((movie) => movie.original_language === this.selectedLanguage);
     }
     this.searchResults = filteredResults;
   }
