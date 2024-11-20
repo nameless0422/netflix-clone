@@ -3,6 +3,7 @@ import { MovieService } from '../../util/movie/movie.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import WishlistManager from '../../util/movie/useWishlist';
 
 @Component({
   selector: 'app-explore',
@@ -17,13 +18,15 @@ export class ExploreComponent implements OnInit {
   ratings: number[] = [5, 6, 7, 8, 9, 10];
   languages: any[] = [];
   
+  wishlistManager = new WishlistManager();
+  hoveredMovieId: number | null = null; // 마우스 호버 상태 관리
   selectedGenre: string = '';
   selectedRating: string = '';
   selectedLanguage: string = '';
   currentPage: number = 1; // 현재 페이지
   isLoading: boolean = false; // 로딩 상태 확인
 
-  constructor(private movieService: MovieService) {}
+  constructor(private movieService: MovieService,) {}
 
   ngOnInit(): void {
     this.resetFilters(); // 페이지 로드 시 필터와 검색 결과 초기화
@@ -89,5 +92,26 @@ export class ExploreComponent implements OnInit {
     if (position >= height - threshold) {
       this.loadMoreMovies(); // 추가 데이터 로드
     }
+  }
+
+  
+  // 찜 여부 확인
+  isFavorite(movieId: number): boolean {
+    return this.wishlistManager.isInWishlist(movieId);
+  }
+
+  // 찜 토글
+  toggleFavorite(movie: { id: number; title: string; poster_path: string }): void {
+    this.wishlistManager.toggleWishlist(movie);
+  }
+
+  onFavoriteClick(event: MouseEvent, movie: { id: number; title: string; poster_path: string }): void {
+    event.stopPropagation(); // 이벤트 전파 방지
+    this.toggleFavorite(movie);
+  }
+
+  getScoreDashArray(score: number): string {
+    const percentage = (score / 100) * 100;
+    return `${percentage}, 100`;
   }
 }
