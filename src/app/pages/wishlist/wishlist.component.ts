@@ -43,4 +43,9 @@ export class WishlistComponent implements OnInit {
   onMouseLeave(): void {
     this.hoveredMovieId = null; // 마우스가 영화 카드에서 벗어났을 때
   }
+  
+  getScoreDashArray(score: number): string {
+    const percentage = (score / 100) * 100;
+    return `${percentage}, 100`;
+  }
 }
