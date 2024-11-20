@@ -4,6 +4,7 @@ import WishlistManager from '../../util/movie/useWishlist';
 @Component({
   selector: 'app-wishlist',
   templateUrl: './wishlist.component.html',
+  standalone: true,
   styleUrls: ['./wishlist.component.css'],
 })
 export class WishlistComponent implements OnInit {
@@ -11,7 +12,7 @@ export class WishlistComponent implements OnInit {
   private wishlistManager = new WishlistManager();
 
   constructor(private cdr: ChangeDetectorRef) {}
-  
+
   ngOnInit(): void {
     this.loadWishlist();
   }
