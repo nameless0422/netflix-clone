@@ -1,20 +1,33 @@
 <div class="explore-container">
-    <h1>찾아보기</h1>
-    <div class="search-bar">
-      <input [(ngModel)]="searchQuery" placeholder="영화 또는 TV 시리즈 검색..." />
-      <button (click)="onSearch()">검색</button>
+  <h1>찾아보기</h1>
+
+  <!-- 필터 영역 -->
+  <div class="filter-bar">
+    <p>선호하는 설정을 선택하세요</p>
+    <select [(ngModel)]="selectedGenre" (change)="applyFilters()">
+      <option value="">장르 (전체)</option>
+      <option *ngFor="let genre of genres" [value]="genre.id">{{ genre.name }}</option>
+    </select>
+    <select [(ngModel)]="selectedRating" (change)="applyFilters()">
+      <option value="">평점 (전체)</option>
+      <option *ngFor="let rating of ratings" [value]="rating">{{ rating }}</option>
+    </select>
+    <select [(ngModel)]="selectedLanguage" (change)="applyFilters()">
+      <option value="">언어 (전체)</option>
+      <option *ngFor="let language of languages" [value]="language.iso_639_1">{{ language.english_name }}</option>
+    </select>
+    <button (click)="resetFilters()">초기화</button>
+  </div>
+
+  <div class="results">
+    <div *ngIf="searchResults.length > 0">
+      <div *ngFor="let movie of searchResults" class="movie-card">
+        <img [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" alt="{{ movie.title }}" />
+        <p>{{ movie.title }}</p>
+      </div>
     </div>
-  
-    <div class="results">
-      <div *ngIf="searchResults.length > 0">
-        <div *ngFor="let movie of searchResults" class="movie-card">
-          <img [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" alt="{{ movie.title }}" />
-          <p>{{ movie.title }}</p>
-        </div>
-      </div>
-      <div *ngIf="searchResults.length === 0">
-        <p>검색 결과가 없습니다.</p>
-      </div>
+    <div *ngIf="searchResults.length === 0">
+      <p>검색 결과가 없습니다.</p>
     </div>
   </div>
-  
+</div>
