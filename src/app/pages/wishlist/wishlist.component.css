@@ -27,8 +27,9 @@ h1 {
 
 .wishlist-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 반응형 그리드 */
+  gap: 20px; /* 카드 사이의 간격 */
+  justify-content: center; /* 중앙 정렬 */
 }
 
 .wishlist-card {
