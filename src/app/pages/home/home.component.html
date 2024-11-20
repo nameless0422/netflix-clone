@@ -10,14 +10,17 @@
     <div class="movie-section">
       <h5 class="text-white">{{ category.title }}</h5>
       
-      <div class="movie-row-container">
+      <div class="movie-row-container"
+      (mouseenter)="onContainerEnter(category.title)" 
+      (mouseleave)="onContainerLeave()"
+      >
         <button class="scroll-button prev-btn" (click)="scrollLeft(category.title)">‹</button>
         
         <div class="movie-row" [attr.data-category]="category.title">
           <ng-container *ngIf="category.result && category.result.length > 0">
             <div *ngFor="let movie of category.result" class="movie-card" 
             (click)="openMovieDetail(movie)"
-            (mouseenter)="onMouseEnter(movie.id)"
+            (mouseenter)="onMouseEnter(movie.id,category.title)"
             (mouseleave)="onMouseLeave()">
               
               <!-- 영화 포스터 -->
@@ -37,7 +40,7 @@
               </button>
 
               <!-- 회원 점수 -->
-              <div class="rating-circle" *ngIf="hoveredMovieId === movie.id">
+              <div class="rating-circle" *ngIf="hoveredMovieId === movie.id && hoveredContainer === category.title">
                 <div class="circle">
                   <svg viewBox="0 0 36 36" class="circular-chart">
                     <path class="circle-bg"

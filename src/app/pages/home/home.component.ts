@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
   movieVideos: any[] = [];
   selectedMovieId: any = null;
   hoveredMovieId: number | null = null;
+  hoveredContainer: string | null = null;
   wishlistManager: WishlistManager;
 
   @ViewChild('popularRow') popularRow!: ElementRef;
@@ -115,8 +116,20 @@ export class HomeComponent implements OnInit {
     this.selectedMovieId = null;
   }
 
-  onMouseEnter(movieId: number): void {
-    this.hoveredMovieId = movieId;
+  // movie-row-container에 마우스를 올릴 때
+  onContainerEnter(containerTitle: string): void {
+    this.hoveredContainer = containerTitle;
+  }
+
+  // movie-row-container에서 마우스를 벗어날 때
+  onContainerLeave(): void {
+    this.hoveredContainer = null;
+  }
+
+  onMouseEnter(movieId: number, containerTitle: string): void {
+    if (this.hoveredContainer === containerTitle) {
+      this.hoveredMovieId = movieId;
+    }
   }
   
   onMouseLeave(): void {
