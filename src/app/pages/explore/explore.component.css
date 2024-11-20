@@ -76,67 +76,68 @@ h1 {
   filter: brightness(0.5);
 }
 
-/* 좋아요 버튼과 평점 컨테이너 */
-.header-actions {
-  position: absolute;
-  bottom: 10px;
-  right: 20px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  z-index: 2;
-}
-
-/* 좋아요 버튼 스타일 */
+/* 찜하기 버튼 스타일 */
 .favorite-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
   background-color: rgba(0, 0, 0, 0.6);
   border: none;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color 0.3s;
+  opacity: 0;
+  transition: opacity 0.3s, background-color 0.3s;
+}
+
+.movie-card:hover .favorite-btn {
+  opacity: 1; /* 마우스 호버 시 버튼 표시 */
 }
 
 .favorite-btn:hover {
   background-color: rgba(255, 0, 0, 0.8);
 }
 
-.favorite-btn .heart-icon {
-  fill: white;
-  width: 24px;
-  height: 24px;
+/* SVG 하트 아이콘 색상 */
+.favorite-btn svg {
+  fill: white; /* 기본 색상 */
+  transition: fill 0.3s;
 }
 
-.favorite-btn.favorited .heart-icon {
-  fill: red;
+.favorite-btn.favorited svg {
+  fill: red; /* 찜 상태일 때 색상 */
 }
 
-/* 평점 스타일 */
+
+/* 회원 점수 스타일 */
 .rating-circle {
-  width: 60px;
-  height: 60px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 50px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.8);
   border-radius: 50%;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 .rating-circle .circle {
   position: relative;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
 }
 
 .circular-chart {
   width: 100%;
   height: 100%;
-  transform: rotate(-90deg);
+  transform: rotate(-90deg); /* 시작점을 위로 이동 */
 }
 
 .circle-bg {
@@ -147,7 +148,7 @@ h1 {
 
 .circle-progress {
   fill: none;
-  stroke: #4caf50;
+  stroke: #4caf50; /* 진행 색상 */
   stroke-width: 3.8;
   stroke-linecap: round;
   transition: stroke-dasharray 0.5s;
