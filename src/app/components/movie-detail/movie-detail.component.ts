@@ -18,6 +18,7 @@ interface Genre {
 export class MovieDetailComponent implements OnInit, OnChanges {
   @Input() movieId!: number;
   @Output() close = new EventEmitter<void>();  // 모달 닫기 이벤트 추가
+  @Output() update = new EventEmitter<void>();
   movieDetails: any = null;
   movieImage: string = '';
   movieGenres: Genre[] = [];
@@ -81,6 +82,7 @@ export class MovieDetailComponent implements OnInit, OnChanges {
 
   closeModal() {
     this.close.emit();  // 부모 컴포넌트로 닫기 이벤트 전달
+    this.update.emit();
   }
 
   toggleWishlist(movie: any): void {

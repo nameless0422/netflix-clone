@@ -79,6 +79,7 @@ export class HomeComponent implements OnInit {
         { title: 'Science-Fiction', result: scifi.results },
         { title: 'Thriller', result: thriller.results }
       ];
+      this.wishlistManager.loadWishlist(); // 위시리스트 업데이트
     } catch (error) {
       console.error('Error loading movie data:', error);
     }
@@ -156,4 +157,8 @@ export class HomeComponent implements OnInit {
     return `${percentage}, 100`;
   }
 
+  refreshHome(): void {
+    console.log('Refreshing home data...');
+    this.loadData(); // 홈 데이터를 다시 로드
+  }
 }
