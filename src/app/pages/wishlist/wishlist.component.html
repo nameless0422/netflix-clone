@@ -1,11 +1,11 @@
 <div class="wishlist-container">
   <h1>내가 찜한 리스트</h1>
 
-  <div class="empty-wishlist">
+  <div class="empty-wishlist" *ngif="wishlist.length === 0">
     위시리스트가 비어 있습니다. 좋아요 버튼을 눌러 영화를 추가하세요!
   </div>
 
-  <div class="wishlist-grid">
+  <div class="wishlist-grid" *ngif="wishlist.length > 0">
     <div class="wishlist-card" *ngFor="let movie of wishlist">
       <img 
         [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" 
@@ -15,9 +15,6 @@
       >
       <div class="wishlist-info">
         <h3>{{ movie.original_title }}</h3>
-        <p>{{ movie.overview }}</p>
-        <p><strong>출시일:</strong> {{ movie.release_date }}</p>
-        <p><strong>평점:</strong> {{ movie.vote_average }}</p>
         <button class="remove-btn" (click)="removeFromWishlist(movie.id)">삭제</button>
       </div>
     </div>
