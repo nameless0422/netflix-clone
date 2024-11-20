@@ -11,7 +11,19 @@ export class WishlistComponent implements OnInit {
   private wishlistManager = new WishlistManager();
 
   ngOnInit(): void {
+    this.loadWishlist();
+  }
+
+  loadWishlist(): void {
     this.wishlistManager.loadWishlist();
     this.wishlist = this.wishlistManager.getWishlist();
+  }
+
+  removeFromWishlist(movieId: number): void {
+    const movie = this.wishlist.find((item) => item.id === movieId);
+    if (movie) {
+      this.wishlistManager.toggleWishlist(movie); // 위시리스트에서 제거
+      this.loadWishlist(); // 위시리스트 갱신
+    }
   }
 }

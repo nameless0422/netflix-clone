@@ -1,8 +1,21 @@
-<div class="wishlist">
-    <h2>내가 찜한 리스트</h2>
-    <div class="movie-card" *ngFor="let movie of wishlist">
-      <img [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" alt="{{ movie.title }}" />
-      <p>{{ movie.title }}</p>
+<div class="wishlist-container">
+  <h1>내가 찜한 리스트</h1>
+
+  <div *ngIf="wishlist.length === 0" class="empty-wishlist">
+    <p>리스트가 비어 있습니다. 좋아요 버튼을 눌러 영화를 추가하세요!</p>
+  </div>
+
+  <div class="wishlist-grid" *ngIf="wishlist.length > 0">
+    <div *ngFor="let movie of wishlist" class="wishlist-card">
+      <img 
+        [src]="'https://image.tmdb.org/t/p/original/' + movie.poster_path" 
+        alt="{{ movie.title }}" 
+        class="wishlist-img"
+      >
+      <div class="wishlist-info">
+        <h3>{{ movie.title }}</h3>
+        <button class="remove-btn" (click)="removeFromWishlist(movie.id)">삭제</button>
+      </div>
     </div>
   </div>
-  
+</div>
