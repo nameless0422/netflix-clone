@@ -41,17 +41,13 @@ export class ExploreComponent implements OnInit {
   }
 
   applyFilters(): void {
-    let filteredResults = [...this.searchResults];
-    if (this.selectedGenre) {
-      filteredResults = filteredResults.filter((movie) => movie.genre_ids.includes(Number(this.selectedGenre)));
-    }
-    if (this.selectedRating) {
-      filteredResults = filteredResults.filter((movie) => Math.floor(movie.vote_average) >= Number(this.selectedRating));
-    }
-    if (this.selectedLanguage) {
-      filteredResults = filteredResults.filter((movie) => movie.original_language === this.selectedLanguage);
-    }
-    this.searchResults = filteredResults;
+    const genre = this.selectedGenre;
+    const rating = this.selectedRating;
+    const language = this.selectedLanguage;
+  
+    this.movieService.getMoviesByFilters(genre, rating, language).then((movies) => {
+      this.searchResults = movies;
+    });
   }
 
   resetFilters(): void {

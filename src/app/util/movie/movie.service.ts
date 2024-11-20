@@ -9,6 +9,7 @@ import { getURL4PopularMovies,
           getURL4MovieCasts,
           getURL4Genres,
           getURL4Languages,
+          getURL4MoviesWithFilters,
           fetchMovies } from './URL';
 import { environment } from '../../../environments/environment';
 
@@ -117,6 +118,17 @@ export class MovieService {
       return response || []; // 언어 배열 반환
     } catch (error) {
       console.error('Error fetching languages:', error);
+      return [];
+    }
+  }
+  // 필터로 가져오기
+  async getMoviesByFilters(genre: string, rating: string, language: string): Promise<any[]> {
+    try {
+      const url = getURL4MoviesWithFilters(this.apiKey, genre, rating, language);
+      const response = await fetchMovies(url);
+      return response.results || []; // 영화 목록 반환
+    } catch (error) {
+      console.error('Error fetching movies by filters:', error);
       return [];
     }
   }

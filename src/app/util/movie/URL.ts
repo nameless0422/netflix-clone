@@ -60,5 +60,32 @@ const getURL4Languages = (apiKey: string): string => {
     return `https://api.themoviedb.org/3/configuration/languages?api_key=${apiKey}`;
 };
 
+const getURL4MoviesWithFilters = (apiKey: string, genre: string, rating: string, language: string): string => {
+    let url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=ko-KR`;
+  
+    if (genre) {
+      url += `&with_genres=${genre}`;
+    }
+    if (rating) {
+      url += `&vote_average.gte=${rating}`;
+    }
+    if (language) {
+      url += `&with_original_language=${language}`;
+    }
+  
+    return url;
+  };
 
-export { fetchFeaturedMovie, getURL4PopularMovies, getURL4ReleaseMovies, getURL4GenreMovies, getURL4SearchMovies, getURL4MovieVideos, getMovieVideos, getURL4DetailsMovies, getURL4MovieCasts, getURL4Genres, getURL4Languages, fetchMovies };
+export { fetchFeaturedMovie, 
+        getURL4PopularMovies, 
+        getURL4ReleaseMovies, 
+        getURL4GenreMovies, 
+        getURL4SearchMovies, 
+        getURL4MovieVideos, 
+        getMovieVideos, 
+        getURL4DetailsMovies, 
+        getURL4MovieCasts, 
+        getURL4Genres, 
+        getURL4Languages, 
+        getURL4MoviesWithFilters,
+        fetchMovies };
