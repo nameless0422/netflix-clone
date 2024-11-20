@@ -18,6 +18,7 @@ h1 {
   margin: 0; /* 여백 제거 */
   letter-spacing: 2px; /* 문자 간격 */
   z-index: 10; /* 다른 요소 위에 표시 */
+  margin-bottom: 20px;
 }
 
 .empty-wishlist {
