@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import WishlistManager from '../../util/movie/useWishlist';
 
 @Component({
@@ -10,6 +10,8 @@ export class WishlistComponent implements OnInit {
   wishlist: any[] = [];
   private wishlistManager = new WishlistManager();
 
+  constructor(private cdr: ChangeDetectorRef) {}
+
   ngOnInit(): void {
     this.loadWishlist();
   }
@@ -17,7 +19,8 @@ export class WishlistComponent implements OnInit {
   loadWishlist(): void {
     this.wishlistManager.loadWishlist();
     this.wishlist = this.wishlistManager.getWishlist();
-    console.log('Loaded Wishlist:', this.wishlist); // 디버깅용
+    console.log('Wishlist Data:', this.wishlist); // 디버깅용
+    this.cdr.detectChanges(); // 강제로 Change Detection 수행
   }
 
   removeFromWishlist(movieId: number): void {
