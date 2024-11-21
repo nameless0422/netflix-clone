@@ -24,6 +24,7 @@ html, body {
 
 .banner-content {
   position: relative;
+  padding: 60px;
   color: white;
   z-index: 1;
 }
