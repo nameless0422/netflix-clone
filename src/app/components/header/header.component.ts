@@ -6,7 +6,6 @@ import WishlistManager from '../../util/movie/useWishlist';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  standalone: true,
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
