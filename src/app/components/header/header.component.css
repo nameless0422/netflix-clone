@@ -27,6 +27,7 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  z-index: 10001;
 }
 
 .logo-icon {
@@ -46,6 +47,7 @@
   color: #ffffff;
   font-size: 0.9rem;
   text-decoration: none;
+  z-index: 10001;
   cursor: pointer
 }
 
