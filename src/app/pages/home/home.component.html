@@ -30,7 +30,7 @@
                    [alt]="movie.title">
 
               <!-- 찜하기 버튼 -->
-              <button *ngIf="hoveredMovieId === movie.id" 
+              <button *ngIf="hoveredMovieId === movie.id && isLoggedIn"  
                 class="favorite-btn" 
                 [class.favorited]="isFavorite(movie.id)"
                 (click)="onFavoriteClick($event, movie)">

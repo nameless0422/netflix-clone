@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChange
 import { MovieService } from '../../util/movie/movie.service';
 import WishlistManager from '../../util/movie/useWishlist';
 import { CommonModule } from '@angular/common'; // CommonModule 추가
+import { CookieService } from 'ngx-cookie-service';
 
 interface Genre {
   id: number;
@@ -25,13 +26,15 @@ export class MovieDetailComponent implements OnInit, OnChanges {
   movieVideos: any[] = [];
   movieCast: any[] = [];
   wishlistManager: WishlistManager;
+  isLoggedIn: boolean = false;
 
-  constructor(private movieService: MovieService) {
+  constructor(private movieService: MovieService, private cookieService: CookieService) {
     this.wishlistManager = WishlistManager.getInstance();
     this.wishlistManager.loadWishlist();
   }
 
   ngOnInit(): void {
+    this.isLoggedIn = this.cookieService.get('isLoggedIn') === 'true';
     if (this.movieId) {
       this.loadMovieDetails(this.movieId);
       this.loadMovieCast(this.movieId);

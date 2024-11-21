@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import WishlistManager from '../../util/movie/useWishlist';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-wishlist',
@@ -13,10 +14,12 @@ export class WishlistComponent implements OnInit {
   wishlist: any[] = [];
   private wishlistManager = WishlistManager.getInstance();
   hoveredMovieId: number | null = null;
+  isLoggedIn: boolean = false;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef, private cookieService: CookieService) {}
 
   ngOnInit(): void {
+    this.isLoggedIn = this.cookieService.get('isLoggedIn') === 'true';
     this.loadWishlist();
   }
 

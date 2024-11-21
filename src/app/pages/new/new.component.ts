@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MovieService } from '../../util/movie/movie.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-new',
@@ -13,10 +14,12 @@ export class NewComponent implements OnInit {
   movies: any[] = [];
   page: number = 1;
   isGridView: boolean = true;
+  isLoggedIn: boolean = false;
 
-  constructor(private movieService: MovieService) {}
+  constructor(private movieService: MovieService, private cookieService: CookieService) {}
 
   ngOnInit(): void {
+    this.isLoggedIn = this.cookieService.get('isLoggedIn') === 'true';
     this.loadReleaseMovies(); // 초기 데이터 로드
   }
 

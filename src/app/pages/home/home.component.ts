@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { MovieDetailComponent } from '../../components/movie-detail/movie-detail.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-home',
@@ -23,17 +24,19 @@ export class HomeComponent implements OnInit {
   hoveredMovieId: number | null = null;
   hoveredContainer: string | null = null;
   wishlistManager: WishlistManager;
+  isLoggedIn: boolean = false;
 
   @ViewChild('popularRow') popularRow!: ElementRef;
   @ViewChild('releaseRow') releaseRow!: ElementRef;
   @ViewChild('actionRow') actionRow!: ElementRef;
 
-  constructor(private movieService: MovieService) {
+  constructor(private movieService: MovieService, private cookieService: CookieService) {
     this.wishlistManager = WishlistManager.getInstance();
     this.wishlistManager.loadWishlist(); // 로컬 스토리지에서 찜 목록 로드
   }
 
   ngOnInit(): void {
+    this.isLoggedIn = this.cookieService.get('isLoggedIn') === 'true';
     this.loadBannerMovie();
     this.loadData();
   }

@@ -29,6 +29,7 @@
 
       <!-- 좋아요 버튼 -->
       <button 
+        *ngIf="isLoggedIn"
         class="favorite-btn" 
         (click)="toggleWishlist(movieDetails)"
         [ngClass]="{'favorited': isInWishlist(movieDetails?.id)}"

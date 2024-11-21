@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import WishlistManager from '../../util/movie/useWishlist';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-explore',
@@ -25,13 +26,15 @@ export class ExploreComponent implements OnInit {
   selectedLanguage: string = '';
   currentPage: number = 1; // 현재 페이지
   isLoading: boolean = false; // 로딩 상태 확인
+  isLoggedIn: boolean = false;
 
-  constructor(private movieService: MovieService) {
+  constructor(private movieService: MovieService, private cookieService: CookieService) {
     this.wishlistManager = WishlistManager.getInstance();
     this.wishlistManager.loadWishlist();
   }
 
   ngOnInit(): void {
+    this.isLoggedIn = this.cookieService.get('isLoggedIn') === 'true';
     this.resetFilters(); // 페이지 로드 시 필터와 검색 결과 초기화
     this.loadGenres();
     this.loadLanguages();
