@@ -40,13 +40,12 @@
   display: flex;
   gap: 2rem;
   margin: 0 auto; /* 중앙 정렬 유지 */
-}
+  }
 
 .nav-menu a {
   color: #ffffff;
   font-size: 0.9rem;
   text-decoration: none;
-  pointer-events: auto;
   cursor: pointer
 }
 
