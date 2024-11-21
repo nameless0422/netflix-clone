@@ -31,6 +31,14 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  onProfileClick(): void {
+    if (this.isLoggedIn) {
+      this.logout();
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
+
   logout(): void {
     this.cookieService.delete('isLoggedIn', '/');
     this.cookieService.delete('userID', '/');

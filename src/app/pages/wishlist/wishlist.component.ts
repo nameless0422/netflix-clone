@@ -11,7 +11,7 @@ import WishlistManager from '../../util/movie/useWishlist';
 })
 export class WishlistComponent implements OnInit {
   wishlist: any[] = [];
-  private wishlistManager = WishlistManager.getInstance(); // 싱글턴 인스턴스 가져오기
+  private wishlistManager = WishlistManager.getInstance();
   hoveredMovieId: number | null = null;
 
   constructor(private cdr: ChangeDetectorRef) {}
@@ -21,6 +21,7 @@ export class WishlistComponent implements OnInit {
   }
 
   loadWishlist(): void {
+    this.wishlistManager.loadWishlist();
     this.wishlist = this.wishlistManager.getWishlist();
     this.cdr.detectChanges();
   }
@@ -28,6 +29,17 @@ export class WishlistComponent implements OnInit {
   toggleFavorite(movie: any): void {
     this.wishlistManager.toggleWishlist(movie);
     this.loadWishlist();
+  }
+
+  // 평점 원형 차트 데이터 생성
+  getScoreDashArray(score: number): string {
+    const percentage = (score / 10) * 100;
+    return `${percentage}, 100`;
+  }
+
+  // 위시리스트 여부 확인
+  isMovieInWishlist(movieId: number): boolean {
+    return this.wishlistManager.isInWishlist(movieId);
   }
 
   onMouseEnter(movieId: number): void {
@@ -38,3 +50,4 @@ export class WishlistComponent implements OnInit {
     this.hoveredMovieId = null;
   }
 }
+
