@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import WishlistManager from '../../util/movie/useWishlist';
+import { CookieService } from 'ngx-cookie-service';
 import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
@@ -12,12 +13,13 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class WishlistComponent implements OnInit {
   wishlist: any[] = [];
-  private wishlistManager = new WishlistManager();
+  private wishlistManager: WishlistManager = new WishlistManager;
   hoveredMovieId: number | null = null; // 마우스 호버 상태 관리
-
-  constructor(private cdr: ChangeDetectorRef, private router: Router) {}
+  isLoggedIn: boolean = false;
+  constructor(private cdr: ChangeDetectorRef, private router: Router, private cookieService: CookieService, ) {}
 
   ngOnInit(): void {
+    this.wishlistManager = new WishlistManager();
     // 페이지 이동 시 로그인 상태 확인 및 위시리스트 업데이트
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -31,8 +33,8 @@ export class WishlistComponent implements OnInit {
 
   // 로그인 상태 확인 및 위시리스트 로드
   private updateWishlist(): void {
-    this.wishlistManager.checkLoginStatus();
-    if (this.wishlistManager.isLoggedIn) {
+    this.isLoggedIn = this.cookieService.get('isLoggedIn') === 'true';
+    if (this.isLoggedIn) {
       this.wishlistManager.loadWishlist();
       this.wishlist = this.wishlistManager.getWishlist();
       console.log('Loaded Wishlist:', this.wishlist); // 디버깅용

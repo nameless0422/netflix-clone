@@ -29,6 +29,7 @@ export class LoginComponent {
         // 로그인 성공 시
         alert('로그인 성공!');
         this.cookieService.set('isLoggedIn', 'true', { expires: 1, path: '/' }); // 쿠키에 로그인 상태 저장 (1일 유효 기간)
+        this.cookieService.set('userID', this.email, { expires: 1, path: '/' });
         this.router.navigate(['/']); // 로그인 후 홈으로 리디렉션
       },
       () => {
