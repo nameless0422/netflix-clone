@@ -73,7 +73,12 @@ export class ExploreComponent implements OnInit {
         this.selectedLanguage,
         this.currentPage
       );
-      this.searchResults = [...this.searchResults, ...newMovies];
+      this.searchResults = [
+        ...this.searchResults,
+        ...newMovies.filter(
+          (movie) => !this.searchResults.some((result) => result.id === movie.id)
+        )
+      ];
       this.currentPage++;
     } catch (error) {
       console.error('Error loading more movies:', error);
@@ -100,7 +105,6 @@ export class ExploreComponent implements OnInit {
     }
   }
 
-  
   // 찜 여부 확인
   isFavorite(movieId: number): boolean {
     return this.wishlistManager.isInWishlist(movieId);
@@ -117,7 +121,7 @@ export class ExploreComponent implements OnInit {
   }
 
   getScoreDashArray(score: number): string {
-    const percentage = (score / 100) * 100;
+    const percentage = (score / 10) * 100;
     return `${percentage}, 100`;
   }
 }
