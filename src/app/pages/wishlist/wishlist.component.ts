@@ -14,14 +14,12 @@ export class WishlistComponent implements OnInit {
   wishlist: any[] = [];
   private wishlistManager = new WishlistManager();
   hoveredMovieId: number | null = null; // 마우스 호버 상태 관리
-  isLoggedIn: boolean = false; // 로그인 상태 확인
-  currentUserEmail: string | null = null; // 현재 사용자 이메일
 
   constructor(private cdr: ChangeDetectorRef, private router: Router) {}
 
   ngOnInit(): void {
-    this.checkLoginStatus();
-    if (this.isLoggedIn) {
+    this.wishlistManager.checkLoginStatus();
+    if (this.wishlistManager.isLoggedIn) {
       this.loadWishlist();
     } else {
       alert('로그인이 필요합니다.');
@@ -29,25 +27,12 @@ export class WishlistComponent implements OnInit {
     }
   }
 
-  // 로그인 상태 확인
-  private checkLoginStatus(): void {
-    const storedUser = localStorage.getItem('currentUser');
-    if (storedUser) {
-      this.currentUserEmail = JSON.parse(storedUser).id; // 이메일 정보 가져오기
-      this.isLoggedIn = !!this.currentUserEmail;
-    } else {
-      this.isLoggedIn = false;
-    }
-  }
-
   // 위시리스트 로드
   loadWishlist(): void {
-    if (this.currentUserEmail) {
-      this.wishlistManager.loadWishlist(); // 사용자별 위시리스트 로드
-      this.wishlist = this.wishlistManager.getWishlist();
-      console.log('Loaded Wishlist:', this.wishlist); // 디버깅용
-      this.cdr.detectChanges(); // 상태 변경 강제 반영
-    }
+    this.wishlistManager.loadWishlist(); // 사용자별 위시리스트 로드
+    this.wishlist = this.wishlistManager.getWishlist();
+    console.log('Loaded Wishlist:', this.wishlist); // 디버깅용
+    this.cdr.detectChanges(); // 상태 변경 강제 반영
   }
 
   // 좋아요 상태 확인
@@ -57,7 +42,7 @@ export class WishlistComponent implements OnInit {
 
   // 좋아요 상태 토글
   toggleFavorite(movie: any): void {
-    if (!this.isLoggedIn) {
+    if (!this.wishlistManager.isLoggedIn) {
       alert('로그인이 필요합니다.');
       return;
     }

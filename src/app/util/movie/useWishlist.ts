@@ -49,7 +49,7 @@ class WishlistManager {
         return this.wishlist;
     }
 
-    private checkLoginStatus(): void {
+    checkLoginStatus(): void {
         const storedUser = localStorage.getItem('currentUser');
         if (storedUser) {
           this.userEmail = JSON.parse(storedUser).id; // 이메일 정보 가져오기
@@ -57,7 +57,8 @@ class WishlistManager {
         } else {
           this.isLoggedIn = false;
         }
-      }
+        console.log("checkLoginStatus : ",this.isLoggedIn, this.userEmail)
+    }
 }
 
 export default WishlistManager;
