@@ -26,6 +26,7 @@
 .logo {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .logo-icon {
@@ -46,6 +47,7 @@
   font-size: 0.9rem;
   text-decoration: none;
   pointer-events: auto;
+  cursor: pointer
 }
 
 .nav-menu a:hover {
