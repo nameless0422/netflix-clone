@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { RouterModule } from '@angular/router';
 import WishlistManager from '../../util/movie/useWishlist';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   standalone: true,
+  imports: [RouterModule],
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
