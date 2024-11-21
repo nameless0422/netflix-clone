@@ -44,6 +44,7 @@
   color: #ffffff;
   font-size: 0.9rem;
   text-decoration: none;
+  pointer-events: auto;
 }
 
 .nav-menu a:hover {
