@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import WishlistManager from '../../util/movie/useWishlist';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-wishlist',
@@ -16,11 +17,20 @@ export class WishlistComponent implements OnInit {
   hoveredMovieId: number | null = null;
   isLoggedIn: boolean = false;
 
-  constructor(private cdr: ChangeDetectorRef, private cookieService: CookieService) {}
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private cookieService: CookieService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.isLoggedIn = this.cookieService.get('isLoggedIn') === 'true';
-    this.loadWishlist();
+    if (!this.isLoggedIn) {
+      // 로그인 상태가 아니면 로그인 페이지로 리다이렉트
+      this.router.navigate(['/login']);
+    } else {
+      this.loadWishlist();
+    }
   }
 
   loadWishlist(): void {
@@ -53,4 +63,3 @@ export class WishlistComponent implements OnInit {
     this.hoveredMovieId = null;
   }
 }
-
