@@ -27,7 +27,7 @@ export class MovieDetailComponent implements OnInit, OnChanges {
   wishlistManager: WishlistManager;
 
   constructor(private movieService: MovieService) {
-    this.wishlistManager = new WishlistManager();
+    this.wishlistManager = WishlistManager.getInstance();
     this.wishlistManager.loadWishlist();
   }
 

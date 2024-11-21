@@ -27,7 +27,7 @@ export class ExploreComponent implements OnInit {
   isLoading: boolean = false; // 로딩 상태 확인
 
   constructor(private movieService: MovieService) {
-    this.wishlistManager = new WishlistManager();
+    this.wishlistManager = WishlistManager.getInstance();
     this.wishlistManager.loadWishlist();
   }
 

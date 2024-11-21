@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
   @ViewChild('actionRow') actionRow!: ElementRef;
 
   constructor(private movieService: MovieService) {
-    this.wishlistManager = new WishlistManager();
+    this.wishlistManager = WishlistManager.getInstance();
     this.wishlistManager.loadWishlist(); // 로컬 스토리지에서 찜 목록 로드
   }
 

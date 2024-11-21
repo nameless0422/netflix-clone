@@ -1,8 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import WishlistManager from '../../util/movie/useWishlist';
-import { CookieService } from 'ngx-cookie-service';
-import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-wishlist',
@@ -13,66 +11,30 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class WishlistComponent implements OnInit {
   wishlist: any[] = [];
-  private wishlistManager: WishlistManager = new WishlistManager;
-  hoveredMovieId: number | null = null; // 마우스 호버 상태 관리
-  isLoggedIn: boolean = false;
-  constructor(private cdr: ChangeDetectorRef, private router: Router, private cookieService: CookieService, ) {}
+  private wishlistManager = WishlistManager.getInstance(); // 싱글턴 인스턴스 가져오기
+  hoveredMovieId: number | null = null;
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.wishlistManager = new WishlistManager();
-    // 페이지 이동 시 로그인 상태 확인 및 위시리스트 업데이트
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.updateWishlist();
-      }
-    });
-
-    // 초기 위시리스트 로드
-    this.updateWishlist();
+    this.loadWishlist();
   }
 
-  // 로그인 상태 확인 및 위시리스트 로드
-  private updateWishlist(): void {
-    this.isLoggedIn = this.cookieService.get('isLoggedIn') === 'true';
-    if (this.isLoggedIn) {
-      this.wishlistManager.loadWishlist();
-      this.wishlist = this.wishlistManager.getWishlist();
-      console.log('Loaded Wishlist:', this.wishlist); // 디버깅용
-      this.cdr.detectChanges();
-    } else {
-      alert('로그인이 필요합니다.');
-      this.router.navigate(['/login']);
-    }
+  loadWishlist(): void {
+    this.wishlist = this.wishlistManager.getWishlist();
+    this.cdr.detectChanges();
   }
 
-  // 좋아요 상태 확인
-  isMovieInWishlist(movieId: number): boolean {
-    return this.wishlistManager.isInWishlist(movieId);
-  }
-
-  // 좋아요 상태 토글
   toggleFavorite(movie: any): void {
-    if (!this.wishlistManager.isLoggedIn) {
-      alert('로그인이 필요합니다.');
-      return;
-    }
-    this.wishlistManager.toggleWishlist(movie); // 사용자별 데이터 저장
-    this.updateWishlist(); // 위시리스트 다시 로드
+    this.wishlistManager.toggleWishlist(movie);
+    this.loadWishlist();
   }
 
-  // 마우스가 영화 카드 위로 올라갔을 때
   onMouseEnter(movieId: number): void {
     this.hoveredMovieId = movieId;
   }
 
-  // 마우스가 영화 카드에서 벗어났을 때
   onMouseLeave(): void {
     this.hoveredMovieId = null;
-  }
-
-  // 평점 원형 차트 데이터 생성
-  getScoreDashArray(score: number): string {
-    const percentage = (score / 10) * 100; // 평점이 10점 만점이므로 10으로 나눔
-    return `${percentage}, 100`;
   }
 }
