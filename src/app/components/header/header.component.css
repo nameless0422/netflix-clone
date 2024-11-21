@@ -10,11 +10,12 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 10000;
   width: 100%;
   max-width: 100vw; /* 뷰포트 너비 초과 방지 */
   height: 50px;
   box-sizing: border-box; /* 패딩 포함하여 크기 계산 */
+  pointer-events: auto;
 }
 
 /* 호버 시 배경색 변경 */
