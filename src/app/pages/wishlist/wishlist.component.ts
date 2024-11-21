@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import WishlistManager from '../../util/movie/useWishlist';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-wishlist',
@@ -18,21 +18,29 @@ export class WishlistComponent implements OnInit {
   constructor(private cdr: ChangeDetectorRef, private router: Router) {}
 
   ngOnInit(): void {
+    // 페이지 이동 시 로그인 상태 확인 및 위시리스트 업데이트
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.updateWishlist();
+      }
+    });
+
+    // 초기 위시리스트 로드
+    this.updateWishlist();
+  }
+
+  // 로그인 상태 확인 및 위시리스트 로드
+  private updateWishlist(): void {
     this.wishlistManager.checkLoginStatus();
     if (this.wishlistManager.isLoggedIn) {
-      this.loadWishlist();
+      this.wishlistManager.loadWishlist();
+      this.wishlist = this.wishlistManager.getWishlist();
+      console.log('Loaded Wishlist:', this.wishlist); // 디버깅용
+      this.cdr.detectChanges();
     } else {
       alert('로그인이 필요합니다.');
       this.router.navigate(['/login']);
     }
-  }
-
-  // 위시리스트 로드
-  loadWishlist(): void {
-    this.wishlistManager.loadWishlist(); // 사용자별 위시리스트 로드
-    this.wishlist = this.wishlistManager.getWishlist();
-    console.log('Loaded Wishlist:', this.wishlist); // 디버깅용
-    this.cdr.detectChanges(); // 상태 변경 강제 반영
   }
 
   // 좋아요 상태 확인
@@ -47,7 +55,7 @@ export class WishlistComponent implements OnInit {
       return;
     }
     this.wishlistManager.toggleWishlist(movie); // 사용자별 데이터 저장
-    this.loadWishlist(); // 위시리스트 다시 로드
+    this.updateWishlist(); // 위시리스트 다시 로드
   }
 
   // 마우스가 영화 카드 위로 올라갔을 때
