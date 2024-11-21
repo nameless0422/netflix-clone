@@ -15,7 +15,7 @@ export class WishlistComponent implements OnInit {
   private wishlistManager = new WishlistManager();
   hoveredMovieId: number | null = null; // 마우스 호버 상태 관리
   isLoggedIn: boolean = false; // 로그인 상태 확인
-  currentUser: string | null = null; // 현재 사용자
+  currentUserEmail: string | null = null; // 현재 사용자 이메일
 
   constructor(private cdr: ChangeDetectorRef, private router: Router) {}
 
@@ -31,14 +31,19 @@ export class WishlistComponent implements OnInit {
 
   // 로그인 상태 확인
   private checkLoginStatus(): void {
-    this.currentUser = localStorage.getItem('currentUser'); // 현재 사용자 확인
-    this.isLoggedIn = !!this.currentUser;
+    const storedUser = localStorage.getItem('currentUser');
+    if (storedUser) {
+      this.currentUserEmail = JSON.parse(storedUser).id; // 이메일 정보 가져오기
+      this.isLoggedIn = !!this.currentUserEmail;
+    } else {
+      this.isLoggedIn = false;
+    }
   }
 
   // 위시리스트 로드
   loadWishlist(): void {
-    if (this.currentUser) {
-      this.wishlistManager.loadWishlist(); // 사용자별 위시리스트 로드
+    if (this.currentUserEmail) {
+      this.wishlistManager.loadWishlist(this.currentUserEmail); // 사용자별 위시리스트 로드
       this.wishlist = this.wishlistManager.getWishlist();
       console.log('Loaded Wishlist:', this.wishlist); // 디버깅용
       this.cdr.detectChanges(); // 상태 변경 강제 반영
@@ -56,7 +61,7 @@ export class WishlistComponent implements OnInit {
       alert('로그인이 필요합니다.');
       return;
     }
-    this.wishlistManager.toggleWishlist(movie); // 사용자별 데이터 저장
+    this.wishlistManager.toggleWishlist(movie, this.currentUserEmail!); // 사용자별 데이터 저장
     this.loadWishlist(); // 위시리스트 다시 로드
   }
 
