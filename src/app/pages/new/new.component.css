@@ -68,23 +68,6 @@
   filter: brightness(0.5); /* 마우스 호버 시 어두워짐 */
 }
 
-/* 평점 원형 스타일 */
-.rating-circle {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 0.9rem;
-  font-weight: bold;
-}
-
 /* 좋아요 버튼 스타일 */
 .favorite-btn {
   position: absolute;
@@ -121,15 +104,20 @@
   fill: red; /* 찜 상태일 때 색상 */
 }
 
-/* 영화 제목 */
-.movie-card p {
-  color: white;
-  padding: 10px;
-  margin: 0;
-  font-size: 14px;
-  text-align: center;
+/* 회원 점수 스타일 */
+.rating-circle {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
-
 
 .rating-circle .circle {
   position: relative;
@@ -166,3 +154,4 @@
   color: white;
   font-weight: bold;
 }
+
