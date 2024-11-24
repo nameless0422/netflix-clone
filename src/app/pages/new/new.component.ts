@@ -13,7 +13,7 @@ import WishlistManager from '../../util/movie/useWishlist';
 })
 export class NewComponent implements OnInit {
   movies: any[] = [];
-  page: number = 1;
+  page: number = 4; // 초기 로드 이후 추가 페이지는 4부터 시작
   isGridView: boolean = true;
   isLoggedIn: boolean = false;
   wishlist: any[] = [];
@@ -25,14 +25,37 @@ export class NewComponent implements OnInit {
   ngOnInit(): void {
     this.isLoggedIn = this.cookieService.get('isLoggedIn') === 'true';
     this.wishlistManager.loadWishlist();
-    this.loadReleaseMovies(); // 초기 데이터 로드
+    this.loadInitialMovies(); // 초기 데이터 로드
   }
+
+  async loadInitialMovies(): Promise<void> {
+    try {
+        for (let i = 1; i <= 3; i++) {
+            const response = await this.movieService.getReleaseMovies(i);
+            if (response && response.results) {
+                // 중복 제거
+                const filteredMovies = response.results.filter(
+                    (movie: any) => !this.movies.some((m) => m.id === movie.id)
+                );
+                this.movies = [...this.movies, ...filteredMovies]; // 기존 데이터에 추가
+            } else {
+                console.error('No results found for page:', i);
+            }
+        }
+    } catch (error) {
+        console.error('Error loading initial release movies:', error);
+    }
+}
 
   async loadReleaseMovies(): Promise<void> {
     try {
       const response = await this.movieService.getReleaseMovies(this.page);
       if (response && response.results) {
-        this.movies = [...this.movies, ...response.results]; // 기존 데이터에 새 데이터 추가
+        // 중복 제거
+        const filteredMovies = response.results.filter(
+          (movie: any) => !this.movies.some((m) => m.id === movie.id)
+        );
+        this.movies = [...this.movies, ...filteredMovies]; // 기존 데이터에 추가
       } else {
         console.error('No results found');
       }
@@ -40,7 +63,6 @@ export class NewComponent implements OnInit {
       console.error('Error loading release movies:', error);
     }
   }
-  
 
   // 무한스크롤
   @HostListener('window:scroll', [])
