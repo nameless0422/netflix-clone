@@ -3,18 +3,20 @@ import { CommonModule } from '@angular/common';
 import WishlistManager from '../../util/movie/useWishlist';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { MovieDetailComponent } from '../../components/movie-detail/movie-detail.component';
 
 @Component({
   selector: 'app-wishlist',
   templateUrl: './wishlist.component.html',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,MovieDetailComponent],
   styleUrls: ['./wishlist.component.css'],
 })
 export class WishlistComponent implements OnInit {
   wishlist: any[] = [];
   private wishlistManager = WishlistManager.getInstance();
   hoveredMovieId: number | null = null;
+  selectedMovieId: number | null = null;
   isLoggedIn: boolean = false;
 
   constructor(
@@ -61,5 +63,17 @@ export class WishlistComponent implements OnInit {
 
   onMouseLeave(): void {
     this.hoveredMovieId = null;
+  }
+
+  openMovieDetail(movie: any) {
+    if (typeof movie.id === 'number') {
+      this.selectedMovieId = movie.id; // movie.id를 올바르게 전달
+    } else {
+      console.error('Invalid movieId:', movie.id);
+    }
+  }
+
+  closeMovieDetail() {
+    this.selectedMovieId = null;
   }
 }
