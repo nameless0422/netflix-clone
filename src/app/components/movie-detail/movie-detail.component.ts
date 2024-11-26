@@ -3,6 +3,7 @@ import { MovieService } from '../../util/movie/movie.service';
 import WishlistManager from '../../util/movie/useWishlist';
 import { CommonModule } from '@angular/common'; // CommonModule 추가
 import { CookieService } from 'ngx-cookie-service';
+import { YouTubePlayerModule } from '@angular/youtube-player';
 
 interface Genre {
   id: number;
@@ -13,7 +14,7 @@ interface Genre {
   selector: 'app-movie-detail',
   templateUrl: './movie-detail.component.html',
   styleUrls: ['./movie-detail.component.css'],
-  imports: [CommonModule],
+  imports: [CommonModule,YouTubePlayerModule],
   standalone: true
 })
 export class MovieDetailComponent implements OnInit, OnChanges {

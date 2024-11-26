@@ -58,18 +58,15 @@
   </div>
 
   <!-- 트레일러 -->
-  <div class="movie-trailer" *ngIf="movieVideos && movieVideos.length > 0">
-    <iframe 
-      [src]="'https://www.youtube.com/embed/' + movieVideos[0]?.key + '?autoplay=1'" 
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
-      class="trailer-iframe">
-    </iframe>
+  <div *ngIf="movieVideos[0].key">
+    <youtube-player
+      [videoId]="movieVideos[0].key"
+      [height]="'390'"
+      [width]="'640'"
+      [showBeforeIframeApiLoads]="true">
+    </youtube-player>
   </div>
-  <div *ngIf="movieVideos.length == 0">
-    <p>트레일러를 찾을 수 없습니다.</p>
-  </div>
+  <p *ngIf="!movieVideos[0].key">트레일러를 찾을 수 없습니다.</p>
 
 
   <!-- 주요 출연진 -->
