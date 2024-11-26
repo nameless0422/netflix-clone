@@ -32,6 +32,7 @@
   }
   
   .movie-card {
+    width: 200px;
     background-color: #222;
     color: white;
     border-radius: 10px;
