@@ -4,13 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import WishlistManager from '../../util/movie/useWishlist';
+import { MovieDetailComponent } from '../../components/movie-detail/movie-detail.component';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-explore',
   templateUrl: './explore.component.html',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [CommonModule, FormsModule, RouterOutlet, RouterLink, RouterLinkActive, MovieDetailComponent],
   styleUrls: ['./explore.component.css']
 })
 export class ExploreComponent implements OnInit {
@@ -21,6 +22,7 @@ export class ExploreComponent implements OnInit {
   
   wishlistManager: WishlistManager;
   hoveredMovieId: number | null = null; // 마우스 호버 상태 관리
+  selectedMovieId: number | null = null;
   selectedGenre: string = '';
   selectedRating: string = '';
   selectedLanguage: string = '';
@@ -123,5 +125,17 @@ export class ExploreComponent implements OnInit {
   getScoreDashArray(score: number): string {
     const percentage = (score / 10) * 100;
     return `${percentage}, 100`;
+  }
+
+  openMovieDetail(movie: any) {
+    if (typeof movie.id === 'number') {
+      this.selectedMovieId = movie.id; // movie.id를 올바르게 전달
+    } else {
+      console.error('Invalid movieId:', movie.id);
+    }
+  }
+
+  closeMovieDetail() {
+    this.selectedMovieId = null;
   }
 }
