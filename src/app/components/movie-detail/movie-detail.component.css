@@ -10,152 +10,77 @@
 
 .modal-content {
   position: fixed;
-  top: 10%;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   width: 80%;
   max-width: 900px;
+  max-height: 90%; /* 모달 높이를 제한 */
   background: #181818;
   color: white;
   border-radius: 10px;
-  overflow: hidden;
+  overflow-y: auto; /* 스크롤 활성화 */
   z-index: 2;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
 }
 
 .movie-header {
   position: relative;
-  height: 200px;
+  width: 100%;
+  height: 300px;
   background-size: cover;
   background-position: center;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
 }
 
 .close-btn {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.8);
   color: white;
   border: none;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
+  font-size: 18px;
   cursor: pointer;
-  font-size: 16px;
-}
-
-.movie-info-container {
-  display: flex;
-  gap: 20px;
-  padding: 20px;
-}
-
-.movie-poster img {
-  width: 150px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-}
-
-.movie-details {
-  flex: 1;
-}
-
-.movie-details h1 {
-  font-size: 1.8rem;
-  margin-bottom: 10px;
-}
-
-.movie-details p {
-  margin: 5px 0;
-}
-
-.movie-cast {
-  padding: 20px;
-}
-
-.movie-cast h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-}
-
-.cast-list {
-  display: flex;
-  gap: 15px;
-  overflow-x: auto;
-}
-
-.cast-card {
-  text-align: center;
-  width: 120px;
-}
-
-.cast-card img {
-  width: 100%;
-  border-radius: 50%;
-  margin-bottom: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-}
-
-.cast-card .character {
-  color: #888;
-  font-size: 0.9rem;
-}
-
-/* 좋아요 버튼과 평점 컨테이너 */
-.header-actions {
-  position: absolute;
-  bottom: 10px;
-  right: 20px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  z-index: 2;
-}
-
-/* 좋아요 버튼 스타일 */
-.favorite-btn {
-  background-color: rgba(0, 0, 0, 0.6);
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transition: background-color 0.3s;
 }
 
-.favorite-btn:hover {
-  background-color: rgba(255, 0, 0, 0.8);
+.close-btn:hover {
+  background: rgba(255, 0, 0, 0.8);
 }
 
-.favorite-btn .heart-icon {
-  fill: white;
-  width: 24px;
-  height: 24px;
+.header-actions {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.favorite-btn.favorited .heart-icon {
-  fill: red;
-}
-
-/* 평점 스타일 */
 .rating-circle {
-  width: 60px;
-  height: 60px;
+  position: relative;
+  width: 50px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.8);
   border-radius: 50%;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 .rating-circle .circle {
   position: relative;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
 }
 
 .circular-chart {
@@ -172,7 +97,7 @@
 
 .circle-progress {
   fill: none;
-  stroke: #4caf50;
+  stroke: #4caf50; /* 진행 색상 */
   stroke-width: 3.8;
   stroke-linecap: round;
   transition: stroke-dasharray 0.5s;
@@ -188,23 +113,70 @@
   font-weight: bold;
 }
 
+.favorite-btn {
+  position: relative;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.favorite-btn:hover {
+  background: rgba(255, 0, 0, 0.8);
+}
+
+.favorite-btn svg {
+  fill: white;
+  transition: fill 0.3s;
+}
+
+.favorite-btn.favorited svg {
+  fill: red;
+}
+
+.movie-info-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+.movie-poster img {
+  border-radius: 8px;
+  width: 150px;
+  height: auto;
+}
+
+.movie-details {
+  flex: 1;
+}
+
+.movie-details h1 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.movie-details p {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
 .youtube-player-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0; /* Adds spacing between the player and other content */
+  margin: 20px 0;
   padding: 10px;
-  background-color: rgba(0, 0, 0, 0.8); /* Slight background to make it blend */
+  background-color: rgba(0, 0, 0, 0.8);
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Optional shadow for aesthetics */
-}
-
-.youtube-player {
-  width: 100%;
-  max-width: 800px; /* Restrict maximum width for better responsiveness */
-  aspect-ratio: 16 / 9; /* Ensure 16:9 video ratio */
-  border: none;
-  border-radius: 8px; /* Rounded corners for smooth integration */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .trailer-not-found {
@@ -216,6 +188,41 @@
   color: #fff;
   font-size: 1.2rem;
   font-weight: bold;
-  margin: 20px 0; /* Space between the message and other content */
+  margin: 20px 0;
   padding: 20px;
+}
+
+.movie-cast {
+  margin-top: 20px;
+}
+
+.cast-list {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cast-card {
+  text-align: center;
+  flex: 0 0 auto;
+  width: 100px;
+}
+
+.cast-card img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 5px;
+}
+
+.cast-card p {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.cast-card .character {
+  font-size: 0.8rem;
+  color: #888;
 }
