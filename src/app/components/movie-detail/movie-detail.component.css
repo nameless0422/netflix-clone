@@ -188,9 +188,21 @@
   font-weight: bold;
 }
 
-youtube-player {
-  display: block;
-  margin: 20px auto;
+.youtube-player-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0; /* Adds spacing between the player and other content */
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.8); /* Slight background to make it blend */
   border-radius: 8px;
-  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Optional shadow for aesthetics */
+}
+
+.youtube-player {
+  width: 100%;
+  max-width: 800px; /* Restrict maximum width for better responsiveness */
+  aspect-ratio: 16 / 9; /* Ensure 16:9 video ratio */
+  border: none;
+  border-radius: 8px; /* Rounded corners for smooth integration */
 }

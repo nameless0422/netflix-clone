@@ -58,11 +58,11 @@
   </div>
 
   <!-- 트레일러 -->
-  <div *ngIf="movieVideos[0].key">
+  <div *ngIf="movieVideos[0].key" class="youtube-player-container">
     <youtube-player
       [videoId]="movieVideos[0].key"
-      [height]="'390'"
-      [width]="'640'"
+      [height]="'100%'"
+      [width]="'100%'"
       [showBeforeIframeApiLoads]="true">
     </youtube-player>
   </div>
