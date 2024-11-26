@@ -10,6 +10,7 @@
     <div [class.grid-view]="isGridView" [class.list-view]="!isGridView">
       <div class="movie-card" 
           *ngFor="let movie of movies"
+          (click)="openMovieDetail(movie)"
           (mouseenter)="onMouseEnter(movie.id)"
           (mouseleave)="onMouseLeave()">
         <img
@@ -51,5 +52,12 @@
 
       </div>
     </div>
+
+    <!-- 선택된 영화가 있을 때만 모달 컴포넌트 렌더링 -->
+    <app-movie-detail 
+    *ngIf="selectedMovieId" 
+    [movieId]="selectedMovieId" 
+    (close)="closeMovieDetail()"
+    ></app-movie-detail>
   </div>
   
