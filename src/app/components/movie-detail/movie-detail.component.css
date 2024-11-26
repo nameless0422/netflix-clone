@@ -212,13 +212,10 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 200px; /* Adjust the height as needed */
-  background-color: rgba(0, 0, 0, 0.8); /* Optional background for better visibility */
   border-radius: 8px;
   color: #fff;
   font-size: 1.2rem;
   font-weight: bold;
   margin: 20px 0; /* Space between the message and other content */
   padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Optional shadow for aesthetics */
 }
