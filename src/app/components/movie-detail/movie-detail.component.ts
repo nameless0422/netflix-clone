@@ -39,6 +39,8 @@ export class MovieDetailComponent implements OnInit, OnChanges {
       this.loadMovieDetails(this.movieId);
       this.loadMovieCast(this.movieId);
       this.loadMovieVideos(this.movieId);
+      console.log(this.movieService.getMovieVideos(this.movieId))
+      console.log(this.movieVideos)
     }
   }
 
