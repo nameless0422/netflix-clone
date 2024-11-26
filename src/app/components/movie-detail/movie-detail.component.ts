@@ -77,6 +77,7 @@ export class MovieDetailComponent implements OnInit, OnChanges {
   async loadMovieVideos(movieId: number): Promise<void> {
     try {
       const videos = await this.movieService.getMovieVideos(movieId);
+      console.log(videos);
       this.movieVideos = videos.filter((video: any) => video.site === 'YouTube');
     } catch (error) {
       console.error('Error loading movie videos:', error);

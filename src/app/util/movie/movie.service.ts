@@ -72,7 +72,6 @@ export class MovieService {
     console.log(url);
     try {
       const response = await fetchMovies(url);
-      console.log(response);
       return response.results; // API에서 results 배열 반환
     } catch (error) {
       console.error('Error fetching movie videos:', error);
