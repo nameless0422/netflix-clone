@@ -38,6 +38,7 @@ export class MovieDetailComponent implements OnInit, OnChanges {
     if (this.movieId) {
       this.loadMovieDetails(this.movieId);
       this.loadMovieCast(this.movieId);
+      this.loadMovieVideos(this.movieId);
     }
   }
 
@@ -57,7 +58,6 @@ export class MovieDetailComponent implements OnInit, OnChanges {
         console.warn('No image available for this movie');
       }
       this.movieGenres = this.movieDetails.genres || []; // 장르 데이터 저장
-      this.loadMovieVideos(movieId);
     } catch (error) {
       console.error('Error loading movie details:', error);
       this.movieDetails = null; // 오류 발생 시 초기화
