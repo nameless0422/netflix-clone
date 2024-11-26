@@ -69,8 +69,10 @@ export class MovieService {
   // 영화의 동영상 정보 가져오기
   async getMovieVideos(movieId: number): Promise<any[]> {
     const url = getURL4MovieVideos(this.apiKey, movieId); // API URL 생성
+    console.log(url);
     try {
       const response = await fetchMovies(url);
+      console.log(response);
       return response.results || []; // API에서 results 배열 반환
     } catch (error) {
       console.error('Error fetching movie videos:', error);
