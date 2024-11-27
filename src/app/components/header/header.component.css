@@ -21,7 +21,11 @@
   -ms-user-select: none;
 }
 
-/* 로고 */
+/* 호버 시 배경색 변경 */
+.header:hover {
+  background-color: #141414;
+}
+
 .logo {
   display: flex;
   align-items: center;
@@ -36,7 +40,6 @@
   margin-right: 10px;
 }
 
-/* 네비게이션 메뉴 */
 .nav-menu {
   display: flex;
   gap: 2rem;
@@ -69,12 +72,13 @@
   margin-right: 10px; /* 햄버거 버튼과의 간격 */
 }
 
+
 .auth-button:hover {
   background-color: #f40612;
   transform: scale(1.05);
 }
 
-/* 햄버거 버튼 */
+/* 햄버거 메뉴 */
 .hamburger-menu {
   display: none; /* 기본적으로 숨김 */
   cursor: pointer;
@@ -87,16 +91,43 @@
   fill: white;
 }
 
+/* 슬라이드 네비게이션 */
+.slide-menu {
+  position: fixed;
+  top: 0;
+  right: -100%; /* 기본적으로 화면 밖에 위치 */
+  width: 250px;
+  height: 100%;
+  background-color: #2b2b2b;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  transition: right 0.3s ease;
+  z-index: 9999;
+}
+
+.slide-menu a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.slide-menu a:hover {
+  color: #b3b3b3;
+}
+
+.slide-menu.active {
+  right: 0; /* 활성화되면 화면 안으로 들어옴 */
+}
+
+/* 모바일 환경에서 햄버거 메뉴 활성화 */
 @media (max-width: 768px) {
   .nav-menu {
     display: none; /* 네비게이션 메뉴 숨김 */
   }
 
   .hamburger-menu {
-    display: block; /* 모바일 환경에서 햄버거 메뉴 보이기 */
-  }
-
-  .auth-button {
-    margin-right: 0; /* 모바일에서는 여백 제거 */
+    display: block; /* 햄버거 메뉴 보이기 */
   }
 }
