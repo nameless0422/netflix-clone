@@ -24,6 +24,12 @@
         <label for="terms">약관에 동의합니다</label>
       </div>
       <button [disabled]="!isEmailValid || !agreeToTerms">회원가입</button>
+      <!-- 모바일 전환 버튼 -->
+      <div class="mobile-toggle">
+        <button (click)="switchMode()">
+          {{ isLoginMode ? '회원가입' : '로그인' }}
+        </button>
+      </div>
     </form>
   </div>
 
@@ -40,6 +46,12 @@
       </div>
       <a href="#">비밀번호를 잊으셨나요?</a>
       <button [disabled]="!isEmailValid">로그인</button>
+      <!-- 모바일 전환 버튼 -->
+      <div class="mobile-toggle">
+        <button (click)="switchMode()">
+          {{ isLoginMode ? '회원가입' : '로그인' }}
+        </button>
+      </div>
     </form>
   </div>
 
@@ -58,10 +70,5 @@
       </div>
     </div>
   </div>
-  <!-- 모바일 전환 버튼 -->
-  <div class="mobile-toggle">
-    <button (click)="switchMode()">
-      {{ isLoginMode ? '회원가입' : '로그인' }}
-    </button>
-  </div>
+  
 </div>
