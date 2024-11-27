@@ -107,9 +107,24 @@ export class NewComponent implements OnInit {
   }
 
   updateCurrentMovies(): void {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
-    this.currentMovies = this.movies.slice(startIndex, endIndex);
+    if (this.isListView) {
+      // 리스트 보기: 현재 페이지 데이터만 표시
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+      this.currentMovies = this.movies.slice(startIndex, endIndex);
+    } else {
+      // 테이블 보기: 화면 크기에 맞게 데이터 표시
+      const containerHeight = window.innerHeight - 200; // 화면 높이에서 상하 여백을 뺀 값
+      const containerWidth = window.innerWidth - 40; // 화면 너비에서 좌우 여백을 뺀 값
+      const cardHeight = 300 + 20; // 카드 높이 + 간격 (CSS와 일치)
+      const cardWidth = 200 + 20; // 카드 너비 + 간격
+  
+      const rows = Math.floor(containerHeight / cardHeight); // 표시할 행 수
+      const cols = Math.floor(containerWidth / cardWidth); // 표시할 열 수
+      const visibleItems = rows * cols; // 화면에 표시할 수 있는 최대 아이템 수
+  
+      this.currentMovies = this.movies.slice(0, visibleItems);
+    }
   }
 
   goToNextPage(): void {
