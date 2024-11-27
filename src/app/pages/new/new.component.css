@@ -16,6 +16,7 @@
   border: none;
   cursor: pointer;
   border-radius: 5px;
+  font-size: 1rem;
 }
 
 .view-toggle button:hover {
@@ -31,19 +32,30 @@
 
 /* 리스트 뷰 스타일 */
 .list-view {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 /* 영화 카드 */
 .movie-card {
   position: relative;
   width: 100%;
+  max-width: 200px;
   background-color: #222;
   color: white;
   border-radius: 10px;
   overflow: hidden;
   transition: transform 0.3s ease;
-  aspect-ratio: 27 / 40; /* 카드 비율 유지 */
+}
+
+.movie-card.list-view {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%; /* 리스트 모드에서 가로 폭 */
+  max-width: none;
+  height: 120px; /* 줄어든 높이 */
 }
 
 .movie-card:hover {
@@ -53,8 +65,13 @@
 
 .movie-img {
   width: 100%;
-  height: 100%;
+  height: 300px;
   object-fit: cover;
+}
+
+.movie-card.list-view .movie-img {
+  width: 100px; /* 리스트 보기에서 작게 조정 */
+  height: 100%; /* 높이 유지 */
 }
 
 .movie-info {
@@ -68,7 +85,7 @@
 
 .movie-info p {
   margin: 0;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 /* 마우스 호버 시 이미지 어두워짐 */
@@ -95,7 +112,7 @@
 }
 
 .movie-card:hover .favorite-btn {
-  opacity: 1;
+  opacity: 1; /* 마우스 호버 시 버튼 표시 */
 }
 
 .favorite-btn:hover {
@@ -163,15 +180,84 @@
   font-weight: bold;
 }
 
+/* 페이지네이션 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.pagination button {
+  padding: 10px 20px;
+  background-color: #e50914; /* Netflix 빨간색 */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.pagination button:disabled {
+  background-color: #444; /* 비활성화 상태는 어두운 회색 */
+  cursor: not-allowed;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #f40612; /* 밝은 빨간색 */
+  transform: scale(1.05); /* 약간 확대 효과 */
+}
+
+.pagination span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  color: #e50914; /* Netflix 강조 색상 */
+  background-color: #222; /* 어두운 배경 */
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* 맨 위로 버튼 */
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.scroll-to-top:hover {
+  background-color: #555;
+}
+
 /* 반응형 디자인 */
 @media (max-width: 768px) {
   .grid-view {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* 모바일에서 더 작은 크기 */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 15px;
   }
 
-  .movie-card {
-    aspect-ratio: 27 / 40; /* 비율 유지 */
+  .movie-card.list-view {
+    height: auto;
+    flex-direction: column;
+  }
+
+  .movie-card.list-view .movie-img {
+    width: 100%;
+    height: auto;
   }
 
   .view-toggle {
