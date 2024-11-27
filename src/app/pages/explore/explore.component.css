@@ -1,58 +1,26 @@
-.explore-container {
-  padding: 20px;
+/* 공통 스타일 */
+body {
+  margin: 0;
+  padding: 0;
   background-color: #141414;
-  color: #ffffff;
+  font-family: Arial, sans-serif;
+  color: #fff;
+}
+
+.container {
+  padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.filter-bar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.filter-bar p {
-  flex: 1 100%;
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.filter-bar select,
-.filter-bar button {
-  flex: 1 1 calc(33.33% - 20px);
-  padding: 10px;
-  background-color: #2b2b2b;
-  border: none;
-  color: #ffffff;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.filter-bar button {
-  background-color: #e50914;
-  font-weight: bold;
-}
-
-.filter-bar button:hover {
-  background-color: #f40612;
-}
-
-.results {
+/* 카드 리스트 */
+.movie-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 10px;
-  margin-top: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* 반응형 그리드 */
+  gap: 20px;
 }
 
+/* 카드 */
 .movie-card {
   position: relative;
   width: 100%;
@@ -60,42 +28,40 @@ h1 {
   background-color: #2f2f2f;
   border-radius: 8px;
   overflow: hidden;
-  cursor: pointer;
   transition: transform 0.3s ease;
 }
 
-.movie-card:hover {
-  transform: scale(1.05);
-}
-
-.movie-img {
+/* 카드 이미지 */
+.movie-card img {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* 이미지 비율 유지 */
   transition: filter 0.3s ease;
 }
 
-.movie-card:hover .movie-img {
+/* 호버 효과 */
+.movie-card:hover img {
   filter: brightness(0.7);
 }
 
-
-/* 회원 점수 스타일 */
+/* 평점 원형 */
 .rating-circle {
   position: absolute;
   top: 10px;
   left: 10px;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.8);
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: bold;
 }
 
 .rating-circle .circle {
@@ -135,7 +101,7 @@ h1 {
 }
 
 
-
+/* 찜 버튼 */
 .favorite-btn {
   position: absolute;
   top: 10px;
@@ -152,52 +118,47 @@ h1 {
   transition: background-color 0.3s ease;
 }
 
+.favorite-btn svg {
+  fill: #fff;
+  width: 20px;
+  height: 20px;
+}
+
+.favorite-btn:hover {
+  background-color: rgba(255, 0, 0, 0.8);
+}
+
 .favorite-btn.favorited svg {
   fill: red;
 }
 
-.favorite-btn:hover {
-  background-color: rgba(255, 0, 0, 0.7);
-}
-
-.favorite-btn svg {
-  width: 20px;
-  height: 20px;
-  fill: white;
-}
-
+/* 반응형 스타일 */
 @media (max-width: 768px) {
-  .filter-bar {
-    flex-direction: column;
-    gap: 10px;
+  .container {
+    padding: 10px;
   }
 
-  .filter-bar select,
-  .filter-bar button {
-    flex: 1 100%;
+  .movie-list {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 15px;
   }
 
-  h1 {
-    font-size: 1.5rem;
+  .movie-card {
+    padding-top: 150%; /* 2:3 비율 유지 */
   }
 
-  .results {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 50px;
-  }
-  .rating-circle {
-    width: 30px; /* 기존: 40px */
-    height: 30px; /* 기존: 40px */
-    font-size: 0.8rem; /* 기존: 다른 값일 경우 수정 */
-  }
-
+  .rating-circle,
   .favorite-btn {
-    width: 30px; /* 기존: 36px */
-    height: 30px; /* 기존: 36px */
+    width: 30px;
+    height: 30px;
+  }
+
+  .rating-circle {
+    font-size: 0.8rem;
   }
 
   .favorite-btn svg {
-    width: 16px; /* 기존: 20px */
-    height: 16px; /* 기존: 20px */
+    width: 16px;
+    height: 16px;
   }
 }
