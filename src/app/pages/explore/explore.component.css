@@ -19,34 +19,41 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap; /* 모바일 대응 */
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 20px; /* 필터 간 간격 */
+  margin: 20px 0;
 }
 
-.filter-section select,
-.filter-section button {
+.filter-section select {
+  width: 200px; /* 선택 상자의 너비 */
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #555; /* 테두리 색상 */
   border-radius: 4px;
-  background-color: #333;
+  background-color: #222; /* 배경색 */
   color: #fff;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.filter-section select:hover {
+  border-color: #e50914; /* 호버 시 테두리 강조 */
 }
 
 .filter-section button {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 4px;
   background-color: #e50914;
+  color: #fff;
+  font-size: 1rem;
   font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.filter-section select:hover,
 .filter-section button:hover {
   background-color: #f40612;
-  border-color: #f40612;
+  transform: scale(1.05); /* 호버 시 확대 */
 }
-
 /* 카드 리스트 */
 .movie-list {
   display: grid;
@@ -95,29 +102,33 @@ body {
   transform: scale(1.05);
 }
 
-/* 평점 원형 */
+/* 평점 원형 스타일 */
 .rating-circle {
   position: absolute;
   top: 10px;
   left: 10px;
   width: 40px;
   height: 40px;
-  background: rgba(0, 0, 0, 0.7);
   border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
   display: flex;
-  align-items: center;
   justify-content: center;
-  font-size: 0.8rem;
+  align-items: center;
+  font-size: 0.9rem;
   font-weight: bold;
-  color: #fff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
-/* 원형 진행도 (SVG) */
+.rating-circle .circle {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
 .circular-chart {
   width: 100%;
   height: 100%;
-  transform: rotate(-90deg); /* 시작점을 위로 */
+  transform: rotate(-90deg); /* 시작점을 위로 이동 */
 }
 
 .circle-bg {
@@ -131,12 +142,16 @@ body {
   stroke: #4caf50; /* 진행 색상 */
   stroke-width: 3.8;
   stroke-linecap: round;
-  transition: stroke-dasharray 0.5s ease;
+  transition: stroke-dasharray 0.5s;
 }
 
-.rating-circle .percentage {
+.percentage {
   position: absolute;
-  font-size: 0.75rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.8rem;
+  color: white;
   font-weight: bold;
 }
 
@@ -178,8 +193,16 @@ body {
   }
 
   .filter-section {
-    flex-direction: column; /* 필터가 세로로 정렬 */
-    align-items: stretch;
+    flex-direction: column; /* 모바일에서는 필터를 세로로 배치 */
+    gap: 15px;
+  }
+
+  .filter-section select {
+    width: 100%; /* 모바일에서는 너비를 100%로 */
+  }
+
+  .filter-section button {
+    width: 100%; /* 초기화 버튼도 너비를 100%로 */
   }
 
   .movie-list {
