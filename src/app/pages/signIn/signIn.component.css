@@ -63,13 +63,18 @@ body {
   background-color: #f40612; /* 밝은 빨간색 */
 }
 
+.container button.hidden {
+  background-color: transparent;
+  border-color: #e50914;
+}
+
 .container form {
   background-color: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 20px;
+  padding: 0 40px;
   height: 100%;
 }
 
@@ -87,6 +92,72 @@ body {
 
 .container input::placeholder {
   color: #bbb; /* 회색 텍스트 */
+}
+
+.form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+}
+
+.sign-in {
+  left: 0;
+  width: 50%;
+  z-index: 2;
+}
+
+.container.active .sign-in {
+  transform: translateX(100%);
+}
+
+.sign-up {
+  left: 0;
+  width: 50%;
+  opacity: 0;
+  z-index: 1;
+}
+
+.container.active .sign-up {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+  animation: move 0.6s;
+}
+
+@keyframes move {
+  0%,
+  49.99% {
+    opacity: 0;
+    z-index: 1;
+  }
+  50%,
+  100% {
+    opacity: 1;
+    z-index: 5;
+  }
+}
+
+.social-icons {
+  margin: 20px 0;
+}
+
+.social-icons a {
+  border: 1px solid #444; /* 어두운 회색 */
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px;
+  width: 40px;
+  height: 40px;
+  color: #fff; /* 아이콘 흰색 */
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.social-icons a:hover {
+  background-color: #e50914; /* 빨간색 배경 */
+  transform: scale(1.1);
 }
 
 .toggle-container {
