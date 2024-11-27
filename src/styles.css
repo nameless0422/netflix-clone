@@ -5,3 +5,7 @@ body {
     font-family: Arial, sans-serif;
     color: #ffffff;
   }
+
+  .toast {
+    z-index: 10500; /* Bootstrap과 충돌 방지 */
+  }

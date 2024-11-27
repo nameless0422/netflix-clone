@@ -62,11 +62,8 @@ export class SignInComponent {
       (user) => {
         this.toastr.success(`안녕하세요, ${user.id}님!`, '로그인 성공');
 
-        // 로그인 상태 쿠키에 저장
-        this.cookieService.set('isLoggedIn', 'true', { path: '/', expires: 7 });
-
-        // 루트 경로로 라우팅
-        this.router.navigate(['/']);
+        this.cookieService.set('isLoggedIn', 'true', { expires: 1, path: '/' }); // 쿠키에 로그인 상태 저장 (1일 유효 기간)
+        this.cookieService.set('userID', this.email, { expires: 1, path: '/' });
       },
       () => {
         this.toastr.error('이메일 또는 비밀번호가 잘못되었습니다.', '로그인 실패');
