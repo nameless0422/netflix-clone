@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { tryLogin, tryRegister } from '../../util/auth/Authentication';
+import { Router } from '@angular/router'; // Router 추가
+import { CookieService } from 'ngx-cookie-service'; // CookieService 추가
 
 @Component({
   selector: 'app-sign-in',
@@ -21,7 +23,11 @@ export class SignInComponent {
   rememberMe: boolean = false; // 아이디 저장 및 자동 로그인
   agreeToTerms: boolean = false; // 약관 동의
 
-  constructor(private toastr: ToastrService) {}
+  constructor(
+    private toastr: ToastrService,
+    private router: Router, // Router 주입
+    private cookieService: CookieService // CookieService 주입
+  ) {}
 
   ngOnInit() {
     // 자동 로그인 정보 로드
@@ -55,6 +61,12 @@ export class SignInComponent {
       this.password,
       (user) => {
         this.toastr.success(`안녕하세요, ${user.id}님!`, '로그인 성공');
+
+        // 로그인 상태 쿠키에 저장
+        this.cookieService.set('isLoggedIn', 'true', { path: '/', expires: 7 });
+
+        // 루트 경로로 라우팅
+        this.router.navigate(['/']);
       },
       () => {
         this.toastr.error('이메일 또는 비밀번호가 잘못되었습니다.', '로그인 실패');
