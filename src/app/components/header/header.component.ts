@@ -53,14 +53,5 @@ export class HeaderComponent implements OnInit {
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
-    const slideMenu = document.getElementById('slideMenu');
-    const hamburger = document.getElementById('hamburger');
-    if (this.isMenuOpen) {
-      slideMenu?.classList.add('active');
-      hamburger?.classList.add('active');
-    } else {
-      slideMenu?.classList.remove('active');
-      hamburger?.classList.remove('active');
-    }
   }
 }
