@@ -2,7 +2,7 @@
   padding: 20px;
 }
 
-/* 뷰 전환 버튼 */
+/* 뷰 전환 버튼 스타일 */
 .view-toggle {
   display: flex;
   justify-content: flex-end;
@@ -11,43 +11,35 @@
 
 .view-toggle button {
   padding: 10px 20px;
-  background-color: #e50914; /* 넷플릭스 빨간색 */
+  background-color: #e50914;
   color: white;
   border: none;
   cursor: pointer;
   border-radius: 5px;
   font-weight: bold;
-  transition: background-color 0.3s ease;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .view-toggle button:hover {
-  background-color: #f40612; /* 조금 더 밝은 빨간색 */
+  background-color: #f40612;
 }
 
-/* 리스트 보기 스타일 */
-.list-view {
-  display: flex;
-  flex-direction: column;
+/* 그리드 보기 */
+.grid-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
+  align-items: start;
 }
 
-/* 카드 공통 스타일 */
+/* 영화 카드 스타일 */
 .movie-card {
-  background-color: #222; /* 카드 배경 */
-  color: white;
+  width: 100%;
+  background-color: #141414;
   border-radius: 10px;
   overflow: hidden;
-  position: relative;
   transition: transform 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.movie-card img {
-  width: 100%;
-  object-fit: cover;
 }
 
 .movie-card:hover {
@@ -55,17 +47,10 @@
   cursor: pointer;
 }
 
-/* 그리드 보기 스타일 */
-.grid-view {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-}
-
 .movie-img {
   width: 100%;
   height: auto;
-  object-fit: cover;
+  display: block;
 }
 
 /* 좋아요 버튼 */
@@ -103,33 +88,39 @@
   fill: red;
 }
 
-/* 페이지네이션 버튼 */
+/* 테이블 보기 - 페이지네이션 */
 .pagination {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
   margin-top: 20px;
+  gap: 10px;
 }
 
 .pagination button {
-  padding: 10px 20px;
-  background-color: #444;
+  background-color: #e50914;
   color: white;
   border: none;
   border-radius: 5px;
+  padding: 10px 20px;
   cursor: pointer;
-  font-size: 1rem;
   font-weight: bold;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .pagination button:hover {
-  background-color: #555;
+  background-color: #f40612;
 }
 
-.pagination .active {
-  background-color: #e50914; /* 넷플릭스 빨간색 */
+.pagination button:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
 }
 
 /* 스크롤 맨 위로 버튼 */
@@ -137,20 +128,19 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 50px;
-  height: 50px;
-  background-color: #e50914; /* 넷플릭스 빨간색 */
+  background-color: rgba(0, 0, 0, 0.8);
   color: white;
   border: none;
   border-radius: 50%;
+  width: 50px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: opacity 0.3s, visibility 0.3s;
 }
 
 .scroll-to-top.visible {
@@ -159,51 +149,107 @@
 }
 
 .scroll-to-top:hover {
-  background-color: #f40612;
+  background-color: rgba(255, 0, 0, 0.8);
 }
 
 .scroll-to-top svg {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   fill: white;
+  transition: fill 0.3s;
+}
+
+.scroll-to-top:hover svg {
+  fill: #ffcccc;
+}
+
+
+/* 포스터 어두운 효과 */
+.movie-card:hover .movie-img {
+  filter: brightness(0.5); /* 마우스 호버 시 어두워짐 */
+}
+
+/* 평점 원형 스타일 */
+.rating-circle {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.rating-circle .circle {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.circular-chart {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg); /* 시작점을 위로 이동 */
+}
+
+.circle-bg {
+  fill: none;
+  stroke: #eee;
+  stroke-width: 3.8;
+}
+
+.circle-progress {
+  fill: none;
+  stroke: #4caf50; /* 진행 색상 */
+  stroke-width: 3.8;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.5s;
+}
+
+.percentage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.8rem;
+  color: white;
+  font-weight: bold;
 }
 
 /* 반응형 디자인 */
 @media (max-width: 768px) {
   .grid-view {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
   }
+
   .movie-card {
-    min-width: 140px; /* 작은 화면에서 카드 너비 축소 */
-    height: 210px; /* 작은 화면에서 카드 높이 축소 */
+    border-radius: 8px;
   }
 
-  .movie-img {
-    height: 100%; /* 작은 화면에서 포스터 높이 축소 */
+  .view-toggle button {
+    padding: 8px 16px;
+    font-size: 14px;
   }
 
-  .rating-circle {
+  .pagination button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .scroll-to-top {
     width: 40px;
     height: 40px;
   }
 
-  .favorite-btn {
-    width: 30px;
-    height: 30px;
-  }
-
-  .favorite-btn svg {
-    width: 18px;
-    height: 18px;
-  }
-
-  .view-toggle button {
-    font-size: 0.9rem;
-    padding: 8px 16px;
-  }
-
-  .pagination button {
-    font-size: 0.8rem;
-    padding: 8px 12px;
+  .scroll-to-top svg {
+    width: 20px;
+    height: 20px;
   }
 }
