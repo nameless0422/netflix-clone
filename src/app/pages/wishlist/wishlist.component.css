@@ -149,8 +149,7 @@
   }
 
   .movie-img {
-    width: 80%;
-    height: 180px; /* 작은 화면에서 포스터 높이 축소 */
+    height: 200px; /* 작은 화면에서 포스터 높이 축소 */
   }
 
   .rating-circle {
@@ -162,5 +161,10 @@
   .favorite-btn {
     width: 30px;
     height: 30px;
+  }
+  
+  .favorite-btn svg {
+    width: 18px;
+    height: 18px;
   }
 }
