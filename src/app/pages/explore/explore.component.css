@@ -62,12 +62,12 @@ h1 {
 }
 
 .movie-card {
-  min-width: 180px; /* 카드 너비 조정 */
-  height: 270px; /* 카드 높이 추가 */
-  background-color: #2f2f2f;
-  border-radius: 4px;
-  overflow: hidden;
   position: relative;
+  width: 100%;
+  aspect-ratio: 27 / 40; /* 가로:세로 비율 설정 (27:40) */
+  overflow: hidden;
+  border-radius: 10px; /* 카드 모서리 둥글게 */
+  background-color: #222; /* 기본 배경색 */
   transition: transform 0.3s ease;
 }
 
