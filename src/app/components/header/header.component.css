@@ -95,10 +95,6 @@
   .hamburger-menu {
     display: flex; /* 햄버거 버튼 표시 */
   }
-
-  .slide-menu a {
-    display: flex;
-  }
 }
 
 /* ===== 추가 개선 사항 ===== */
@@ -148,7 +144,7 @@
 
 /* 슬라이드 메뉴 */
 .slide-menu {
-  display: none;
+  visibility: hidden;
   position: fixed;
   top: 0;
   right: -250px;
@@ -166,6 +162,7 @@
 
 .slide-menu.active {
   right: 0;
+  visibility: visible; /* 활성화 시 보이도록 설정 */
 }
 
 .slide-menu a {
