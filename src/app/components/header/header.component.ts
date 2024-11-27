@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
 import { RouterModule } from '@angular/router';
 import WishlistManager from '../../util/movie/useWishlist';
@@ -8,13 +9,14 @@ import WishlistManager from '../../util/movie/useWishlist';
   selector: 'app-header',
   templateUrl: './header.component.html',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule],
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
   isLoggedIn: boolean = false;
   isMenuOpen: boolean = false;
   currentUserEmail: string | null = null;
+  touchStartX: number = 0;
 
   private wishlistManager = WishlistManager.getInstance(); // 싱글턴 인스턴스 가져오기
 
@@ -57,6 +59,22 @@ export class HeaderComponent implements OnInit {
     if (this.isMenuOpen) {
       slideMenu?.classList.add('active');
     } else {
+      slideMenu?.classList.remove('active');
+    }
+  }
+
+  onTouchStart(event: TouchEvent): void {
+    this.touchStartX = event.touches[0].clientX; // 터치 시작 위치 저장
+  }
+
+  onTouchEnd(event: TouchEvent): void {
+    const touchEndX = event.changedTouches[0].clientX; // 터치 종료 위치 저장
+    const swipeDistance = touchEndX - this.touchStartX;
+
+    if (swipeDistance > 50) {
+      // 오른쪽으로 50px 이상 스와이프하면 메뉴 닫기
+      this.isMenuOpen = false;
+      const slideMenu = document.getElementById('slideMenu'); 
       slideMenu?.classList.remove('active');
     }
   }
