@@ -1,73 +1,79 @@
 .new-page-container {
-    padding: 20px;
-  }
-  
-  .view-toggle {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 20px;
-  }
-  
-  .view-toggle button {
-    padding: 10px 20px;
-    background-color: #444;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  .view-toggle button:hover {
-    background-color: #555;
-  }
-  
-  .grid-view {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-  }
-  
-  .list-view {
-    display: block;
-  }
-  
-  .movie-card {
-    width: 200px;
-    background-color: #222;
-    color: white;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-  }
-  
-  .movie-card:hover {
-    transform: scale(1.05);
-    cursor: pointer;
-  }
-  
-  .movie-img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-  }
-  
-  .movie-info {
-    padding: 10px;
-  }
-  
-  .movie-info h3 {
-    margin: 0 0 10px 0;
-    font-size: 1.2rem;
-  }
-  
-  .movie-info p {
-    margin: 0;
-    font-size: 1rem;
-  }
-  
-  
+  padding: 20px;
+}
+
+/* 뷰 전환 버튼 */
+.view-toggle {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.view-toggle button {
+  padding: 10px 20px;
+  background-color: #444;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.view-toggle button:hover {
+  background-color: #555;
+}
+
+/* 그리드 뷰 스타일 */
+.grid-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+/* 리스트 뷰 스타일 */
+.list-view {
+  display: block;
+}
+
+/* 영화 카드 */
+.movie-card {
+  position: relative;
+  width: 100%;
+  background-color: #222;
+  color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  aspect-ratio: 27 / 40; /* 카드 비율 유지 */
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.movie-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.movie-info {
+  padding: 10px;
+}
+
+.movie-info h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
+}
+
+.movie-info p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* 마우스 호버 시 이미지 어두워짐 */
 .movie-card:hover .movie-img {
-  filter: brightness(0.5); /* 마우스 호버 시 어두워짐 */
+  filter: brightness(0.5);
 }
 
 /* 좋아요 버튼 스타일 */
@@ -89,24 +95,24 @@
 }
 
 .movie-card:hover .favorite-btn {
-  opacity: 1; /* 마우스 호버 시 버튼 표시 */
+  opacity: 1;
 }
 
 .favorite-btn:hover {
   background-color: rgba(255, 0, 0, 0.8);
 }
 
-/* SVG 하트 아이콘 색상 */
+/* 좋아요 상태 */
 .favorite-btn svg {
-  fill: white; /* 기본 색상 */
+  fill: white;
   transition: fill 0.3s;
 }
 
 .favorite-btn.favorited svg {
-  fill: red; /* 찜 상태일 때 색상 */
+  fill: red;
 }
 
-/* 회원 점수 스타일 */
+/* 평점 표시 스타일 */
 .rating-circle {
   position: absolute;
   top: 10px;
@@ -130,7 +136,7 @@
 .circular-chart {
   width: 100%;
   height: 100%;
-  transform: rotate(-90deg); /* 시작점을 위로 이동 */
+  transform: rotate(-90deg);
 }
 
 .circle-bg {
@@ -141,7 +147,7 @@
 
 .circle-progress {
   fill: none;
-  stroke: #4caf50; /* 진행 색상 */
+  stroke: #4caf50;
   stroke-width: 3.8;
   stroke-linecap: round;
   transition: stroke-dasharray 0.5s;
@@ -157,3 +163,23 @@
   font-weight: bold;
 }
 
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .grid-view {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* 모바일에서 더 작은 크기 */
+    gap: 15px;
+  }
+
+  .movie-card {
+    aspect-ratio: 27 / 40; /* 비율 유지 */
+  }
+
+  .view-toggle {
+    justify-content: center;
+  }
+
+  .view-toggle button {
+    width: 100%;
+    padding: 10px;
+  }
+}
