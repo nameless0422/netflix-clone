@@ -1,27 +1,25 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { CookieService } from 'ngx-cookie-service';
+import { ToastrService } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr'; // Custom Toast 라이브러리
 
 @Component({
   selector: 'app-auth',
   templateUrl: './signIn.component.html',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [FormsModule],
   styleUrls: ['./signIn.component.css'],
 })
-export class SignInComponent {
+export class AuthComponent {
   isLoginMode: boolean = true;
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
+  username: string = '';
   rememberMe: boolean = false;
   agreeTerms: boolean = false;
   isEmailValid: boolean = true;
 
-  constructor(private router: Router, private cookieService: CookieService, private toastr: ToastrService) {}
+  constructor(private toastr: ToastrService) {}
 
   switchMode() {
     this.isLoginMode = !this.isLoginMode;
@@ -34,32 +32,25 @@ export class SignInComponent {
 
   onLogin() {
     if (!this.isEmailValid) {
-      this.toastr.error('올바른 이메일 형식을 입력하세요.');
+      this.toastr.error('Invalid email format', 'Error');
       return;
     }
-    // 로그인 로직 (예제)
-    this.toastr.success('로그인 성공!');
-    if (this.rememberMe) {
-      this.cookieService.set('userEmail', this.email, { expires: 30 });
-    }
-    this.router.navigate(['/']);
+    this.toastr.success('Login successful', 'Success');
   }
 
   onSignup() {
     if (!this.isEmailValid) {
-      this.toastr.error('올바른 이메일 형식을 입력하세요.');
+      this.toastr.error('Invalid email format', 'Error');
       return;
     }
     if (this.password !== this.confirmPassword) {
-      this.toastr.error('비밀번호가 일치하지 않습니다.');
+      this.toastr.error('Passwords do not match', 'Error');
       return;
     }
     if (!this.agreeTerms) {
-      this.toastr.error('약관에 동의해주세요.');
+      this.toastr.error('You must agree to the terms', 'Error');
       return;
     }
-    // 회원가입 로직 (예제)
-    this.toastr.success('회원가입 성공!');
-    this.switchMode();
+    this.toastr.success('Signup successful', 'Success');
   }
 }

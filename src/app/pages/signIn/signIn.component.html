@@ -1,78 +1,69 @@
 <div class="auth-container">
-  <div *ngIf="isLoginMode" class="login-container">
-    <h2>로그인</h2>
-    <form (ngSubmit)="onLogin()">
+  <div class="form-box">
+    <div class="form-header">
+      <h2>{{ isLoginMode ? 'Login' : 'Sign up' }}</h2>
+      <p (click)="switchMode()">{{ isLoginMode ? 'Sign up' : 'Login' }}</p>
+    </div>
+
+    <form *ngIf="isLoginMode" (ngSubmit)="onLogin()" class="login-form">
       <div class="form-group">
-        <label for="login-email">아이디 (이메일)</label>
         <input
           type="email"
-          id="login-email"
+          placeholder="Email"
           [(ngModel)]="email"
           name="login-email"
           required
           (input)="validateEmail()"
         />
-        <p *ngIf="!isEmailValid && email" class="error-message">올바른 이메일 형식이 아닙니다.</p>
+        <span class="error-message" *ngIf="!isEmailValid && email">Invalid email format</span>
       </div>
       <div class="form-group">
-        <label for="login-password">비밀번호</label>
-        <input type="password" id="login-password" [(ngModel)]="password" name="login-password" required />
+        <input type="password" placeholder="Password" [(ngModel)]="password" name="login-password" required />
       </div>
       <div class="form-group">
-        <input type="checkbox" id="remember-me" [(ngModel)]="rememberMe" name="remember-me" />
-        <label for="remember-me">Remember me</label>
+        <label>
+          <input type="checkbox" [(ngModel)]="rememberMe" name="remember-me" /> Remember me
+        </label>
       </div>
-      <button type="submit">로그인</button>
-      <p class="switch-mode">
-        계정이 없으신가요? <a (click)="switchMode()">회원가입</a>
-      </p>
+      <button type="submit">Login</button>
     </form>
-  </div>
 
-  <div *ngIf="!isLoginMode" class="signup-container">
-    <h2>회원가입</h2>
-    <form (ngSubmit)="onSignup()">
+    <form *ngIf="!isLoginMode" (ngSubmit)="onSignup()" class="signup-form">
       <div class="form-group">
-        <label for="signup-email">아이디 (이메일)</label>
+        <input type="text" placeholder="User name" [(ngModel)]="username" name="signup-username" required />
+      </div>
+      <div class="form-group">
         <input
           type="email"
-          id="signup-email"
+          placeholder="Email"
           [(ngModel)]="email"
           name="signup-email"
           required
           (input)="validateEmail()"
         />
-        <p *ngIf="!isEmailValid && email" class="error-message">올바른 이메일 형식이 아닙니다.</p>
+        <span class="error-message" *ngIf="!isEmailValid && email">Invalid email format</span>
       </div>
       <div class="form-group">
-        <label for="signup-password">비밀번호</label>
-        <input
-          type="password"
-          id="signup-password"
-          [(ngModel)]="password"
-          name="signup-password"
-          required
-        />
+        <input type="password" placeholder="Password" [(ngModel)]="password" name="signup-password" required />
       </div>
       <div class="form-group">
-        <label for="confirm-password">비밀번호 확인</label>
         <input
           type="password"
-          id="confirm-password"
+          placeholder="Confirm Password"
           [(ngModel)]="confirmPassword"
-          name="confirm-password"
+          name="signup-confirm-password"
           required
         />
-        <p *ngIf="password !== confirmPassword && confirmPassword" class="error-message">비밀번호가 일치하지 않습니다.</p>
+        <span class="error-message" *ngIf="password !== confirmPassword && confirmPassword">
+          Passwords do not match
+        </span>
       </div>
       <div class="form-group">
-        <input type="checkbox" id="agree-terms" [(ngModel)]="agreeTerms" name="agree-terms" required />
-        <label for="agree-terms">약관에 동의합니다.</label>
+        <label>
+          <input type="checkbox" [(ngModel)]="agreeTerms" name="agree-terms" required /> I agree to the terms
+        </label>
       </div>
-      <button type="submit" [disabled]="password !== confirmPassword || !agreeTerms">회원가입</button>
-      <p class="switch-mode">
-        이미 계정이 있으신가요? <a (click)="switchMode()">로그인</a>
-      </p>
+      <button type="submit" [disabled]="password !== confirmPassword || !agreeTerms">Sign up</button>
     </form>
   </div>
 </div>
