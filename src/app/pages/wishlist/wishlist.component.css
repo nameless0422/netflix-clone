@@ -2,17 +2,18 @@
   padding: 20px;
   background-color: #141414;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .movie-row {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* 반응형 그리드 */
   gap: 20px;
 }
 
 .movie-card {
-  min-width: 200px;
-  max-width: 200px;
   background-color: #2f2f2f;
   border-radius: 4px;
   overflow: hidden;
@@ -25,14 +26,16 @@
   cursor: pointer;
 }
 
+/* 포스터 이미지 */
 .movie-img {
   width: 100%;
-  height: 300px;
+  height: 225px; /* 2:3 비율 */
   object-fit: cover;
   border-radius: 4px;
   transition: filter 0.3s ease;
 }
 
+/* 포스터 어두운 효과 */
 .movie-card:hover .movie-img {
   filter: brightness(0.5); /* 마우스 호버 시 어두워짐 */
 }
@@ -99,61 +102,18 @@
   text-align: center;
 }
 
-.rating-circle .circle {
-  position: relative;
-  width: 40px;
-  height: 40px;
-}
-
-.circular-chart {
-  width: 100%;
-  height: 100%;
-  transform: rotate(-90deg); /* 시작점을 위로 이동 */
-}
-
-.circle-bg {
-  fill: none;
-  stroke: #eee;
-  stroke-width: 3.8;
-}
-
-.circle-progress {
-  fill: none;
-  stroke: #4caf50; /* 진행 색상 */
-  stroke-width: 3.8;
-  stroke-linecap: round;
-  transition: stroke-dasharray 0.5s;
-}
-
-.percentage {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 0.8rem;
-  color: white;
-  font-weight: bold;
-}
-
-/* 모바일 환경 대응 */
+/* 반응형 스타일 */
 @media (max-width: 768px) {
   .movie-row {
-    display: flex;
-    overflow-x: scroll;
-    flex-wrap: nowrap; /* 가로로 스크롤 가능하게 */
-    gap: 10px;
-    padding: 10px 0;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* 작은 화면에서 그리드 크기 조정 */
   }
 
   .movie-card {
-    min-width: 140px;
-    max-width: 140px;
-    height: 210px;
-    flex: 0 0 auto;
+    height: auto;
   }
 
   .movie-img {
-    height: 100%;
+    height: 180px; /* 작은 화면에서 포스터 높이 축소 */
   }
 
   .rating-circle {
