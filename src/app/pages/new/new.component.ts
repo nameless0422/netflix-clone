@@ -15,10 +15,10 @@ import { MovieDetailComponent } from '../../components/movie-detail/movie-detail
 export class NewComponent implements OnInit {
   movies: any[] = [];
   currentMovies: any[] = [];
-  page: number = 1; // 초기 페이지
-  currentPage: number = 1; // 테이블 보기에서 현재 페이지
-  itemsPerPage: number = 10; // 테이블 보기에서 페이지당 영화 개수
-  isListView: boolean = true; // 뷰 전환 상태
+  page: number = 1;
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
+  isListView: boolean = true;
   isLoggedIn: boolean = false;
   wishlist: any[] = [];
   private wishlistManager = WishlistManager.getInstance();
@@ -26,6 +26,7 @@ export class NewComponent implements OnInit {
   selectedMovieId: number | null = null;
   isLoading: boolean = false;
   showScrollToTop: boolean = false;
+  gridTemplateColumns: string = '';
 
   constructor(private movieService: MovieService, private cookieService: CookieService) {}
 
@@ -46,14 +47,14 @@ export class NewComponent implements OnInit {
           this.movies = [...this.movies, ...filteredMovies];
         }
       }
-      this.updateCurrentMovies(); // 테이블 보기 초기 페이지 설정
+      this.updateCurrentMovies();
     } catch (error) {
       console.error('Error loading initial movies:', error);
     }
   }
 
   async loadMoreMovies(): Promise<void> {
-    if (!this.isListView) return; // 테이블 보기일 때는 무한 스크롤 비활성화
+    if (!this.isListView) return;
     this.isLoading = true;
     try {
       const response = await this.movieService.getReleaseMovies(this.page);
@@ -63,12 +64,25 @@ export class NewComponent implements OnInit {
         );
         this.movies = [...this.movies, ...filteredMovies];
         this.page++;
+        this.updateCurrentMovies(); // 페이지 업데이트
       }
     } catch (error) {
       console.error('Error loading more movies:', error);
     } finally {
       this.isLoading = false;
     }
+  }
+
+  setGridTemplateColumns(): void {
+    const containerWidth = window.innerWidth;
+    const cardWidth = 200 + 15;
+    const columns = Math.floor(containerWidth / cardWidth);
+    this.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+  }
+
+  @HostListener('window:resize', [])
+  onResize(): void {
+    if (!this.isListView) this.setGridTemplateColumns();
   }
 
   @HostListener('window:scroll', [])
@@ -88,6 +102,7 @@ export class NewComponent implements OnInit {
     this.isListView = !this.isListView;
     if (!this.isListView) {
       this.updateCurrentMovies();
+      this.setGridTemplateColumns();
     }
   }
 
@@ -98,10 +113,10 @@ export class NewComponent implements OnInit {
   }
 
   goToNextPage(): void {
-    if ((this.currentPage * this.itemsPerPage) < this.movies.length) {
+    if (this.currentPage * this.itemsPerPage < this.movies.length) {
       this.currentPage++;
       this.updateCurrentMovies();
-    }else{
+    } else {
       this.loadMoreMovies();
     }
   }

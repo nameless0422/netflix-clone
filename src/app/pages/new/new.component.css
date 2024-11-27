@@ -11,51 +11,43 @@
 
 .view-toggle button {
   padding: 10px 20px;
-  background-color: #444;
+  background-color: #e50914; /* 넷플릭스 빨간색 */
   color: white;
   border: none;
   cursor: pointer;
   border-radius: 5px;
-  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
 .view-toggle button:hover {
-  background-color: #555;
+  background-color: #f40612; /* 조금 더 밝은 빨간색 */
 }
 
-/* 그리드 뷰 스타일 */
-.grid-view {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-}
-
-/* 리스트 뷰 스타일 */
+/* 리스트 보기 스타일 */
 .list-view {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
 }
 
-/* 영화 카드 */
+/* 카드 공통 스타일 */
 .movie-card {
-  position: relative;
-  width: 100%;
-  max-width: 200px;
-  background-color: #222;
+  background-color: #222; /* 카드 배경 */
   color: white;
   border-radius: 10px;
   overflow: hidden;
+  position: relative;
   transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.movie-card.list-view {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%; /* 리스트 모드에서 가로 폭 */
-  max-width: none;
-  height: 120px; /* 줄어든 높이 */
+.movie-card img {
+  width: 100%;
+  object-fit: cover;
 }
 
 .movie-card:hover {
@@ -63,37 +55,20 @@
   cursor: pointer;
 }
 
+/* 그리드 보기 스타일 */
+.grid-view {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
 .movie-img {
   width: 100%;
-  height: 300px;
+  height: auto;
   object-fit: cover;
 }
 
-.movie-card.list-view .movie-img {
-  width: 100px; /* 리스트 보기에서 작게 조정 */
-  height: 100%; /* 높이 유지 */
-}
-
-.movie-info {
-  padding: 10px;
-}
-
-.movie-info h3 {
-  margin: 0 0 10px 0;
-  font-size: 1.2rem;
-}
-
-.movie-info p {
-  margin: 0;
-  font-size: 0.9rem;
-}
-
-/* 마우스 호버 시 이미지 어두워짐 */
-.movie-card:hover .movie-img {
-  filter: brightness(0.5);
-}
-
-/* 좋아요 버튼 스타일 */
+/* 좋아요 버튼 */
 .favorite-btn {
   position: absolute;
   top: 10px;
@@ -112,14 +87,13 @@
 }
 
 .movie-card:hover .favorite-btn {
-  opacity: 1; /* 마우스 호버 시 버튼 표시 */
+  opacity: 1;
 }
 
 .favorite-btn:hover {
   background-color: rgba(255, 0, 0, 0.8);
 }
 
-/* 좋아요 상태 */
 .favorite-btn svg {
   fill: white;
   transition: fill 0.3s;
@@ -129,143 +103,107 @@
   fill: red;
 }
 
-/* 평점 표시 스타일 */
-.rating-circle {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.8);
-  border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
-}
-
-.rating-circle .circle {
-  position: relative;
-  width: 40px;
-  height: 40px;
-}
-
-.circular-chart {
-  width: 100%;
-  height: 100%;
-  transform: rotate(-90deg);
-}
-
-.circle-bg {
-  fill: none;
-  stroke: #eee;
-  stroke-width: 3.8;
-}
-
-.circle-progress {
-  fill: none;
-  stroke: #4caf50;
-  stroke-width: 3.8;
-  stroke-linecap: round;
-  transition: stroke-dasharray 0.5s;
-}
-
-.percentage {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 0.8rem;
-  color: white;
-  font-weight: bold;
-}
-
-/* 페이지네이션 */
+/* 페이지네이션 버튼 */
 .pagination {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  align-items: center;
   gap: 10px;
+  margin-top: 20px;
 }
 
 .pagination button {
   padding: 10px 20px;
-  background-color: #e50914; /* Netflix 빨간색 */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: bold;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.pagination button:disabled {
-  background-color: #444; /* 비활성화 상태는 어두운 회색 */
-  cursor: not-allowed;
-}
-
-.pagination button:hover:not(:disabled) {
-  background-color: #f40612; /* 밝은 빨간색 */
-  transform: scale(1.05); /* 약간 확대 효과 */
-}
-
-.pagination span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 20px;
-  color: #e50914; /* Netflix 강조 색상 */
-  background-color: #222; /* 어두운 배경 */
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: bold;
-}
-
-/* 맨 위로 버튼 */
-.scroll-to-top {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  padding: 10px 15px;
   background-color: #444;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:hover {
+  background-color: #555;
+}
+
+.pagination .active {
+  background-color: #e50914; /* 넷플릭스 빨간색 */
+}
+
+/* 스크롤 맨 위로 버튼 */
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: #e50914; /* 넷플릭스 빨간색 */
+  color: white;
+  border: none;
+  border-radius: 50%;
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 1000;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.scroll-to-top.visible {
+  opacity: 1;
+  visibility: visible;
 }
 
 .scroll-to-top:hover {
-  background-color: #555;
+  background-color: #f40612;
+}
+
+.scroll-to-top svg {
+  width: 20px;
+  height: 20px;
+  fill: white;
 }
 
 /* 반응형 디자인 */
 @media (max-width: 768px) {
   .grid-view {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+  .movie-card {
+    min-width: 140px; /* 작은 화면에서 카드 너비 축소 */
+    height: 210px; /* 작은 화면에서 카드 높이 축소 */
   }
 
-  .movie-card.list-view {
-    height: auto;
-    flex-direction: column;
+  .movie-img {
+    height: 100%; /* 작은 화면에서 포스터 높이 축소 */
   }
 
-  .movie-card.list-view .movie-img {
-    width: 100%;
-    height: auto;
+  .rating-circle {
+    width: 40px;
+    height: 40px;
   }
 
-  .view-toggle {
-    justify-content: center;
+  .favorite-btn {
+    width: 30px;
+    height: 30px;
+  }
+
+  .favorite-btn svg {
+    width: 18px;
+    height: 18px;
   }
 
   .view-toggle button {
-    width: 100%;
-    padding: 10px;
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+
+  .pagination button {
+    font-size: 0.8rem;
+    padding: 8px 12px;
   }
 }
