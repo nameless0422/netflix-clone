@@ -9,7 +9,7 @@ body {
       rgba(0, 0, 0, 0.5), /* 어두운 투명도 조절 (0.5) */
       rgba(0, 0, 0, 0.5)
     ),
-    url('assets/images/login_background.jpg');
+    url('../../../assets/images/login_background.jpg');
   height: 100vh;
   margin: 0;
   background-size: cover; /* 화면 전체에 맞춤 */
