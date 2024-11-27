@@ -37,6 +37,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = this.cookieService.get('isLoggedIn') === 'true';
+    this.addSwipeListeners();
     this.loadBannerMovie();
     this.loadData();
   }
@@ -164,4 +165,29 @@ export class HomeComponent implements OnInit {
     console.log('Refreshing home data...');
     this.loadData(); // 홈 데이터를 다시 로드
   }
+
+  addSwipeListeners(): void { // 스와이프
+    const movieRows = document.querySelectorAll('.movie-row');
+    movieRows.forEach((row) => {
+      let startX = 0;
+      let scrollLeft = 0;
+  
+      // 'touchstart' 이벤트 핸들러
+      row.addEventListener('touchstart', (e) => {
+        const touchEvent = e as TouchEvent;
+        const touch = touchEvent.touches[0];
+        startX = touch.pageX;
+        scrollLeft = (touchEvent.currentTarget as HTMLElement).scrollLeft;
+      });
+  
+      // 'touchmove' 이벤트 핸들러
+      row.addEventListener('touchmove', (e) => {
+        const touchEvent = e as TouchEvent;
+        const touch = touchEvent.touches[0];
+        const x = touch.pageX - startX;
+        (touchEvent.currentTarget as HTMLElement).scrollLeft = scrollLeft - x;
+      });
+    });
+  }
+  
 }
