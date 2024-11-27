@@ -48,14 +48,43 @@ Netflix Clone은 Angular를 기반으로 제작된 영화 정보 제공 프론�
 
 ## 📦 설치 및 실행
 
-1. **의존성 설치**
-   ```
-   npm install
-   ```
+1. **git hub actions 사용**
+```
+name: Deploy Angular to GitHub Pages
 
-2. **개발 서버 실행**
+on:
+  push:
+    branches:
+      - master
 
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
 
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install dependencies and build Angular app
+      run: |
+        npm install
+        npm run build --configuration=production --base-href=/netflix-clone/  # base-href 추가
+
+    - name: Install jq
+      run: sudo apt-get install -y jq
+
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        token: ${{ secrets.ACTIONS_DEPLOY_KEY  }}
+        branch: deploy
+        folder: dist/browser  # 빌드된 Angular 앱 폴더
+```
 
 ## 🛠️ 향후 개선 사항
   - 사용자 리뷰 기능 추가
