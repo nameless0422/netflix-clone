@@ -242,3 +242,20 @@ body {
   margin-top: 5px;
   text-align: left;
 }
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; /* 모바일에서는 위아래 정렬 */
+  }
+
+  .form-container {
+    flex: none; /* 비율 해제 */
+    width: 90%; /* 가로 크기 조정 */
+  }
+
+  .toggle-container {
+    flex: none; /* 비율 해제 */
+    width: 90%; /* 가로 크기 조정 */
+    margin-top: 20px; /* 여백 추가 */
+  }
+}
