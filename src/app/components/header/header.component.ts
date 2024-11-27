@@ -13,6 +13,7 @@ import WishlistManager from '../../util/movie/useWishlist';
 })
 export class HeaderComponent implements OnInit {
   isLoggedIn: boolean = false;
+  isMenuOpen: boolean = false;
   currentUserEmail: string | null = null;
 
   private wishlistManager = WishlistManager.getInstance(); // 싱글턴 인스턴스 가져오기
@@ -48,5 +49,18 @@ export class HeaderComponent implements OnInit {
     this.isLoggedIn = false;
     this.currentUserEmail = null;
     this.router.navigate(['/']);
+  }
+
+  toggleMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
+    const slideMenu = document.getElementById('slideMenu');
+    const hamburger = document.getElementById('hamburger');
+    if (this.isMenuOpen) {
+      slideMenu?.classList.add('active');
+      hamburger?.classList.add('active');
+    } else {
+      slideMenu?.classList.remove('active');
+      hamburger?.classList.remove('active');
+    }
   }
 }
