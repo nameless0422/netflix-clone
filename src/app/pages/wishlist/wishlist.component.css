@@ -99,7 +99,6 @@
   text-align: center;
 }
 
-
 .rating-circle .circle {
   position: relative;
   width: 40px;
@@ -134,4 +133,37 @@
   font-size: 0.8rem;
   color: white;
   font-weight: bold;
+}
+
+/* 모바일 환경 대응 */
+@media (max-width: 768px) {
+  .movie-row {
+    display: flex;
+    overflow-x: scroll;
+    flex-wrap: nowrap; /* 가로로 스크롤 가능하게 */
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  .movie-card {
+    min-width: 140px;
+    max-width: 140px;
+    height: 210px;
+    flex: 0 0 auto;
+  }
+
+  .movie-img {
+    height: 100%;
+  }
+
+  .rating-circle {
+    width: 30px;
+    height: 30px;
+    font-size: 0.7rem;
+  }
+
+  .favorite-btn {
+    width: 30px;
+    height: 30px;
+  }
 }
