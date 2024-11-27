@@ -6,27 +6,25 @@
 
 body {
   background-color: #141414; /* Netflix 검은색 배경 */
+  height: 100vh;
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  height: 100vh;
 }
 
 .container {
+  position: absolute;
+  top: 50%; /* 화면 세로 중앙 */
+  left: 50%; /* 화면 가로 중앙 */
+  transform: translate(-50%, -50%); /* 요소의 중심을 기준으로 조정 */
   background-color: #000; /* Netflix 기본 검정 */
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-  position: relative;
-  overflow: hidden;
   width: 768px;
   max-width: 100%;
   min-height: 480px;
-  /* 화면 중앙 정렬 */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: auto; /* 자동 여백 */
+  padding: 20px; /* 내부 여백 */
 }
 
 .container p {
