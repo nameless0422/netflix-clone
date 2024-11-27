@@ -82,7 +82,10 @@
   }
 
   .hamburger-menu {
-    display: flex; /* 햄버거 버튼 표시 */
+    display: flex;
+    position: absolute;
+    top: 15px;
+    right: 20px;
   }
 }
 
