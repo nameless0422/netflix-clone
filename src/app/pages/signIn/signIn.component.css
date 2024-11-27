@@ -244,24 +244,21 @@ body {
 }
 /* 모바일에서만 전환 버튼 표시 */
 @media (max-width: 768px) {
-  .mobile-toggle {
-    position: absolute;
-    bottom: 20px; /* 화면 하단에 배치 */
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
+  .container {
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 20px;
   }
 
-  .mobile-toggle button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    font-size: 16px;
-    background-color: #e50914;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  .form-container {
+    width: 90%;
+    max-width: 400px;
+  }
+
+  .login-btn {
+    margin: 20px auto 0 auto;
+    width: 90%;
+    max-width: 300px;
   }
 
   .mobile-toggle button:hover {
