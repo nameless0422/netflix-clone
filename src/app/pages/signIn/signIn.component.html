@@ -1,69 +1,60 @@
-<div class="auth-container">
-  <div class="form-box">
-    <div class="form-header">
-      <h2>{{ isLoginMode ? 'Login' : 'Sign up' }}</h2>
-      <p (click)="switchMode()">{{ isLoginMode ? 'Sign up' : 'Login' }}</p>
+<div class="container" [class.active]="!isLoginMode" id="container">
+  <div class="form-container sign-up">
+    <form (ngSubmit)="onSignup()">
+      <h1>Create Account</h1>
+      <div class="social-icons">
+        <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+        <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+        <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+      </div>
+      <span>or use your email for registration</span>
+      <input type="email" placeholder="Email" [(ngModel)]="email" name="signup-email" required />
+      <input
+        type="password"
+        placeholder="Password"
+        [(ngModel)]="password"
+        name="signup-password"
+        required
+      />
+      <input
+        type="password"
+        placeholder="Confirm Password"
+        [(ngModel)]="confirmPassword"
+        name="signup-confirm-password"
+        required
+      />
+      <button [disabled]="!isEmailValid">Sign Up</button>
+    </form>
+  </div>
+  <div class="form-container sign-in">
+    <form (ngSubmit)="onLogin()">
+      <h1>Sign In</h1>
+      <div class="social-icons">
+        <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+        <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+        <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+      </div>
+      <span>or use your email password</span>
+      <input type="email" placeholder="Email" [(ngModel)]="email" name="login-email" required />
+      <input type="password" placeholder="Password" [(ngModel)]="password" name="login-password" required />
+      <a href="#">Forget Your Password?</a>
+      <button [disabled]="!isEmailValid">Sign In</button>
+    </form>
+  </div>
+  <div class="toggle-container">
+    <div class="toggle">
+      <div class="toggle-panel toggle-left">
+        <h1>Welcome Back!</h1>
+        <p>Enter your personal details to use all of site features</p>
+        <button (click)="switchMode()" class="hidden" id="login">Sign In</button>
+      </div>
+      <div class="toggle-panel toggle-right">
+        <h1>Hello, Friend!</h1>
+        <p>Register with your personal details to use all of site features</p>
+        <button (click)="switchMode()" class="hidden" id="register">Sign Up</button>
+      </div>
     </div>
-
-    <form *ngIf="isLoginMode" (ngSubmit)="onLogin()" class="login-form">
-      <div class="form-group">
-        <input
-          type="email"
-          placeholder="Email"
-          [(ngModel)]="email"
-          name="login-email"
-          required
-          (input)="validateEmail()"
-        />
-        <span class="error-message" *ngIf="!isEmailValid && email">Invalid email format</span>
-      </div>
-      <div class="form-group">
-        <input type="password" placeholder="Password" [(ngModel)]="password" name="login-password" required />
-      </div>
-      <div class="form-group">
-        <label>
-          <input type="checkbox" [(ngModel)]="rememberMe" name="remember-me" /> Remember me
-        </label>
-      </div>
-      <button type="submit">Login</button>
-    </form>
-
-    <form *ngIf="!isLoginMode" (ngSubmit)="onSignup()" class="signup-form">
-      <div class="form-group">
-        <input type="text" placeholder="User name" [(ngModel)]="username" name="signup-username" required />
-      </div>
-      <div class="form-group">
-        <input
-          type="email"
-          placeholder="Email"
-          [(ngModel)]="email"
-          name="signup-email"
-          required
-          (input)="validateEmail()"
-        />
-        <span class="error-message" *ngIf="!isEmailValid && email">Invalid email format</span>
-      </div>
-      <div class="form-group">
-        <input type="password" placeholder="Password" [(ngModel)]="password" name="signup-password" required />
-      </div>
-      <div class="form-group">
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          [(ngModel)]="confirmPassword"
-          name="signup-confirm-password"
-          required
-        />
-        <span class="error-message" *ngIf="password !== confirmPassword && confirmPassword">
-          Passwords do not match
-        </span>
-      </div>
-      <div class="form-group">
-        <label>
-          <input type="checkbox" [(ngModel)]="agreeTerms" name="agree-terms" required /> I agree to the terms
-        </label>
-      </div>
-      <button type="submit" [disabled]="password !== confirmPassword || !agreeTerms">Sign up</button>
-    </form>
   </div>
 </div>
