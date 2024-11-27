@@ -1,14 +1,18 @@
 import { Component } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { CommonModule } from '@angular/common'; 
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { tryLogin, tryRegister } from '../../util/auth/Authentication'; // auth 경로에 맞게 수정
+import { ToastrModule, ToastrService } from 'ngx-toastr'; 
+import { tryLogin, tryRegister } from '../../util/auth/Authentication';
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './signIn.component.html',
   standalone: true,
-  imports: [FormsModule,BrowserAnimationsModule],
+  imports: [
+    CommonModule, 
+    FormsModule,
+    ToastrModule 
+  ],
   styleUrls: ['./signIn.component.css'],
 })
 export class SignInComponent {
