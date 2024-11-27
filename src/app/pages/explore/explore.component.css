@@ -42,9 +42,23 @@ body {
   transition: filter 0.3s ease;
 }
 
+/* 카드 제목 */
+.movie-card-title {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: #fff;
+  font-size: 1rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
 /* 호버 효과 */
 .movie-card:hover img {
   filter: brightness(0.7);
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
 }
 
 /* 평점 원형 */
@@ -52,53 +66,85 @@ body {
   position: absolute;
   top: 10px;
   left: 10px;
-  width: 40px;
-  height: 40px;
+  background-color: rgba(0, 0, 0, 0.7);
   border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
+  width: 36px;
+  height: 36px;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   font-size: 0.9rem;
   font-weight: bold;
+  color: #fff;
 }
 
-.rating-circle .circle {
-  position: relative;
-  width: 40px;
-  height: 40px;
-}
-
-.circular-chart {
-  width: 100%;
-  height: 100%;
-  transform: rotate(-90deg); /* 시작점을 위로 이동 */
-}
-
-.circle-bg {
-  fill: none;
-  stroke: #eee;
-  stroke-width: 3.8;
-}
-
-.circle-progress {
-  fill: none;
-  stroke: #4caf50; /* 진행 색상 */
-  stroke-width: 3.8;
-  stroke-linecap: round;
-  transition: stroke-dasharray 0.5s;
-}
-
-.percentage {
+/* 찜 버튼 */
+.favorite-btn {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 0.8rem;
-  color: white;
-  font-weight: bold;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
+
+.favorite-btn svg {
+  fill: #fff;
+  width: 20px;
+  height: 20px;
+}
+
+.favorite-btn:hover {
+  background-color: rgba(255, 0, 0, 0.8);
+}
+
+.favorite-btn.favorited svg {
+  fill: red;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .movie-list {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 15px;
+  }
+
+  .movie-card {
+    padding-top: 150%; /* 2:3 비율 유지 */
+  }
+
+  .rating-circle,
+  .favorite-btn {
+    width: 30px;
+    height: 30px;
+  }
+
+  .rating-circle {
+    font-size: 0.8rem;
+  }
+
+  .favorite-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* 모바일 카드 제목 크기 */
+  .movie-card-title {
+    font-size: 0.8rem;
+  }
+}
+
 
 
 /* 찜 버튼 */
