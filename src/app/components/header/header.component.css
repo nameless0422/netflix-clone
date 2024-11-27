@@ -83,11 +83,6 @@
     padding: 0.5rem 1rem;
   }
 
-  .logo {
-    margin-bottom: 10px;
-    justify-content: center;
-  }
-
   .nav-menu {
     display: none; /* 기본 메뉴 숨김 */
   }
