@@ -1,14 +1,8 @@
 <div class="container" [class.active]="!isLoginMode" id="container">
   <div class="form-container sign-up">
     <form (ngSubmit)="onSignup()">
-      <h1>Create Account</h1>
-      <div class="social-icons">
-        <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
-        <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-        <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
-        <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
-      </div>
-      <span>or use your email for registration</span>
+      <h1>회원가입</h1>
+      <span>이메일을 입력하여 등록하세요</span>
       <input type="email" placeholder="Email" [(ngModel)]="email" name="signup-email" required />
       <input
         type="password"
@@ -24,30 +18,42 @@
         name="signup-confirm-password"
         required
       />
-      <button [disabled]="!isEmailValid">Sign Up</button>
+      <div class="checkbox-container">
+        <input type="checkbox" id="terms" [(ngModel)]="agreeToTerms" name="agreeToTerms" required />
+        <label for="terms">약관에 동의합니다</label>
+      </div>
+      <button [disabled]="!isEmailValid || !agreeToTerms">회원가입</button>
     </form>
   </div>
   <div class="form-container sign-in">
     <form (ngSubmit)="onLogin()">
-      <h1>Sign In</h1>
-      <span>or use your email password</span>
+      <h1>로그인</h1>
       <input type="email" placeholder="Email" [(ngModel)]="email" name="login-email" required />
-      <input type="password" placeholder="Password" [(ngModel)]="password" name="login-password" required />
-      <a href="#">Forget Your Password?</a>
-      <button [disabled]="!isEmailValid">Sign In</button>
+      <input
+        type="password"
+        placeholder="Password"
+        [(ngModel)]="password"
+        name="login-password"
+        required
+      />
+      <div class="checkbox-container">
+        <input type="checkbox" id="rememberMe" [(ngModel)]="rememberMe" name="rememberMe" />
+        <label for="rememberMe">아이디 저장 및 자동 로그인</label>
+      </div>
+      <button [disabled]="!isEmailValid">로그인</button>
     </form>
   </div>
   <div class="toggle-container">
     <div class="toggle">
       <div class="toggle-panel toggle-left">
-        <h1>Welcome Back!</h1>
-        <p>Enter your personal details to use all of site features</p>
-        <button (click)="switchMode()" class="hidden" id="login">Sign In</button>
+        <h1>환영합니다!</h1>
+        <p>모든 사이트 기능을 사용하려면 로그인하세요.</p>
+        <button (click)="switchMode()" class="hidden" id="login">로그인</button>
       </div>
       <div class="toggle-panel toggle-right">
-        <h1>Hello, Friend!</h1>
-        <p>Register with your personal details to use all of site features</p>
-        <button (click)="switchMode()" class="hidden" id="register">Sign Up</button>
+        <h1>안녕하세요!</h1>
+        <p>모든 사이트 기능을 사용하려면 회원가입하세요.</p>
+        <button (click)="switchMode()" class="hidden" id="register">회원가입</button>
       </div>
     </div>
   </div>
