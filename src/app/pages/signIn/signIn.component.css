@@ -243,6 +243,7 @@ body {
   text-align: left;
 }
 
+/* 공통 스타일 */
 .m_container {
   display: flex;
   flex-direction: column;
@@ -312,6 +313,32 @@ body {
 .m_container button:hover {
   background-color: #f40612;
 }
+
+/* 모바일 전환 버튼 */
+.m_container .mobile-toggle {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.m_container .mobile-toggle button {
+  width: 100%;
+  padding: 10px;
+  background-color: #e50914;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.m_container .mobile-toggle button:hover {
+  background-color: #f40612;
+}
+
 
 /* 모바일에서만 전환 버튼 표시 */
 @media (max-width: 768px) {
