@@ -1,7 +1,7 @@
 # Netflix Clone
 
 ## 📋 프로젝트 기본 정보
-Netflix Clone은 Angular를 기반으로 제작된 영화 정보 제공 웹 애플리케이션입니다. 사용자는 영화 정보를 확인하고, 찜한 영화 목록을 관리하며, 다양한 필터를 통해 원하는 영화를 검색할 수 있습니다.
+Netflix Clone은 Angular를 기반으로 제작된 영화 정보 제공 프론트 페이지입니다. 사용자는 영화 정보를 확인하고, 찜한 영화 목록을 관리하며, 다양한 필터를 통해 원하는 영화를 검색할 수 있습니다.
 
 ---
 
@@ -23,33 +23,6 @@ Netflix Clone은 Angular를 기반으로 제작된 영화 정보 제공 웹 애�
 ---
 
 ## 📁 프로젝트 폴더 구조
-├── src/ 
-│ ├── app/ 
-│ │ ├── components/ # UI 컴포넌트 
-│ │ │ ├── header/ # 헤더 컴포넌트 
-│ │ │ ├── footer/ # 푸터 컴포넌트 
-│ │ │ └── movie-detail/ # 모달 영화 상세정보 
-│ │ ├── pages/ # 주요 페이지 
-│ │ │ ├── home/ # 홈 페이지 
-│ │ │ ├── wishlist/ # 찜한 리스트 페이지 
-│ │ │ ├── explore/ # 찾아보기 페이지 
-│ │ │ └── new/ # 대세 콘텐츠 페이지 
-│ │ ├── util/ # 유틸리티 
-│ │ │ ├── movie/ # 영화 관련 API 서비스 
-│ │ │ │ ├── movie.service.ts 
-│ │ │ │ ├── URL.ts # TMDB API URL 생성 함수 
-│ │ │ │ └── useWishlist.ts # 위시리스트 관리 
-│ │ │ ├── auth/ # 사용자 인증 관리 
-│ │ │ │ └── Authentication.ts 
-│ │ ├── app.routes.ts # 애플리케이션 라우팅 설정 
-│ │ ├── styles.scss # 전역 스타일링 
-│ │ └── main.ts  
-│ └── assets/ 
-│ └── images/ 
-├── angular.json 
-├── package.json  
-├── tsconfig.json 
-└── README.md 
 
 ---
 
@@ -82,19 +55,7 @@ Netflix Clone은 Angular를 기반으로 제작된 영화 정보 제공 웹 애�
 
 2. **개발 서버 실행**
 
-bash
-코드 복사
-ng serve
-프로덕션 빌드
 
-bash
-코드 복사
-ng build --prod
-테스트
-
-bash
-코드 복사
-ng test
 
 ## 🛠️ 향후 개선 사항
   - 사용자 리뷰 기능 추가

@@ -60,7 +60,7 @@
   </div>
 
   <!-- 페이지네이션 (리스트 보기에서만) -->
-  <div *ngIf="!isGridView" class="pagination-controls">
+  <div *ngIf="isGridView" class="pagination-controls">
     <button (click)="goToPreviousPage()" [disabled]="currentPage === 1">이전</button>
     <span>페이지 {{ currentPage }}</span>
     <button (click)="goToNextPage()" [disabled]="!hasNextPage()">다음</button>
