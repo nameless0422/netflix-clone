@@ -1,200 +1,94 @@
-.explore-container {
-  padding: 20px;
+/* Reset styles for consistent appearance */
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.filter-bar {
+.container {
+  width: 100%;
+  padding: 0 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.filter-container {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-between;
   gap: 10px;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
-.filter-bar p {
-  flex: 1 1 100%;
-  font-size: 1rem;
-  color: #fff;
-}
-
-.filter-bar select,
-.filter-bar button {
-  flex: 1 1 calc(33.333% - 10px);
+.filter-container select,
+.filter-container button {
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background: #2b2b2b;
-  color: #fff;
   font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ddd;
   outline: none;
 }
 
-.filter-bar button {
+.filter-container button {
   background-color: #e50914;
+  color: #fff;
+  border: none;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-.filter-bar button:hover {
+.filter-container button:hover {
   background-color: #f40612;
 }
 
-.results {
+.movies-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 10px;
+  gap: 20px;
 }
 
 .movie-card {
-  position: relative;
-  background-color: #2f2f2f;
-  border-radius: 4px;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  border-radius: 5px;
   overflow: hidden;
-  transition: transform 0.3s ease;
-  aspect-ratio: 2 / 3; /* 카드의 비율을 항상 2:3으로 고정 */
+  position: relative;
+  transition: transform 0.3s;
 }
 
 .movie-card:hover {
   transform: scale(1.05);
-  cursor: pointer;
 }
 
-.movie-img {
+.movie-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.rating-circle {
+.movie-card-title {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.8);
-  border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 10px;
+  font-size: 0.9rem;
+  text-align: center;
 }
 
-.rating-circle .circle {
-  position: relative;
-  width: 40px;
-  height: 40px;
-}
-
-.circular-chart {
-  width: 100%;
-  height: 100%;
-  transform: rotate(-90deg);
-}
-
-.circle-bg {
-  fill: none;
-  stroke: #eee;
-  stroke-width: 3.8;
-}
-
-.circle-progress {
-  fill: none;
-  stroke: #4caf50;
-  stroke-width: 3.8;
-  stroke-linecap: round;
-  transition: stroke-dasharray 0.5s;
-}
-
-.percentage {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 0.8rem;
-  color: white;
-  font-weight: bold;
-}
-
-.favorite-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: rgba(0, 0, 0, 0.6);
-  border: none;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  opacity: 0;
-  transition: opacity 0.3s, background-color 0.3s;
-}
-
-.movie-card:hover .favorite-btn {
-  opacity: 1;
-}
-
-.favorite-btn:hover {
-  background-color: rgba(255, 0, 0, 0.8);
-}
-
-.favorite-btn svg {
-  fill: white;
-  transition: fill 0.3s;
-}
-
-.favorite-btn.favorited svg {
-  fill: red;
-}
-
-/* PC 기본 스타일 유지 */
-@media (min-width: 769px) {
-  .filter-bar select,
-  .filter-bar button {
-    flex: 1 1 calc(33.333% - 10px);
-  }
-
-  .results {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  }
-}
-
-/* 모바일 대응 */
+/* Responsive styles */
 @media (max-width: 768px) {
-  .filter-bar select,
-  .filter-bar button {
-    flex: 1 1 100%;
+  .filter-container {
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .results {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 5px;
+  .movies-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   }
 
-  .movie-card {
-    aspect-ratio: 2 / 3; /* 비율 고정 */
-  }
-
-  .rating-circle {
-    width: 40px;
-    height: 40px;
-  }
-
-  .rating-circle .circle {
-    width: 30px;
-    height: 30px;
-  }
-
-  .circular-chart {
-    stroke-width: 3;
-  }
-
-  .percentage {
-    font-size: 0.7rem;
-  }
-
-  .favorite-btn {
-    width: 30px;
-    height: 30px;
+  .movie-card-title {
+    font-size: 0.8rem;
   }
 }
