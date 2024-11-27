@@ -242,10 +242,30 @@ body {
   margin-top: 5px;
   text-align: left;
 }
-
 /* 모바일에서만 전환 버튼 표시 */
 @media (max-width: 768px) {
-  .container {
+  .mobile-toggle {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .mobile-toggle button {
+    background-color: #e50914;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .mobile-toggle button:hover {
+    background-color: #f40612;
+  }
+
+  /* 기존 토글 숨기기 */
+  .toggle-container {
     display: none;
   }
 }
