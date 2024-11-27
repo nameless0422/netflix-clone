@@ -1,67 +1,58 @@
-/* 공통 스타일 */
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #141414;
-  font-family: Arial, sans-serif;
-  color: #fff;
-}
-
-/* 컨테이너 */
-.container {
+.explore-container {
   padding: 20px;
+  background-color: #141414;
+  color: #ffffff;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* 필터 섹션 */
-.filter-section {
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.filter-bar {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px; /* 필터 간 간격 */
-  margin: 20px 0;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
-.filter-section select {
-  width: 200px; /* 선택 상자의 너비 */
+.filter-bar p {
+  flex: 1 100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.filter-bar select,
+.filter-bar button {
+  flex: 1 1 calc(33.33% - 20px);
   padding: 10px;
-  border: 1px solid #555; /* 테두리 색상 */
-  border-radius: 4px;
-  background-color: #222; /* 배경색 */
-  color: #fff;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-}
-
-.filter-section select:hover {
-  border-color: #e50914; /* 호버 시 테두리 강조 */
-}
-
-.filter-section button {
-  padding: 12px 30px;
+  background-color: #2b2b2b;
   border: none;
+  color: #ffffff;
   border-radius: 4px;
-  background-color: #e50914;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: bold;
+  font-size: 14px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.filter-section button:hover {
+.filter-bar button {
+  background-color: #e50914;
+  font-weight: bold;
+}
+
+.filter-bar button:hover {
   background-color: #f40612;
-  transform: scale(1.05); /* 호버 시 확대 */
-}
-/* 카드 리스트 */
-.movie-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* 반응형 그리드 */
-  gap: 20px;
 }
 
-/* 카드 */
+.results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+}
+
 .movie-card {
   position: relative;
   width: 100%;
@@ -69,54 +60,42 @@ body {
   background-color: #2f2f2f;
   border-radius: 8px;
   overflow: hidden;
+  cursor: pointer;
   transition: transform 0.3s ease;
-}
-
-/* 카드 이미지 */
-.movie-card img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* 이미지 비율 유지 */
-  transition: filter 0.3s ease;
-}
-
-/* 카드 제목 */
-.movie-card-title {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  color: #fff;
-  font-size: 1rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-}
-
-/* 호버 효과 */
-.movie-card:hover img {
-  filter: brightness(0.7);
 }
 
 .movie-card:hover {
   transform: scale(1.05);
 }
 
-/* 평점 원형 스타일 */
+.movie-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.3s ease;
+}
+
+.movie-card:hover .movie-img {
+  filter: brightness(0.7);
+}
+
+
+/* 회원 점수 스타일 */
 .rating-circle {
   position: absolute;
   top: 10px;
   left: 10px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
+  width: 50px;
+  height: 50px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  font-size: 0.9rem;
-  font-weight: bold;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 .rating-circle .circle {
@@ -155,7 +134,8 @@ body {
   font-weight: bold;
 }
 
-/* 찜 버튼 */
+
+
 .favorite-btn {
   position: absolute;
   top: 10px;
@@ -172,129 +152,52 @@ body {
   transition: background-color 0.3s ease;
 }
 
-.favorite-btn svg {
-  fill: #fff;
-  width: 20px;
-  height: 20px;
-}
-
-.favorite-btn:hover {
-  background-color: rgba(255, 0, 0, 0.8);
-}
-
 .favorite-btn.favorited svg {
   fill: red;
 }
 
-/* 반응형 스타일 */
-@media (max-width: 768px) {
-  .container {
-    padding: 10px;
-  }
-
-  .filter-section {
-    flex-direction: column; /* 모바일에서는 필터를 세로로 배치 */
-    gap: 15px;
-  }
-
-  .filter-section select {
-    width: 100%; /* 모바일에서는 너비를 100%로 */
-  }
-
-  .filter-section button {
-    width: 100%; /* 초기화 버튼도 너비를 100%로 */
-  }
-
-  .movie-list {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* 모바일에서 작은 카드 크기 */
-    gap: 15px;
-  }
-
-  .movie-card {
-    padding-top: 150%; /* 2:3 비율 유지 */
-  }
-
-  .rating-circle,
-  .favorite-btn {
-    width: 30px;
-    height: 30px;
-  }
-
-  .rating-circle .percentage {
-    font-size: 0.65rem;
-  }
-
-  .favorite-btn svg {
-    width: 16px;
-    height: 16px;
-  }
-
-  /* 모바일 카드 제목 크기 */
-  .movie-card-title {
-    font-size: 0.8rem;
-  }
-}
-
-
-
-/* 찜 버튼 */
-.favorite-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: rgba(0, 0, 0, 0.7);
-  border: none;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.favorite-btn:hover {
+  background-color: rgba(255, 0, 0, 0.7);
 }
 
 .favorite-btn svg {
-  fill: #fff;
   width: 20px;
   height: 20px;
+  fill: white;
 }
 
-.favorite-btn:hover {
-  background-color: rgba(255, 0, 0, 0.8);
-}
-
-.favorite-btn.favorited svg {
-  fill: red;
-}
-
-/* 반응형 스타일 */
 @media (max-width: 768px) {
-  .container {
-    padding: 10px;
+  .filter-bar {
+    flex-direction: column;
+    gap: 10px;
   }
 
-  .movie-list {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 15px;
+  .filter-bar select,
+  .filter-bar button {
+    flex: 1 100%;
   }
 
-  .movie-card {
-    padding-top: 150%; /* 2:3 비율 유지 */
+  h1 {
+    font-size: 1.5rem;
   }
 
-  .rating-circle,
-  .favorite-btn {
-    width: 30px;
-    height: 30px;
+  .results {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 50px;
   }
-
   .rating-circle {
-    font-size: 0.8rem;
+    width: 30px; /* 기존: 40px */
+    height: 30px; /* 기존: 40px */
+    font-size: 0.8rem; /* 기존: 다른 값일 경우 수정 */
+  }
+
+  .favorite-btn {
+    width: 30px; /* 기존: 36px */
+    height: 30px; /* 기존: 36px */
   }
 
   .favorite-btn svg {
-    width: 16px;
-    height: 16px;
+    width: 16px; /* 기존: 20px */
+    height: 16px; /* 기존: 20px */
   }
 }
