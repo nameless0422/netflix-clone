@@ -77,12 +77,6 @@
 
 /* ===== 모바일 대응 ===== */
 @media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    height: auto;
-    padding: 0.5rem 1rem;
-  }
-
   .nav-menu {
     display: none; /* 기본 메뉴 숨김 */
   }
