@@ -64,6 +64,7 @@ export class SignInComponent {
 
         this.cookieService.set('isLoggedIn', 'true', { expires: 1, path: '/' }); // 쿠키에 로그인 상태 저장 (1일 유효 기간)
         this.cookieService.set('userID', this.email, { expires: 1, path: '/' });
+        this.router.navigate(['/']); // 로그인 후 홈으로 리디렉션
       },
       () => {
         this.toastr.error('이메일 또는 비밀번호가 잘못되었습니다.', '로그인 실패');
