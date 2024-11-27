@@ -242,40 +242,37 @@ body {
   margin-top: 5px;
   text-align: left;
 }
-
+/* 모바일에서만 전환 버튼 표시 */
 @media (max-width: 768px) {
-  .container {
+  .mobile-toggle {
     display: flex;
-    flex-direction: column; /* 위아래로 배치 */
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    margin-top: 20px;
   }
 
-  .form-container {
-    width: 90%; /* 화면 너비에 맞추기 */
-    margin-bottom: 20px; /* 로그인/회원가입 사이 간격 */
-    transition: transform 0.6s ease-in-out;
-    position: relative;
+  .mobile-toggle button {
+    background-color: #e50914;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
   }
 
-  .form-container.sign-in {
-    transform: translateY(0); /* 초기 위치 */
+  .mobile-toggle button:hover {
+    background-color: #f40612;
   }
 
-  .form-container.sign-up {
-    transform: translateY(100%); /* 아래로 숨기기 */
-  }
-
-  .container.active .form-container.sign-in {
-    transform: translateY(-100%); /* 위로 이동 */
-  }
-
-  .container.active .form-container.sign-up {
-    transform: translateY(0); /* 제자리로 이동 */
-  }
-
+  /* 기존 토글 숨기기 */
   .toggle-container {
-    display: none; /* 모바일에서 토글 숨기기 */
+    display: none;
+  }
+}
+
+/* PC에서는 전환 버튼 숨기기 */
+@media (min-width: 769px) {
+  .mobile-toggle {
+    display: none;
   }
 }
