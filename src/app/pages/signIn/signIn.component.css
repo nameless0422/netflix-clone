@@ -245,19 +245,23 @@ body {
 /* 모바일에서만 전환 버튼 표시 */
 @media (max-width: 768px) {
   .mobile-toggle {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+    position: absolute;
+    bottom: 20px; /* 화면 하단에 배치 */
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
   }
 
   .mobile-toggle button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 16px;
     background-color: #e50914;
     color: white;
-    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 14px;
   }
 
   .mobile-toggle button:hover {
