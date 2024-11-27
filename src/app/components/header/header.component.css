@@ -72,12 +72,11 @@
 .auth-icon {
   width: 24px;
   height: 24px;
-  fill: #e50914;
+  fill: white;
   transition: transform 0.2s ease, fill 0.3s ease;
 }
 
 .auth-button:hover .auth-icon {
-  fill: #f40612;
   transform: scale(1.1);
 }
 
