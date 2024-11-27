@@ -7,7 +7,7 @@ import { ExploreComponent } from './pages/explore/explore.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'signin', component: SignInComponent },
+  { path: 'signIn', component: SignInComponent },
   { path: 'explore', component: ExploreComponent },
   { path: 'new', component: NewComponent },
   { path: 'wishlist', component: WishlistComponent }

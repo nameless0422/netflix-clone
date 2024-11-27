@@ -29,7 +29,7 @@ export class WishlistComponent implements OnInit {
     this.isLoggedIn = this.cookieService.get('isLoggedIn') === 'true';
     if (!this.isLoggedIn) {
       // 로그인 상태가 아니면 로그인 페이지로 리다이렉트
-      this.router.navigate(['/login']);
+      this.router.navigate(['/signIn']);
     } else {
       this.loadWishlist();
     }
