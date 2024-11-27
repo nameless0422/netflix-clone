@@ -21,7 +21,11 @@
     </svg>
   </div>
 
-  <button class="auth-button" (click)="onProfileClick()">{{ isLoggedIn ? '로그아웃' : '로그인' }}</button>
+  <div class="auth-button" (click)="onProfileClick()">
+    <svg class="auth-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+      <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512h388.6c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304h-91.4z" />
+    </svg>
+  </div>
 
   <!-- 슬라이드 메뉴 -->
   <nav class="slide-menu" id="slideMenu">
