@@ -1,16 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { tryLogin, tryRegister } from '../../util/auth/Authentication';
-import { Router } from '@angular/router'; // Router 추가
-import { CookieService } from 'ngx-cookie-service'; // CookieService 추가
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './signIn.component.html',
   standalone: true,
-  imports: [CommonModule, FormsModule, ToastrModule],
+  imports: [CommonModule, FormsModule],
   styleUrls: ['./signIn.component.css'],
 })
 export class SignInComponent {
@@ -23,11 +22,7 @@ export class SignInComponent {
   rememberMe: boolean = false; // 아이디 저장 및 자동 로그인
   agreeToTerms: boolean = false; // 약관 동의
 
-  constructor(
-    private toastr: ToastrService,
-    private router: Router, // Router 주입
-    private cookieService: CookieService // CookieService 주입
-  ) {}
+  constructor(private router: Router, private cookieService: CookieService) {}
 
   ngOnInit() {
     // 자동 로그인 정보 로드
@@ -60,14 +55,14 @@ export class SignInComponent {
       this.email,
       this.password,
       (user) => {
-        this.toastr.success(`안녕하세요, ${user.id}님!`, '로그인 성공');
-
-        this.cookieService.set('isLoggedIn', 'true', { expires: 1, path: '/' }); // 쿠키에 로그인 상태 저장 (1일 유효 기간)
+        alert(`안녕하세요, ${user.id}님! 로그인 성공`); // 성공 메시지
+        this.cookieService.set('isLoggedIn', 'true', { path: '/', expires: 7 });
         this.cookieService.set('userID', this.email, { expires: 1, path: '/' });
-        this.router.navigate(['/']); // 로그인 후 홈으로 리디렉션
+        // 루트 경로로 라우팅
+        this.router.navigate(['/']);
       },
       () => {
-        this.toastr.error('이메일 또는 비밀번호가 잘못되었습니다.', '로그인 실패');
+        alert('이메일 또는 비밀번호가 잘못되었습니다. 로그인 실패'); // 실패 메시지
       }
     );
   }
@@ -75,12 +70,12 @@ export class SignInComponent {
   // 회원가입 처리
   onSignup() {
     if (this.password !== this.confirmPassword) {
-      this.toastr.error('비밀번호가 일치하지 않습니다.', '회원가입 실패');
+      alert('비밀번호가 일치하지 않습니다. 회원가입 실패'); // 비밀번호 불일치 메시지
       return;
     }
 
     if (!this.agreeToTerms) {
-      this.toastr.warning('약관에 동의해야 합니다.', '회원가입 실패');
+      alert('약관에 동의해야 합니다. 회원가입 실패'); // 약관 동의 메시지
       return;
     }
 
@@ -88,11 +83,11 @@ export class SignInComponent {
       this.email,
       this.password,
       () => {
-        this.toastr.success('회원가입이 완료되었습니다!', '회원가입 성공');
+        alert('회원가입이 완료되었습니다! 회원가입 성공'); // 성공 메시지
         this.switchMode(); // 회원가입 후 로그인 화면으로 전환
       },
       (error) => {
-        this.toastr.error(error?.message || '오류가 발생했습니다.', '회원가입 실패');
+        alert(error?.message || '오류가 발생했습니다. 회원가입 실패'); // 실패 메시지
       }
     );
   }
