@@ -245,17 +245,26 @@ body {
 
 @media (max-width: 768px) {
   .container {
-    flex-direction: column; /* 모바일에서는 위아래 정렬 */
+    flex-direction: column; /* 모바일에서 위아래 정렬 */
   }
 
   .form-container {
-    flex: none; /* 비율 해제 */
-    width: 90%; /* 가로 크기 조정 */
+    transform: translateY(0); /* 초기 위치 */
+  }
+
+  .container.active .form-container.sign-in {
+    transform: translateY(-100%); /* 로그인 폼 위로 이동 */
+  }
+
+  .container.active .form-container.sign-up {
+    transform: translateY(100%); /* 회원가입 폼 아래로 이동 */
   }
 
   .toggle-container {
-    flex: none; /* 비율 해제 */
-    width: 90%; /* 가로 크기 조정 */
-    margin-top: 20px; /* 여백 추가 */
+    transform: translateY(0); /* 초기 위치 */
+  }
+
+  .container.active .toggle-container {
+    transform: translateY(-200%); /* 토글 컨테이너도 세로 이동 */
   }
 }
