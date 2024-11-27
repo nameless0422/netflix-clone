@@ -97,8 +97,8 @@
 .slide-menu {
   position: fixed;
   top: 0;
-  right: -300px; /* 기본적으로 숨김 */
-  width: 300px;
+  right: -100%; /* 기본적으로 숨김 */
+  width: 200px;
   height: 100%;
   background-color: #2b2b2b;
   color: white;
@@ -107,7 +107,7 @@
   padding: 1rem;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
   transition: right 0.3s ease;
-  z-index: 1002;
+  z-index: 10002;
 }
 
 .slide-menu.open {
