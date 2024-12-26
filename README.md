@@ -70,6 +70,15 @@ jobs:
       with:
         node-version: '18'
 
+    - name: Configure Environment
+      run: |
+        echo "export const environment = {" > src/environments/environment.prod.ts
+        echo "  production: true," >> src/environments/environment.prod.ts
+        echo "  apiKey: '${{ secrets.TMDB_API_KEY }}'," >> src/environments/environment.prod.ts
+        echo "  kakaoApiKey: '${{ secrets.KAKAO_LOGIN_KEY }}'" >> src/environments/environment.prod.ts
+        echo "};" >> src/environments/environment.prod.ts
+
+
     - name: Install dependencies and build Angular app
       run: |
         npm install
@@ -84,6 +93,8 @@ jobs:
         token: ${{ secrets.ACTIONS_DEPLOY_KEY  }}
         branch: deploy
         folder: dist/browser  # 빌드된 Angular 앱 폴더
+
+        
 ```
 
 ## 🛠️ 향후 개선 사항
