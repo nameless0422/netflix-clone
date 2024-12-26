@@ -140,9 +140,19 @@ export class SignInComponent {
                   kakaoNickname, // 비밀번호 대신 닉네임 사용
                   () => {
                     alert(`회원가입 성공! ${kakaoNickname}님, 환영합니다.`);
-                    this.cookieService.set('isLoggedIn', 'true', { path: '/', expires: 7 });
-                    this.cookieService.set('userID', kakaoEmail, { path: '/', expires: 7 });
-                    this.router.navigate(['/']); // 회원가입 성공 시 홈으로 이동
+                    tryLogin(
+                      kakaoEmail,
+                      kakaoNickname, // 비밀번호 대신 닉네임 사용
+                      (user) => {
+                        alert(`자동 로그인 성공! ${user.id}님, 환영합니다.`);
+                        this.cookieService.set('isLoggedIn', 'true', { path: '/', expires: 7 });
+                        this.cookieService.set('userID', kakaoEmail, { path: '/', expires: 7 });
+                        this.router.navigate(['/']); // 자동 로그인 성공 시 홈으로 이동
+                      },
+                      () => {
+                        alert('자동 로그인 실패: 다시 시도해주세요.');
+                      }
+                    );
                   },
                   (error) => {
                     alert(error?.message || '회원가입 실패: 알 수 없는 오류 발생');
