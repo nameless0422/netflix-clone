@@ -18,10 +18,13 @@ jobs:
       with:
         node-version: '18'
 
-    - name: Set Environment Variables
+    - name: Configure Environment
       run: |
-        echo "TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}" >> .env
-        echo "KAKAO_API_KEY=${{ secrets.KAKAO_API_KEY }}" >> .env
+        echo "export const environment = {" > src/environments/environment.prod.ts
+        echo "  production: true," >> src/environments/environment.prod.ts
+        echo "  tmdbApiKey: '${{ secrets.TMDB_API_KEY }}'," >> src/environments/environment.prod.ts
+        echo "  kakaoApiKey: '${{ secrets.KAKAO_API_KEY }}'" >> src/environments/environment.prod.ts
+        echo "};" >> src/environments/environment.prod.ts
 
 
     - name: Install dependencies and build Angular app
