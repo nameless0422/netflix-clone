@@ -4,6 +4,6 @@ dotenv.config();
 
 export const environment = {
     production: true,
-    apiKey: process.env.TMDB_API_KEY || '',
-    kakaoApiKey: process.env.KAKAO_API_KEY || '',
+    apiKey: process.env['TMDB_API_KEY'] || '',
+    kakaoApiKey: process.env['KAKAO_API_KEY'] || '',
 };
