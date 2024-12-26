@@ -11,7 +11,7 @@ import { getURL4PopularMovies,
           getURL4Languages,
           getURL4MoviesWithFilters,
           fetchMovies } from './URL';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

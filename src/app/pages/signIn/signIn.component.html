@@ -40,6 +40,9 @@
       </div>
       <a href="#">비밀번호를 잊으셨나요?</a>
       <button [disabled]="!isEmailValid">로그인</button>
+      <div>
+        <button class="kakao-login-btn" (click)="onKakaoLogin()">카카오로 로그인</button>
+      </div>
     </form>
   </div>
 

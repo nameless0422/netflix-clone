@@ -24,7 +24,7 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },"src/.env"
             ],
             "styles": [
               "src/styles.css"

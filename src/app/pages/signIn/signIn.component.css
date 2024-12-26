@@ -276,3 +276,18 @@ body {
     display: none;
   }
 }
+
+.kakao-login-btn {
+  background-color: #fee500;
+  border: none;
+  padding: 10px 20px;
+  color: #381e1f;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.kakao-login-btn:hover {
+  transform: scale(1.05);
+}

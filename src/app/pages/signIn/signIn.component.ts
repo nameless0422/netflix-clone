@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { tryLogin, tryRegister } from '../../util/auth/Authentication';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-sign-in',
@@ -25,6 +26,12 @@ export class SignInComponent {
   constructor(private router: Router, private cookieService: CookieService) {}
 
   ngOnInit() {
+    // 카카오 SDK 초기화
+    if (!Kakao.isInitialized()) {
+      Kakao.init(environment.kakaoApiKey); // 발급받은 카카오 JavaScript 키
+      console.log('Kakao Initialized:', Kakao.isInitialized());
+    }
+
     // 자동 로그인 정보 로드
     const savedEmail = localStorage.getItem('savedEmail');
     const savedPassword = localStorage.getItem('savedPassword');
@@ -90,6 +97,33 @@ export class SignInComponent {
         alert(error?.message || '오류가 발생했습니다. 회원가입 실패'); // 실패 메시지
       }
     );
+  }
+
+  // 카카오 로그인 처리
+  onKakaoLogin() {
+    Kakao.Auth.login({
+      success: (authObj: any) => {
+        console.log('카카오 로그인 성공:', authObj);
+        Kakao.API.request({
+          url: '/v2/user/me',
+          success: (res: any) => {
+            const kakaoEmail = res.kakao_account.email;
+            const kakaoNickname = res.kakao_account.profile.nickname;
+
+            alert(`카카오 로그인 성공! 환영합니다, ${kakaoNickname}님.`);
+            this.cookieService.set('isLoggedIn', 'true', { path: '/', expires: 7 });
+            this.cookieService.set('userID', kakaoEmail, { path: '/', expires: 7 });
+            this.router.navigate(['/']);
+          },
+          fail: (err: any) => {
+            console.error('카카오 사용자 정보 요청 실패:', err);
+          }
+        });
+      },
+      fail: (err: any) => {
+        console.error('카카오 로그인 실패:', err);
+      }
+    });
   }
 
   // 로그인/회원가입 모드 전환
