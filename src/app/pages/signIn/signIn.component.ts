@@ -100,10 +100,21 @@ export class SignInComponent {
   }
 
   // 카카오 로그인 처리
-  onKakaoLogin() {
+  onKakaoLogin(event: Event) {
+    // 기본 동작 차단
+    event.preventDefault();
+    event.stopPropagation();
+  
+    if (!Kakao.isInitialized()) {
+      console.error('Kakao SDK가 초기화되지 않았습니다.');
+      return;
+    }
+  
     Kakao.Auth.authorize({
       redirectUri: 'https://nameless0422.github.io/netflix-clone/kakao-callback',
     });
+  
+    // 카카오 인증 성공 후 처리
     Kakao.Auth.login({
       success: (authObj: any) => {
         console.log('카카오 로그인 성공:', authObj);
@@ -112,22 +123,49 @@ export class SignInComponent {
           success: (res: any) => {
             const kakaoEmail = res.kakao_account.email;
             const kakaoNickname = res.kakao_account.profile.nickname;
-
-            alert(`카카오 로그인 성공! 환영합니다, ${kakaoNickname}님.`);
-            this.cookieService.set('isLoggedIn', 'true', { path: '/', expires: 7 });
-            this.cookieService.set('userID', kakaoEmail, { path: '/', expires: 7 });
-            this.router.navigate(['/']);
+  
+            console.log(`카카오 계정 정보: ${kakaoEmail}, ${kakaoNickname}`);
+  
+            // tryLogin 시도
+            tryLogin(
+              kakaoEmail,
+              kakaoNickname, // 비밀번호 대신 닉네임을 임시로 사용
+              (user) => {
+                alert(`로그인 성공! ${user.id}님, 환영합니다.`);
+                this.cookieService.set('isLoggedIn', 'true', { path: '/', expires: 7 });
+                this.cookieService.set('userID', kakaoEmail, { path: '/', expires: 7 });
+                this.router.navigate(['/']); // 로그인 성공 시 홈으로 이동
+              },
+              () => {
+                // 로그인 실패 시 회원가입 시도
+                console.log('로그인 실패, 회원가입 시도');
+                tryRegister(
+                  kakaoEmail,
+                  kakaoNickname, // 비밀번호 대신 닉네임 사용
+                  () => {
+                    alert(`회원가입 성공! ${kakaoNickname}님, 환영합니다.`);
+                    this.cookieService.set('isLoggedIn', 'true', { path: '/', expires: 7 });
+                    this.cookieService.set('userID', kakaoEmail, { path: '/', expires: 7 });
+                    this.router.navigate(['/']); // 회원가입 성공 시 홈으로 이동
+                  },
+                  (error) => {
+                    alert(error?.message || '회원가입 실패: 알 수 없는 오류 발생');
+                  }
+                );
+              }
+            );
           },
           fail: (err: any) => {
             console.error('카카오 사용자 정보 요청 실패:', err);
-          }
+          },
         });
       },
       fail: (err: any) => {
         console.error('카카오 로그인 실패:', err);
-      }
+      },
     });
   }
+  
 
   // 로그인/회원가입 모드 전환
   switchMode() {
