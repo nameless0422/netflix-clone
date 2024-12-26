@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { tryLogin, tryRegister } from '../../util/auth/Authentication';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-sign-in',
