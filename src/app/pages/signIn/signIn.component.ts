@@ -117,7 +117,7 @@ export class SignInComponent {
         Kakao.API.request({
           url: '/v2/user/me',
           success: (res: any) => {
-            const kakaoEmail = res.kakao_account.email;
+            const kakaoEmail = res.kakao_account.profile.nickname;
             const kakaoNickname = res.kakao_account.profile.nickname;
   
             console.log(`카카오 계정 정보: ${kakaoEmail}, ${kakaoNickname}`);
