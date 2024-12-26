@@ -102,7 +102,7 @@ export class SignInComponent {
   // 카카오 로그인 처리
   onKakaoLogin() {
     Kakao.Auth.authorize({
-      redirectUri: 'https://nameless0422.github.io/netflix-clone/',
+      redirectUri: 'https://nameless0422.github.io/netflix-clone/kakao-callback',
     });
     Kakao.Auth.login({
       success: (authObj: any) => {
