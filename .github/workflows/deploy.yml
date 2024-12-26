@@ -22,7 +22,7 @@ jobs:
       run: |
         echo "export const environment = {" > src/environments/environment.prod.ts
         echo "  production: true," >> src/environments/environment.prod.ts
-        echo "  tmdbApiKey: '${{ secrets.TMDB_API_KEY }}'," >> src/environments/environment.prod.ts
+        echo "  apiKey: '${{ secrets.TMDB_API_KEY }}'," >> src/environments/environment.prod.ts
         echo "  kakaoApiKey: '${{ secrets.KAKAO_API_KEY }}'" >> src/environments/environment.prod.ts
         echo "};" >> src/environments/environment.prod.ts
 
