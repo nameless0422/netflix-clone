@@ -2,6 +2,7 @@
 
 ## 📋 프로젝트 기본 정보
 Netflix Clone은 Angular를 기반으로 제작된 영화 정보 제공 프론트 페이지입니다. 사용자는 영화 정보를 확인하고, 찜한 영화 목록을 관리하며, 다양한 필터를 통해 원하는 영화를 검색할 수 있습니다.
+
 https://nameless0422.github.io/netflix-clone/
 ---
 
